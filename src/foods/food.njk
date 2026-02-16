@@ -1,0 +1,83 @@
+<article>
+  <h1>How long does {{ food.name }} last?</h1>
+
+  <section aria-label="Storage Summary">
+    <h2>Storage Summary</h2>
+    <ul>
+      <li>Pantry: {{ food.pantry_min_days }}-{{ food.pantry_max_days }} days</li>
+      <li>Fridge: {{ food.fridge_min_days }}-{{ food.fridge_max_days }} days</li>
+      <li>Freezer: {{ food.freezer_min_days }}-{{ food.freezer_max_days }} days</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Spoilage signs</h2>
+    <ul>
+      {% for sign in food.spoilage_signs %}
+      <li>{{ sign }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Storage tips</h2>
+    <ul>
+      {% for tip in food.storage_tips %}
+      <li>{{ tip }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  {% if food.notes %}
+  <section>
+    <h2>Notes</h2>
+    <p>{{ food.notes }}</p>
+  </section>
+  {% endif %}
+
+  <section aria-label="Safety Disclaimer">
+    <h2>Safety disclaimer</h2>
+    <p>
+      Educational only. This content is not medical advice. When in doubt, throw it out.
+      Read our <a href="/disclaimer/">full disclaimer</a>.
+    </p>
+  </section>
+
+  <section>
+    <h2>Sources used</h2>
+    <ul>
+      {% for source in sourcesUsed %}
+      <li>
+        <a href="{{ source.url }}">{{ source.title }}</a> ({{ source.publisher }})
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Dataset metadata</h2>
+    <p>Version {{ dataset.version }} | Last updated {{ dataset.last_updated }}</p>
+  </section>
+
+  <section>
+    <h2>Tools</h2>
+    <p><a href="/food-left-out-calculator/">Food left out calculator</a></p>
+  </section>
+
+  <section>
+    <h2>Related foods</h2>
+    {% if relatedFoods.length %}
+    <ul>
+      {% for related in relatedFoods %}
+      <li>
+        <a href="/how-long-does-{{ related.slug }}-last/">
+          How long does {{ related.name }} last?
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No related foods yet.</p>
+    {% endif %}
+  </section>
+</article>
