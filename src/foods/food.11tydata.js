@@ -8,7 +8,10 @@ module.exports = {
   permalink: (data) => `/how-long-does-${data.food.slug}-last/`,
   eleventyComputed: {
     title: (data) => `How long does ${data.food.name} last?`,
-    canonical: (data) => `/how-long-does-${data.food.slug}-last/`,
+    canonical: (data) => {
+      const baseUrl = String(data.site?.url || "").replace(/\/$/, "");
+      return `${baseUrl}/how-long-does-${data.food.slug}-last/`;
+    },
     sourcesUsed: (data) => {
       const sourceItems = data.sources?.items ?? [];
       const targets = new Set([data.food.food_id, data.food.category, "all_foods"]);
@@ -23,6 +26,28 @@ module.exports = {
             candidate.food_id !== data.food.food_id
         )
         .slice(0, 6);
+    },
+    jsonLd: (data) => {
+      const baseUrl = String(data.site?.url || "").replace(/\/$/, "");
+      const canonical = `${baseUrl}/how-long-does-${data.food.slug}-last/`;
+      const payload = {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            name: data.site?.organizationName || "Cheffist",
+            url: baseUrl
+          },
+          {
+            "@type": "WebPage",
+            name: `How long does ${data.food.name} last?`,
+            url: canonical,
+            dateModified: data.dataset?.last_updated
+          }
+        ]
+      };
+
+      return JSON.stringify(payload);
     }
   }
 };

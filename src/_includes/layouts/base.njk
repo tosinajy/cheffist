@@ -4,8 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title or "Cheffist" }}</title>
-    {% if canonical %}
-    <link rel="canonical" href="{{ canonical }}" />
+    {% set canonicalPath = canonical or page.url %}
+    {% if canonicalPath %}
+    {% if canonicalPath.slice(0, 4) == "http" %}
+    <link rel="canonical" href="{{ canonicalPath }}" />
+    {% else %}
+    <link rel="canonical" href="{{ site.url }}{{ canonicalPath }}" />
+    {% endif %}
+    {% endif %}
+    {% if jsonLd %}
+    <script type="application/ld+json">{{ jsonLd | safe }}</script>
     {% endif %}
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
