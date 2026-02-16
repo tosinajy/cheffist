@@ -1,9 +1,93 @@
 [
   {
-    "id": "apple",
-    "name": "Apple",
-    "category": "fruit",
-    "unit": "100g",
-    "calories_per_unit": 52
+    "id": "",
+    "name": "White Rice Dry",
+    "category": "grains",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Rolled Oats Dry",
+    "category": "grains",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Whole Milk",
+    "category": "dairy",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Eggs In Shell",
+    "category": "protein",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Chicken Raw",
+    "category": "protein",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Ground Beef Raw",
+    "category": "protein",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Salmon Raw",
+    "category": "seafood",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Romaine Lettuce",
+    "category": "produce",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Apple Whole",
+    "category": "produce",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Strawberries Fresh",
+    "category": "produce",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Bread Sliced",
+    "category": "bakery",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Cooked Rice",
+    "category": "cooked_foods",
+    "unit": "",
+    "calories_per_unit": null
+  },
+  {
+    "id": "",
+    "name": "Cooked Chicken",
+    "category": "cooked_foods",
+    "unit": "",
+    "calories_per_unit": null
   }
 ]

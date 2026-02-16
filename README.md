@@ -16,6 +16,12 @@ Eleventy-first scaffold for a data-driven food site.
 
 CSV files in `data/` are canonical. Generated files in `src/_data/` are build artifacts created by `npm run data:build`.
 
+Current schema files:
+- `data/foods.csv`
+- `data/sitout_rules.csv`
+- `data/sources.csv`
+- `data/DATASET_VERSION.json`
+
 ## Data pipeline
 
 1. `scripts/build-data.js` reads `data/foods.csv`.
@@ -27,9 +33,10 @@ CSV files in `data/` are canonical. Generated files in `src/_data/` are build ar
 ## Add foods
 
 1. Edit `data/foods.csv` and append a row with headers:
-   `id,name,category,unit,calories_per_unit`
-2. Run `npm run data:build`.
-3. Commit both CSV changes and generated JSON updates.
+   `food_id,name,slug,category,synonyms,pantry_min_days,pantry_max_days,fridge_min_days,fridge_max_days,freezer_min_days,freezer_max_days,spoilage_signs,storage_tips,notes,high_risk_food,default_affiliate_tags`
+2. Use pipe-separated lists for multi-value fields (`synonyms`, `spoilage_signs`, `storage_tips`, `default_affiliate_tags`).
+3. Run `npm run data:build`.
+4. Commit both CSV changes and generated JSON updates.
 
 ## Commands
 

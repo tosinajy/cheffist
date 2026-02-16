@@ -1,0 +1,4 @@
+source_id,title,publisher,url,notes,applies_to
+usda_leftovers,Leftovers and Food Safety,USDA FSIS,https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety,Conservative leftover guidance,cooked_foods
+fda_storage_chart,Refrigerator and Freezer Storage Chart,FDA,https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-freezer-storage-chart,Baseline cold storage ranges,all_foods
+cdc_clean_separate_cook_chill,Clean Separate Cook Chill,CDC,https://www.cdc.gov/food-safety/communication-resources/clean-separate-cook-chill.html,General handling practices,all_foods
