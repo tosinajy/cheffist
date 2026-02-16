@@ -1,0 +1,170 @@
+<form method="get" action="/food-left-out-calculator/" data-calculator-form>
+  <div>
+    <label for="food_id">Food</label>
+    <select id="food_id" name="food_id" required aria-required="true">
+      <option value="">Select a food</option>
+      {% for food in foods.items %}
+      <option
+        value="{{ food.food_id }}"
+        {% if calculatorContext.initialInput.food_id == food.food_id %}selected{% endif %}
+      >
+        {{ food.name }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div
+    data-state-wrap
+    {% if not (calculatorContext.initialInput.food_id and foods.byId[calculatorContext.initialInput.food_id] and foods.byId[calculatorContext.initialInput.food_id].states.length) %}hidden{% endif %}
+  >
+    <label for="state">State</label>
+    <select id="state" name="state" data-state-select>
+      <option value="">Select state</option>
+      {% if calculatorContext.initialInput.food_id and foods.byId[calculatorContext.initialInput.food_id] %}
+      {% for stateEntry in foods.byId[calculatorContext.initialInput.food_id].states %}
+      <option
+        value="{{ stateEntry.state }}"
+        {% if calculatorContext.initialInput.state == stateEntry.state %}selected{% endif %}
+      >
+        {{ stateEntry.label }}
+      </option>
+      {% endfor %}
+      {% endif %}
+    </select>
+  </div>
+
+  <div>
+    <label for="temp_value">Temperature</label>
+    <input
+      id="temp_value"
+      name="temp_value"
+      type="number"
+      step="0.1"
+      value="{{ calculatorContext.initialInput.temp_value }}"
+      required
+      aria-required="true"
+    />
+    <fieldset>
+      <legend>Unit</legend>
+      <label>
+        <input
+          type="radio"
+          name="temp_unit"
+          value="F"
+          {% if calculatorContext.initialInput.temp_unit == "F" %}checked{% endif %}
+        />
+        Fahrenheit
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="temp_unit"
+          value="C"
+          {% if calculatorContext.initialInput.temp_unit == "C" %}checked{% endif %}
+        />
+        Celsius
+      </label>
+    </fieldset>
+  </div>
+
+  <div>
+    <label for="hours">Hours left out</label>
+    <input
+      id="hours"
+      name="hours"
+      type="number"
+      min="0"
+      value="{{ calculatorContext.initialInput.hours }}"
+      required
+      aria-required="true"
+    />
+  </div>
+
+  <div>
+    <label for="minutes">Minutes left out</label>
+    <input
+      id="minutes"
+      name="minutes"
+      type="number"
+      min="0"
+      value="{{ calculatorContext.initialInput.minutes }}"
+      required
+      aria-required="true"
+    />
+  </div>
+
+  <fieldset>
+    <legend>Modifiers</legend>
+    <label for="covered">
+      <input
+        id="covered"
+        name="covered"
+        type="checkbox"
+        value="1"
+        {% if calculatorContext.initialInput.covered %}checked{% endif %}
+      />
+      Food was covered
+    </label>
+    <label for="high_risk_consumer">
+      <input
+        id="high_risk_consumer"
+        name="high_risk_consumer"
+        type="checkbox"
+        value="1"
+        {% if calculatorContext.initialInput.high_risk_consumer %}checked{% endif %}
+      />
+      High-risk consumer (pregnant, elderly, immunocompromised)
+    </label>
+  </fieldset>
+
+  <button type="submit">Calculate</button>
+</form>
+
+<section aria-live="polite" data-results>
+  <h2>Result</h2>
+  <p>
+    Status:
+    <strong data-result-status>{{ calculatorContext.initialResult.status }}</strong>
+  </p>
+  <p>
+    Conservative safe limit:
+    <strong data-result-limit>{{ calculatorContext.initialResult.conservative_safe_limit_label }}</strong>
+  </p>
+  <p>
+    Applied rule:
+    <strong data-result-rule>
+      {% if calculatorContext.initialResult.matched_rule %}
+      {{ calculatorContext.initialResult.matched_rule.rule_id }} ({{ calculatorContext.initialResult.matched_rule.applies_to }})
+      {% else %}
+      No matching rule
+      {% endif %}
+    </strong>
+  </p>
+
+  <h3>Reasons</h3>
+  <ul data-result-reasons>
+    {% for reason in calculatorContext.initialResult.reasons %}
+    <li>{{ reason }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Assumptions</h3>
+  <ul data-result-assumptions>
+    {% for assumption in calculatorContext.initialResult.assumptions %}
+    <li>{{ assumption }}</li>
+    {% endfor %}
+  </ul>
+
+  <p>
+    Recommended action:
+    <strong data-result-action>{{ calculatorContext.initialResult.recommended_action }}</strong>
+  </p>
+  <p>
+    Read the <a href="/disclaimer/">disclaimer</a> before making food safety decisions.
+  </p>
+</section>
+
+<script id="calculator-data" type="application/json">{{ calculatorContext.serialized | safe }}</script>
+<script src="/assets/calculator-engine.js"></script>
+<script src="/assets/js/sitout-calculator.js"></script>

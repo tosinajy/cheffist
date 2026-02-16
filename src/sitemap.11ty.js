@@ -18,8 +18,9 @@ class SitemapTemplate {
     const foodRoutes = (data.foods?.items ?? []).map(
       (food) => `/how-long-does-${food.slug}-last/`
     );
+    const prefilledRoutes = (data.sitoutPrefills ?? []).map((entry) => entry.url);
 
-    const routes = [...coreRoutes, ...foodRoutes];
+    const routes = [...coreRoutes, ...foodRoutes, ...prefilledRoutes];
     const lastmod = data.dataset?.last_updated || "";
     const baseUrl = String(data.site?.url || "").replace(/\/$/, "");
 
