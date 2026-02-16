@@ -1,7 +1,15 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 
-const { parseBoolean, splitList, validateFoodsRows } = require("../scripts/build-data");
+const {
+  getAllowedStates,
+  parseAppliesTo,
+  parseBoolean,
+  resolveRuleForFood,
+  splitList,
+  validateFoodsRows,
+  validateRulesRows
+} = require("../scripts/build-data");
 
 test("splitList converts pipe-delimited values into arrays", () => {
   assert.deepEqual(splitList("a| b |c"), ["a", "b", "c"]);
@@ -82,4 +90,86 @@ test("validateFoodsRows builds deterministic byId/bySlug maps", () => {
   assert.deepEqual(out.items.map((item) => item.food_id), ["a_food", "z_food"]);
   assert.equal(out.byId.a_food.slug, "a-food");
   assert.equal(out.bySlug["z-food"].food_id, "z_food");
+});
+
+test("parseAppliesTo accepts state/category/food formats", () => {
+  const foodsById = { chicken_raw: { food_id: "chicken_raw", category: "protein" } };
+  const categories = new Set(["protein"]);
+  const allowedStates = getAllowedStates();
+
+  const stateScope = parseAppliesTo(
+    "state:chicken_raw:raw",
+    2,
+    foodsById,
+    categories,
+    allowedStates
+  );
+  const foodScope = parseAppliesTo(
+    "food:chicken_raw",
+    2,
+    foodsById,
+    categories,
+    allowedStates
+  );
+  const categoryScope = parseAppliesTo(
+    "category:protein",
+    2,
+    foodsById,
+    categories,
+    allowedStates
+  );
+
+  assert.equal(stateScope.type, "state");
+  assert.equal(foodScope.type, "food");
+  assert.equal(categoryScope.type, "category");
+});
+
+test("resolveRuleForFood prefers state over food over category", () => {
+  const foodsById = {
+    chicken_raw: { food_id: "chicken_raw", category: "protein" }
+  };
+  const categories = new Set(["protein"]);
+  const allowedStates = getAllowedStates();
+  const rules = validateRulesRows(
+    [
+      {
+        rule_id: "category_rule",
+        applies_to: "category:protein",
+        temp_min_f: "40",
+        temp_max_f: "90",
+        max_safe_minutes: "120",
+        covered_modifier_minutes: "30",
+        high_risk_modifier_minutes: "-15"
+      },
+      {
+        rule_id: "food_rule",
+        applies_to: "food:chicken_raw",
+        temp_min_f: "40",
+        temp_max_f: "90",
+        max_safe_minutes: "90",
+        covered_modifier_minutes: "20",
+        high_risk_modifier_minutes: "-20"
+      },
+      {
+        rule_id: "state_rule",
+        applies_to: "state:chicken_raw:raw",
+        temp_min_f: "40",
+        temp_max_f: "90",
+        max_safe_minutes: "60",
+        covered_modifier_minutes: "15",
+        high_risk_modifier_minutes: "-30"
+      }
+    ],
+    foodsById,
+    categories,
+    allowedStates
+  );
+
+  const match = resolveRuleForFood(rules, {
+    food_id: "chicken_raw",
+    category: "protein",
+    state: "raw"
+  });
+
+  assert.equal(match.rule_id, "state_rule");
 });

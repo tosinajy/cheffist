@@ -32,7 +32,8 @@
         "produce",
         "longer-storage",
         "fruit"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "bread_sliced",
@@ -66,7 +67,8 @@
         "bakery",
         "pantry-storage",
         "freezer-storage"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "chicken_cooked",
@@ -100,6 +102,15 @@
         "leftovers",
         "high-risk",
         "meal-prep"
+      ],
+      "states": [
+        {
+          "food_id": "chicken_cooked",
+          "state": "cooked",
+          "label": "Cooked chicken",
+          "override_high_risk_food": true,
+          "notes": "Prepared leftovers should be handled conservatively"
+        }
       ]
     },
     {
@@ -134,6 +145,15 @@
         "raw-meat",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "chicken_raw",
+          "state": "raw",
+          "label": "Raw chicken",
+          "override_high_risk_food": true,
+          "notes": "Raw poultry risk profile"
+        }
       ]
     },
     {
@@ -168,7 +188,8 @@
         "eggs",
         "fridge-storage",
         "high-risk"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "ground_beef_raw",
@@ -202,6 +223,15 @@
         "raw-meat",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "ground_beef_raw",
+          "state": "raw",
+          "label": "Raw ground beef",
+          "override_high_risk_food": true,
+          "notes": "Ground meat high-risk state"
+        }
       ]
     },
     {
@@ -236,7 +266,8 @@
         "produce",
         "fridge-storage",
         "freshness"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "milk_whole",
@@ -270,6 +301,22 @@
         "dairy",
         "fridge-storage",
         "high-risk"
+      ],
+      "states": [
+        {
+          "food_id": "milk_whole",
+          "state": "opened",
+          "label": "Opened milk",
+          "override_high_risk_food": true,
+          "notes": "Opened dairy is more perishable"
+        },
+        {
+          "food_id": "milk_whole",
+          "state": "unopened",
+          "label": "Unopened milk",
+          "override_high_risk_food": null,
+          "notes": "Use package date plus spoilage checks"
+        }
       ]
     },
     {
@@ -304,6 +351,15 @@
         "leftovers",
         "high-risk",
         "meal-prep"
+      ],
+      "states": [
+        {
+          "food_id": "rice_cooked",
+          "state": "cooked",
+          "label": "Cooked rice",
+          "override_high_risk_food": true,
+          "notes": "Cooked leftovers are time-sensitive"
+        }
       ]
     },
     {
@@ -338,7 +394,8 @@
         "pantry",
         "oats",
         "airtight-container"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "salmon_raw",
@@ -372,6 +429,15 @@
         "seafood",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "salmon_raw",
+          "state": "raw",
+          "label": "Raw salmon",
+          "override_high_risk_food": true,
+          "notes": "Raw seafood risk profile"
+        }
       ]
     },
     {
@@ -406,7 +472,8 @@
         "produce",
         "berries",
         "fridge-storage"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "white_rice_dry",
@@ -440,7 +507,8 @@
         "pantry",
         "airtight-container",
         "grain-storage"
-      ]
+      ],
+      "states": []
     }
   ],
   "byId": {
@@ -476,7 +544,8 @@
         "produce",
         "longer-storage",
         "fruit"
-      ]
+      ],
+      "states": []
     },
     "bread_sliced": {
       "food_id": "bread_sliced",
@@ -510,7 +579,8 @@
         "bakery",
         "pantry-storage",
         "freezer-storage"
-      ]
+      ],
+      "states": []
     },
     "chicken_cooked": {
       "food_id": "chicken_cooked",
@@ -544,6 +614,15 @@
         "leftovers",
         "high-risk",
         "meal-prep"
+      ],
+      "states": [
+        {
+          "food_id": "chicken_cooked",
+          "state": "cooked",
+          "label": "Cooked chicken",
+          "override_high_risk_food": true,
+          "notes": "Prepared leftovers should be handled conservatively"
+        }
       ]
     },
     "chicken_raw": {
@@ -578,6 +657,15 @@
         "raw-meat",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "chicken_raw",
+          "state": "raw",
+          "label": "Raw chicken",
+          "override_high_risk_food": true,
+          "notes": "Raw poultry risk profile"
+        }
       ]
     },
     "eggs_shell": {
@@ -612,7 +700,8 @@
         "eggs",
         "fridge-storage",
         "high-risk"
-      ]
+      ],
+      "states": []
     },
     "ground_beef_raw": {
       "food_id": "ground_beef_raw",
@@ -646,6 +735,15 @@
         "raw-meat",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "ground_beef_raw",
+          "state": "raw",
+          "label": "Raw ground beef",
+          "override_high_risk_food": true,
+          "notes": "Ground meat high-risk state"
+        }
       ]
     },
     "lettuce_romaine": {
@@ -680,7 +778,8 @@
         "produce",
         "fridge-storage",
         "freshness"
-      ]
+      ],
+      "states": []
     },
     "milk_whole": {
       "food_id": "milk_whole",
@@ -714,6 +813,22 @@
         "dairy",
         "fridge-storage",
         "high-risk"
+      ],
+      "states": [
+        {
+          "food_id": "milk_whole",
+          "state": "opened",
+          "label": "Opened milk",
+          "override_high_risk_food": true,
+          "notes": "Opened dairy is more perishable"
+        },
+        {
+          "food_id": "milk_whole",
+          "state": "unopened",
+          "label": "Unopened milk",
+          "override_high_risk_food": null,
+          "notes": "Use package date plus spoilage checks"
+        }
       ]
     },
     "rice_cooked": {
@@ -748,6 +863,15 @@
         "leftovers",
         "high-risk",
         "meal-prep"
+      ],
+      "states": [
+        {
+          "food_id": "rice_cooked",
+          "state": "cooked",
+          "label": "Cooked rice",
+          "override_high_risk_food": true,
+          "notes": "Cooked leftovers are time-sensitive"
+        }
       ]
     },
     "rolled_oats_dry": {
@@ -782,7 +906,8 @@
         "pantry",
         "oats",
         "airtight-container"
-      ]
+      ],
+      "states": []
     },
     "salmon_raw": {
       "food_id": "salmon_raw",
@@ -816,6 +941,15 @@
         "seafood",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "salmon_raw",
+          "state": "raw",
+          "label": "Raw salmon",
+          "override_high_risk_food": true,
+          "notes": "Raw seafood risk profile"
+        }
       ]
     },
     "strawberries_fresh": {
@@ -850,7 +984,8 @@
         "produce",
         "berries",
         "fridge-storage"
-      ]
+      ],
+      "states": []
     },
     "white_rice_dry": {
       "food_id": "white_rice_dry",
@@ -884,7 +1019,8 @@
         "pantry",
         "airtight-container",
         "grain-storage"
-      ]
+      ],
+      "states": []
     }
   },
   "bySlug": {
@@ -920,7 +1056,8 @@
         "produce",
         "longer-storage",
         "fruit"
-      ]
+      ],
+      "states": []
     },
     "bread-sliced": {
       "food_id": "bread_sliced",
@@ -954,7 +1091,8 @@
         "bakery",
         "pantry-storage",
         "freezer-storage"
-      ]
+      ],
+      "states": []
     },
     "chicken-cooked": {
       "food_id": "chicken_cooked",
@@ -988,6 +1126,15 @@
         "leftovers",
         "high-risk",
         "meal-prep"
+      ],
+      "states": [
+        {
+          "food_id": "chicken_cooked",
+          "state": "cooked",
+          "label": "Cooked chicken",
+          "override_high_risk_food": true,
+          "notes": "Prepared leftovers should be handled conservatively"
+        }
       ]
     },
     "chicken-raw": {
@@ -1022,6 +1169,15 @@
         "raw-meat",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "chicken_raw",
+          "state": "raw",
+          "label": "Raw chicken",
+          "override_high_risk_food": true,
+          "notes": "Raw poultry risk profile"
+        }
       ]
     },
     "eggs-in-shell": {
@@ -1056,7 +1212,8 @@
         "eggs",
         "fridge-storage",
         "high-risk"
-      ]
+      ],
+      "states": []
     },
     "ground-beef-raw": {
       "food_id": "ground_beef_raw",
@@ -1090,6 +1247,15 @@
         "raw-meat",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "ground_beef_raw",
+          "state": "raw",
+          "label": "Raw ground beef",
+          "override_high_risk_food": true,
+          "notes": "Ground meat high-risk state"
+        }
       ]
     },
     "romaine-lettuce": {
@@ -1124,7 +1290,8 @@
         "produce",
         "fridge-storage",
         "freshness"
-      ]
+      ],
+      "states": []
     },
     "whole-milk": {
       "food_id": "milk_whole",
@@ -1158,6 +1325,22 @@
         "dairy",
         "fridge-storage",
         "high-risk"
+      ],
+      "states": [
+        {
+          "food_id": "milk_whole",
+          "state": "opened",
+          "label": "Opened milk",
+          "override_high_risk_food": true,
+          "notes": "Opened dairy is more perishable"
+        },
+        {
+          "food_id": "milk_whole",
+          "state": "unopened",
+          "label": "Unopened milk",
+          "override_high_risk_food": null,
+          "notes": "Use package date plus spoilage checks"
+        }
       ]
     },
     "rice-cooked": {
@@ -1192,6 +1375,15 @@
         "leftovers",
         "high-risk",
         "meal-prep"
+      ],
+      "states": [
+        {
+          "food_id": "rice_cooked",
+          "state": "cooked",
+          "label": "Cooked rice",
+          "override_high_risk_food": true,
+          "notes": "Cooked leftovers are time-sensitive"
+        }
       ]
     },
     "rolled-oats-dry": {
@@ -1226,7 +1418,8 @@
         "pantry",
         "oats",
         "airtight-container"
-      ]
+      ],
+      "states": []
     },
     "salmon-raw": {
       "food_id": "salmon_raw",
@@ -1260,6 +1453,15 @@
         "seafood",
         "high-risk",
         "freezer-storage"
+      ],
+      "states": [
+        {
+          "food_id": "salmon_raw",
+          "state": "raw",
+          "label": "Raw salmon",
+          "override_high_risk_food": true,
+          "notes": "Raw seafood risk profile"
+        }
       ]
     },
     "strawberries-fresh": {
@@ -1294,7 +1496,8 @@
         "produce",
         "berries",
         "fridge-storage"
-      ]
+      ],
+      "states": []
     },
     "white-rice-dry": {
       "food_id": "white_rice_dry",
@@ -1328,7 +1531,17 @@
         "pantry",
         "airtight-container",
         "grain-storage"
-      ]
+      ],
+      "states": []
     }
-  }
+  },
+  "categories": [
+    "bakery",
+    "cooked_foods",
+    "dairy",
+    "grains",
+    "produce",
+    "protein",
+    "seafood"
+  ]
 }

@@ -1,35 +1,29 @@
 {
   "items": [
     {
-      "rule_id": "cool_room_window",
-      "applies_to": "all_foods",
-      "temp_min_f": 32,
-      "temp_max_f": 39,
-      "max_safe_minutes": 240,
-      "covered_modifier_minutes": 30,
-      "high_risk_modifier_minutes": 0
-    },
-    {
-      "rule_id": "high_risk_standard",
-      "applies_to": "high_risk_foods",
+      "rule_id": "category_cooked_foods_room_temp",
+      "applies_to": "category:cooked_foods",
+      "scope": {
+        "type": "category",
+        "key": "cooked_foods",
+        "category": "cooked_foods"
+      },
+      "priority": 1,
       "temp_min_f": 40,
       "temp_max_f": 90,
       "max_safe_minutes": 90,
-      "covered_modifier_minutes": 15,
-      "high_risk_modifier_minutes": -30
+      "covered_modifier_minutes": 20,
+      "high_risk_modifier_minutes": -20
     },
     {
-      "rule_id": "room_temp_hot",
-      "applies_to": "all_foods",
-      "temp_min_f": 91,
-      "temp_max_f": 110,
-      "max_safe_minutes": 60,
-      "covered_modifier_minutes": 15,
-      "high_risk_modifier_minutes": -15
-    },
-    {
-      "rule_id": "room_temp_standard",
-      "applies_to": "all_foods",
+      "rule_id": "category_protein_room_temp",
+      "applies_to": "category:protein",
+      "scope": {
+        "type": "category",
+        "key": "protein",
+        "category": "protein"
+      },
+      "priority": 1,
       "temp_min_f": 40,
       "temp_max_f": 90,
       "max_safe_minutes": 120,
@@ -37,60 +31,214 @@
       "high_risk_modifier_minutes": -15
     },
     {
-      "rule_id": "thawed_perishables",
-      "applies_to": "thawed_perishables",
+      "rule_id": "food_chicken_raw_room_temp",
+      "applies_to": "food:chicken_raw",
+      "scope": {
+        "type": "food",
+        "key": "chicken_raw",
+        "food_id": "chicken_raw"
+      },
+      "priority": 2,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 90,
+      "covered_modifier_minutes": 20,
+      "high_risk_modifier_minutes": -20
+    },
+    {
+      "rule_id": "state_chicken_raw_raw_room_temp",
+      "applies_to": "state:chicken_raw:raw",
+      "scope": {
+        "type": "state",
+        "key": "chicken_raw:raw",
+        "food_id": "chicken_raw",
+        "state": "raw"
+      },
+      "priority": 3,
       "temp_min_f": 40,
       "temp_max_f": 90,
       "max_safe_minutes": 60,
       "covered_modifier_minutes": 15,
-      "high_risk_modifier_minutes": -15
+      "high_risk_modifier_minutes": -30
+    },
+    {
+      "rule_id": "state_rice_cooked_cooked_room_temp",
+      "applies_to": "state:rice_cooked:cooked",
+      "scope": {
+        "type": "state",
+        "key": "rice_cooked:cooked",
+        "food_id": "rice_cooked",
+        "state": "cooked"
+      },
+      "priority": 3,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -25
     }
   ],
   "byId": {
-    "cool_room_window": {
-      "rule_id": "cool_room_window",
-      "applies_to": "all_foods",
-      "temp_min_f": 32,
-      "temp_max_f": 39,
-      "max_safe_minutes": 240,
-      "covered_modifier_minutes": 30,
-      "high_risk_modifier_minutes": 0
-    },
-    "high_risk_standard": {
-      "rule_id": "high_risk_standard",
-      "applies_to": "high_risk_foods",
+    "category_cooked_foods_room_temp": {
+      "rule_id": "category_cooked_foods_room_temp",
+      "applies_to": "category:cooked_foods",
+      "scope": {
+        "type": "category",
+        "key": "cooked_foods",
+        "category": "cooked_foods"
+      },
+      "priority": 1,
       "temp_min_f": 40,
       "temp_max_f": 90,
       "max_safe_minutes": 90,
-      "covered_modifier_minutes": 15,
-      "high_risk_modifier_minutes": -30
+      "covered_modifier_minutes": 20,
+      "high_risk_modifier_minutes": -20
     },
-    "room_temp_hot": {
-      "rule_id": "room_temp_hot",
-      "applies_to": "all_foods",
-      "temp_min_f": 91,
-      "temp_max_f": 110,
-      "max_safe_minutes": 60,
-      "covered_modifier_minutes": 15,
-      "high_risk_modifier_minutes": -15
-    },
-    "room_temp_standard": {
-      "rule_id": "room_temp_standard",
-      "applies_to": "all_foods",
+    "category_protein_room_temp": {
+      "rule_id": "category_protein_room_temp",
+      "applies_to": "category:protein",
+      "scope": {
+        "type": "category",
+        "key": "protein",
+        "category": "protein"
+      },
+      "priority": 1,
       "temp_min_f": 40,
       "temp_max_f": 90,
       "max_safe_minutes": 120,
       "covered_modifier_minutes": 30,
       "high_risk_modifier_minutes": -15
     },
-    "thawed_perishables": {
-      "rule_id": "thawed_perishables",
-      "applies_to": "thawed_perishables",
+    "food_chicken_raw_room_temp": {
+      "rule_id": "food_chicken_raw_room_temp",
+      "applies_to": "food:chicken_raw",
+      "scope": {
+        "type": "food",
+        "key": "chicken_raw",
+        "food_id": "chicken_raw"
+      },
+      "priority": 2,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 90,
+      "covered_modifier_minutes": 20,
+      "high_risk_modifier_minutes": -20
+    },
+    "state_chicken_raw_raw_room_temp": {
+      "rule_id": "state_chicken_raw_raw_room_temp",
+      "applies_to": "state:chicken_raw:raw",
+      "scope": {
+        "type": "state",
+        "key": "chicken_raw:raw",
+        "food_id": "chicken_raw",
+        "state": "raw"
+      },
+      "priority": 3,
       "temp_min_f": 40,
       "temp_max_f": 90,
       "max_safe_minutes": 60,
       "covered_modifier_minutes": 15,
-      "high_risk_modifier_minutes": -15
+      "high_risk_modifier_minutes": -30
+    },
+    "state_rice_cooked_cooked_room_temp": {
+      "rule_id": "state_rice_cooked_cooked_room_temp",
+      "applies_to": "state:rice_cooked:cooked",
+      "scope": {
+        "type": "state",
+        "key": "rice_cooked:cooked",
+        "food_id": "rice_cooked",
+        "state": "cooked"
+      },
+      "priority": 3,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -25
     }
-  }
+  },
+  "byAppliesTo": {
+    "category:cooked_foods": {
+      "rule_id": "category_cooked_foods_room_temp",
+      "applies_to": "category:cooked_foods",
+      "scope": {
+        "type": "category",
+        "key": "cooked_foods",
+        "category": "cooked_foods"
+      },
+      "priority": 1,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 90,
+      "covered_modifier_minutes": 20,
+      "high_risk_modifier_minutes": -20
+    },
+    "category:protein": {
+      "rule_id": "category_protein_room_temp",
+      "applies_to": "category:protein",
+      "scope": {
+        "type": "category",
+        "key": "protein",
+        "category": "protein"
+      },
+      "priority": 1,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 120,
+      "covered_modifier_minutes": 30,
+      "high_risk_modifier_minutes": -15
+    },
+    "food:chicken_raw": {
+      "rule_id": "food_chicken_raw_room_temp",
+      "applies_to": "food:chicken_raw",
+      "scope": {
+        "type": "food",
+        "key": "chicken_raw",
+        "food_id": "chicken_raw"
+      },
+      "priority": 2,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 90,
+      "covered_modifier_minutes": 20,
+      "high_risk_modifier_minutes": -20
+    },
+    "state:chicken_raw:raw": {
+      "rule_id": "state_chicken_raw_raw_room_temp",
+      "applies_to": "state:chicken_raw:raw",
+      "scope": {
+        "type": "state",
+        "key": "chicken_raw:raw",
+        "food_id": "chicken_raw",
+        "state": "raw"
+      },
+      "priority": 3,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -30
+    },
+    "state:rice_cooked:cooked": {
+      "rule_id": "state_rice_cooked_cooked_room_temp",
+      "applies_to": "state:rice_cooked:cooked",
+      "scope": {
+        "type": "state",
+        "key": "rice_cooked:cooked",
+        "food_id": "rice_cooked",
+        "state": "cooked"
+      },
+      "priority": 3,
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -25
+    }
+  },
+  "matchingPriority": [
+    "state",
+    "food",
+    "category"
+  ]
 }

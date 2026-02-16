@@ -5,7 +5,12 @@ const { spawnSync } = require("node:child_process");
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 
-const { parseCsvFile, validateFoodsRows } = require("../scripts/build-data");
+const {
+  getAllowedStates,
+  parseCsvFile,
+  validateFoodsRows,
+  validateRulesRows
+} = require("../scripts/build-data");
 
 const FOODS_REQUIRED_COLUMNS = [
   "food_id",
@@ -45,7 +50,7 @@ test("happy path: build-data script succeeds with seeded CSVs", () => {
   });
 
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /Built foods=\d+, rules=\d+, sources=\d+\./);
+  assert.match(result.stdout, /Built foods=\d+, states=\d+, rules=\d+, sources=\d+\./);
 });
 
 test("duplicate slug fails with clear reason", () => {
@@ -103,4 +108,56 @@ test("missing required header fails during parse/validation setup", () => {
       /is missing required columns: slug/
     );
   });
+});
+
+test("invalid state in applies_to fails with helpful error", () => {
+  const foodsById = { chicken_raw: { food_id: "chicken_raw", category: "protein" } };
+  const categories = new Set(["protein"]);
+
+  assert.throws(
+    () =>
+      validateRulesRows(
+        [
+          {
+            rule_id: "bad_state",
+            applies_to: "state:chicken_raw:frozen",
+            temp_min_f: "40",
+            temp_max_f: "90",
+            max_safe_minutes: "60",
+            covered_modifier_minutes: "15",
+            high_risk_modifier_minutes: "-30"
+          }
+        ],
+        foodsById,
+        categories,
+        getAllowedStates()
+      ),
+    /state 'frozen' in applies_to must be one of/
+  );
+});
+
+test("invalid applies_to shape fails", () => {
+  const foodsById = { chicken_raw: { food_id: "chicken_raw", category: "protein" } };
+  const categories = new Set(["protein"]);
+
+  assert.throws(
+    () =>
+      validateRulesRows(
+        [
+          {
+            rule_id: "bad_shape",
+            applies_to: "all_foods",
+            temp_min_f: "40",
+            temp_max_f: "90",
+            max_safe_minutes: "120",
+            covered_modifier_minutes: "30",
+            high_risk_modifier_minutes: "-15"
+          }
+        ],
+        foodsById,
+        categories,
+        getAllowedStates()
+      ),
+    /applies_to must be food:\{food_id\}, category:\{category_slug\}, or state:\{food_id\}:\{state\}/
+  );
 });

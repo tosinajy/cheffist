@@ -18,6 +18,7 @@ CSV files in `data/` are canonical. Generated files in `src/_data/` are build ar
 
 Current schema files:
 - `data/foods.csv`
+- `data/foods_states.csv` (optional state variants)
 - `data/sitout_rules.csv`
 - `data/sources.csv`
 - `data/DATASET_VERSION.json`
@@ -25,10 +26,14 @@ Current schema files:
 ## Data pipeline
 
 1. `scripts/build-data.js` reads `data/foods.csv`.
-2. It parses/normalizes records.
-3. It writes:
+2. Optionally reads `data/foods_states.csv` for per-food state variants.
+3. It parses/normalizes records.
+4. It writes:
    - `src/_data/foods.json`
-   - `src/_data/foods.meta.json`
+   - `src/_data/foodStates.json`
+   - `src/_data/rules.json`
+   - `src/_data/sources.json`
+   - `src/_data/dataset.json`
 
 ## Add foods
 
