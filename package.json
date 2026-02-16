@@ -1,0 +1,18 @@
+{
+  "name": "cheffist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Eleventy-first food data site scaffold",
+  "engines": {
+    "node": ">=20 <23"
+  },
+  "scripts": {
+    "dev": "eleventy --serve",
+    "data:build": "node scripts/build-data.js",
+    "build": "npm run data:build && eleventy",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

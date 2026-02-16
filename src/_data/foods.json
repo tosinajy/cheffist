@@ -1,0 +1,9 @@
+[
+  {
+    "id": "apple",
+    "name": "Apple",
+    "category": "fruit",
+    "unit": "100g",
+    "calories_per_unit": 52
+  }
+]
