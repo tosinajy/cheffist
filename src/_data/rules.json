@@ -1,0 +1,96 @@
+{
+  "items": [
+    {
+      "rule_id": "cool_room_window",
+      "applies_to": "all_foods",
+      "temp_min_f": 32,
+      "temp_max_f": 39,
+      "max_safe_minutes": 240,
+      "covered_modifier_minutes": 30,
+      "high_risk_modifier_minutes": 0
+    },
+    {
+      "rule_id": "high_risk_standard",
+      "applies_to": "high_risk_foods",
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 90,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -30
+    },
+    {
+      "rule_id": "room_temp_hot",
+      "applies_to": "all_foods",
+      "temp_min_f": 91,
+      "temp_max_f": 110,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -15
+    },
+    {
+      "rule_id": "room_temp_standard",
+      "applies_to": "all_foods",
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 120,
+      "covered_modifier_minutes": 30,
+      "high_risk_modifier_minutes": -15
+    },
+    {
+      "rule_id": "thawed_perishables",
+      "applies_to": "thawed_perishables",
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -15
+    }
+  ],
+  "byId": {
+    "cool_room_window": {
+      "rule_id": "cool_room_window",
+      "applies_to": "all_foods",
+      "temp_min_f": 32,
+      "temp_max_f": 39,
+      "max_safe_minutes": 240,
+      "covered_modifier_minutes": 30,
+      "high_risk_modifier_minutes": 0
+    },
+    "high_risk_standard": {
+      "rule_id": "high_risk_standard",
+      "applies_to": "high_risk_foods",
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 90,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -30
+    },
+    "room_temp_hot": {
+      "rule_id": "room_temp_hot",
+      "applies_to": "all_foods",
+      "temp_min_f": 91,
+      "temp_max_f": 110,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -15
+    },
+    "room_temp_standard": {
+      "rule_id": "room_temp_standard",
+      "applies_to": "all_foods",
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 120,
+      "covered_modifier_minutes": 30,
+      "high_risk_modifier_minutes": -15
+    },
+    "thawed_perishables": {
+      "rule_id": "thawed_perishables",
+      "applies_to": "thawed_perishables",
+      "temp_min_f": 40,
+      "temp_max_f": 90,
+      "max_safe_minutes": 60,
+      "covered_modifier_minutes": 15,
+      "high_risk_modifier_minutes": -15
+    }
+  }
+}
