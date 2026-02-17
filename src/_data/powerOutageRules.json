@@ -1,0 +1,283 @@
+{
+  "items": [
+    {
+      "rule_id": "category_cooked_foods_outage",
+      "applies_to": "category:cooked_foods",
+      "scope": {
+        "type": "category",
+        "key": "cooked_foods",
+        "category": "cooked_foods"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Prepared leftovers need strict limits"
+    },
+    {
+      "rule_id": "category_dairy_outage",
+      "applies_to": "category:dairy",
+      "scope": {
+        "type": "category",
+        "key": "dairy",
+        "category": "dairy"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Dairy warms quickly and should be handled conservatively"
+    },
+    {
+      "rule_id": "category_produce_outage",
+      "applies_to": "category:produce",
+      "scope": {
+        "type": "category",
+        "key": "produce",
+        "category": "produce"
+      },
+      "priority": 2,
+      "temp_threshold_f": 45,
+      "max_safe_minutes": 180,
+      "notes": "Whole produce has slightly more tolerance"
+    },
+    {
+      "rule_id": "category_protein_outage",
+      "applies_to": "category:protein",
+      "scope": {
+        "type": "category",
+        "key": "protein",
+        "category": "protein"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Raw proteins are high risk when warming"
+    },
+    {
+      "rule_id": "category_seafood_outage",
+      "applies_to": "category:seafood",
+      "scope": {
+        "type": "category",
+        "key": "seafood",
+        "category": "seafood"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 45,
+      "notes": "Seafood is highly perishable during outages"
+    },
+    {
+      "rule_id": "default_power_outage",
+      "applies_to": "default",
+      "scope": {
+        "type": "default",
+        "key": "default"
+      },
+      "priority": 1,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 120,
+      "notes": "Conservative fallback for unknown foods"
+    },
+    {
+      "rule_id": "food_milk_whole_outage",
+      "applies_to": "food:milk_whole",
+      "scope": {
+        "type": "food",
+        "key": "milk_whole",
+        "food_id": "milk_whole"
+      },
+      "priority": 3,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 45,
+      "notes": "Milk should be discarded sooner once warming"
+    }
+  ],
+  "byId": {
+    "category_cooked_foods_outage": {
+      "rule_id": "category_cooked_foods_outage",
+      "applies_to": "category:cooked_foods",
+      "scope": {
+        "type": "category",
+        "key": "cooked_foods",
+        "category": "cooked_foods"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Prepared leftovers need strict limits"
+    },
+    "category_dairy_outage": {
+      "rule_id": "category_dairy_outage",
+      "applies_to": "category:dairy",
+      "scope": {
+        "type": "category",
+        "key": "dairy",
+        "category": "dairy"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Dairy warms quickly and should be handled conservatively"
+    },
+    "category_produce_outage": {
+      "rule_id": "category_produce_outage",
+      "applies_to": "category:produce",
+      "scope": {
+        "type": "category",
+        "key": "produce",
+        "category": "produce"
+      },
+      "priority": 2,
+      "temp_threshold_f": 45,
+      "max_safe_minutes": 180,
+      "notes": "Whole produce has slightly more tolerance"
+    },
+    "category_protein_outage": {
+      "rule_id": "category_protein_outage",
+      "applies_to": "category:protein",
+      "scope": {
+        "type": "category",
+        "key": "protein",
+        "category": "protein"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Raw proteins are high risk when warming"
+    },
+    "category_seafood_outage": {
+      "rule_id": "category_seafood_outage",
+      "applies_to": "category:seafood",
+      "scope": {
+        "type": "category",
+        "key": "seafood",
+        "category": "seafood"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 45,
+      "notes": "Seafood is highly perishable during outages"
+    },
+    "default_power_outage": {
+      "rule_id": "default_power_outage",
+      "applies_to": "default",
+      "scope": {
+        "type": "default",
+        "key": "default"
+      },
+      "priority": 1,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 120,
+      "notes": "Conservative fallback for unknown foods"
+    },
+    "food_milk_whole_outage": {
+      "rule_id": "food_milk_whole_outage",
+      "applies_to": "food:milk_whole",
+      "scope": {
+        "type": "food",
+        "key": "milk_whole",
+        "food_id": "milk_whole"
+      },
+      "priority": 3,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 45,
+      "notes": "Milk should be discarded sooner once warming"
+    }
+  },
+  "byAppliesTo": {
+    "category:cooked_foods": {
+      "rule_id": "category_cooked_foods_outage",
+      "applies_to": "category:cooked_foods",
+      "scope": {
+        "type": "category",
+        "key": "cooked_foods",
+        "category": "cooked_foods"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Prepared leftovers need strict limits"
+    },
+    "category:dairy": {
+      "rule_id": "category_dairy_outage",
+      "applies_to": "category:dairy",
+      "scope": {
+        "type": "category",
+        "key": "dairy",
+        "category": "dairy"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Dairy warms quickly and should be handled conservatively"
+    },
+    "category:produce": {
+      "rule_id": "category_produce_outage",
+      "applies_to": "category:produce",
+      "scope": {
+        "type": "category",
+        "key": "produce",
+        "category": "produce"
+      },
+      "priority": 2,
+      "temp_threshold_f": 45,
+      "max_safe_minutes": 180,
+      "notes": "Whole produce has slightly more tolerance"
+    },
+    "category:protein": {
+      "rule_id": "category_protein_outage",
+      "applies_to": "category:protein",
+      "scope": {
+        "type": "category",
+        "key": "protein",
+        "category": "protein"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 60,
+      "notes": "Raw proteins are high risk when warming"
+    },
+    "category:seafood": {
+      "rule_id": "category_seafood_outage",
+      "applies_to": "category:seafood",
+      "scope": {
+        "type": "category",
+        "key": "seafood",
+        "category": "seafood"
+      },
+      "priority": 2,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 45,
+      "notes": "Seafood is highly perishable during outages"
+    },
+    "default": {
+      "rule_id": "default_power_outage",
+      "applies_to": "default",
+      "scope": {
+        "type": "default",
+        "key": "default"
+      },
+      "priority": 1,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 120,
+      "notes": "Conservative fallback for unknown foods"
+    },
+    "food:milk_whole": {
+      "rule_id": "food_milk_whole_outage",
+      "applies_to": "food:milk_whole",
+      "scope": {
+        "type": "food",
+        "key": "milk_whole",
+        "food_id": "milk_whole"
+      },
+      "priority": 3,
+      "temp_threshold_f": 40,
+      "max_safe_minutes": 45,
+      "notes": "Milk should be discarded sooner once warming"
+    }
+  },
+  "matchingPriority": [
+    "food",
+    "category",
+    "default"
+  ]
+}

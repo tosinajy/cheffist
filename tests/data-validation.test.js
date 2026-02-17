@@ -8,6 +8,7 @@ const assert = require("node:assert/strict");
 const {
   getAllowedStates,
   parseCsvFile,
+  validatePowerOutageRulesRows,
   validateFoodsRows,
   validateRulesRows
 } = require("../scripts/build-data");
@@ -50,7 +51,10 @@ test("happy path: build-data script succeeds with seeded CSVs", () => {
   });
 
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /Built foods=\d+, states=\d+, rules=\d+, sources=\d+\./);
+  assert.match(
+    result.stdout,
+    /Built foods=\d+, states=\d+, rules=\d+, outageRules=\d+, sources=\d+\./
+  );
 });
 
 test("duplicate slug fails with clear reason", () => {
@@ -159,5 +163,58 @@ test("invalid applies_to shape fails", () => {
         getAllowedStates()
       ),
     /applies_to must be food:\{food_id\}, category:\{category_slug\}, or state:\{food_id\}:\{state\}/
+  );
+});
+
+test("power outage rules require a default applies_to row", () => {
+  const foodsById = { milk_whole: { food_id: "milk_whole", category: "dairy" } };
+  const categories = new Set(["dairy"]);
+
+  assert.throws(
+    () =>
+      validatePowerOutageRulesRows(
+        [
+          {
+            rule_id: "milk_only",
+            applies_to: "food:milk_whole",
+            temp_threshold_f: "40",
+            max_safe_minutes: "45",
+            notes: ""
+          }
+        ],
+        foodsById,
+        categories
+      ),
+    /at least one default rule is required/
+  );
+});
+
+test("power outage rules reject invalid applies_to formats", () => {
+  const foodsById = { milk_whole: { food_id: "milk_whole", category: "dairy" } };
+  const categories = new Set(["dairy"]);
+
+  assert.throws(
+    () =>
+      validatePowerOutageRulesRows(
+        [
+          {
+            rule_id: "default_rule",
+            applies_to: "default",
+            temp_threshold_f: "40",
+            max_safe_minutes: "120",
+            notes: ""
+          },
+          {
+            rule_id: "bad_rule",
+            applies_to: "state:milk_whole:opened",
+            temp_threshold_f: "40",
+            max_safe_minutes: "60",
+            notes: ""
+          }
+        ],
+        foodsById,
+        categories
+      ),
+    /applies_to must be food:\{food_id\}, category:\{category\}, or default/
   );
 });

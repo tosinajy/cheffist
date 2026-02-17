@@ -10,6 +10,7 @@ const FILES = {
   foods: path.join(DATA_DIR, "foods.csv"),
   foodStates: path.join(DATA_DIR, "foods_states.csv"),
   rules: path.join(DATA_DIR, "sitout_rules.csv"),
+  powerOutageRules: path.join(DATA_DIR, "power_outage_rules.csv"),
   sources: path.join(DATA_DIR, "sources.csv"),
   dataset: path.join(DATA_DIR, "DATASET_VERSION.json")
 };
@@ -42,6 +43,13 @@ const REQUIRED = {
     "max_safe_minutes",
     "covered_modifier_minutes",
     "high_risk_modifier_minutes"
+  ],
+  powerOutageRules: [
+    "rule_id",
+    "applies_to",
+    "temp_threshold_f",
+    "max_safe_minutes",
+    "notes"
   ],
   sources: ["source_id", "title", "publisher", "url", "notes", "applies_to"]
 };
@@ -437,6 +445,115 @@ function resolveRuleForFood(rules, { food_id, category, state }) {
   return null;
 }
 
+function parsePowerOutageAppliesTo(appliesToValue, rowNumber, foodsById, categories) {
+  const appliesTo = String(appliesToValue || "").trim();
+  const invalid = () =>
+    new Error(
+      "power_outage_rules.csv row " +
+        rowNumber +
+        ": applies_to must be food:{food_id}, category:{category}, or default"
+    );
+
+  if (appliesTo === "default") {
+    return { type: "default", key: "default" };
+  }
+
+  if (appliesTo.startsWith("food:")) {
+    const foodId = appliesTo.slice(5);
+    if (!foodId) throw invalid();
+    if (!foodsById[foodId]) {
+      throw new Error(
+        `power_outage_rules.csv row ${rowNumber}: unknown food_id '${foodId}' in applies_to`
+      );
+    }
+    return { type: "food", key: foodId, food_id: foodId };
+  }
+
+  if (appliesTo.startsWith("category:")) {
+    const category = appliesTo.slice(9);
+    if (!category) throw invalid();
+    if (!categories.has(category)) {
+      throw new Error(
+        `power_outage_rules.csv row ${rowNumber}: unknown category '${category}' in applies_to`
+      );
+    }
+    return { type: "category", key: category, category };
+  }
+
+  throw invalid();
+}
+
+function validatePowerOutageRulesRows(rows, foodsById, categories) {
+  const seenRuleIds = new Set();
+  const seenAppliesTo = new Set();
+  const normalized = [];
+  let hasDefaultRule = false;
+
+  rows.forEach((row, index) => {
+    const rowNumber = index + 2;
+    assertNonEmpty(row, "rule_id", rowNumber, "power_outage_rules.csv");
+    assertNonEmpty(row, "applies_to", rowNumber, "power_outage_rules.csv");
+
+    const ruleId = String(row.rule_id).trim();
+    const appliesTo = String(row.applies_to).trim();
+
+    if (seenRuleIds.has(ruleId)) {
+      throw new Error(`power_outage_rules.csv row ${rowNumber}: duplicate rule_id '${ruleId}'`);
+    }
+    if (seenAppliesTo.has(appliesTo)) {
+      throw new Error(`power_outage_rules.csv row ${rowNumber}: duplicate applies_to '${appliesTo}'`);
+    }
+    seenRuleIds.add(ruleId);
+    seenAppliesTo.add(appliesTo);
+
+    const scope = parsePowerOutageAppliesTo(appliesTo, rowNumber, foodsById, categories);
+    if (scope.type === "default") hasDefaultRule = true;
+
+    const tempThreshold = toRequiredInt(
+      row,
+      "temp_threshold_f",
+      rowNumber,
+      "power_outage_rules.csv"
+    );
+    const maxSafeMinutes = toRequiredInt(
+      row,
+      "max_safe_minutes",
+      rowNumber,
+      "power_outage_rules.csv"
+    );
+
+    normalized.push({
+      rule_id: ruleId,
+      applies_to: appliesTo,
+      scope,
+      priority: scope.type === "food" ? 3 : scope.type === "category" ? 2 : 1,
+      temp_threshold_f: tempThreshold,
+      max_safe_minutes: maxSafeMinutes,
+      notes: String(row.notes || "").trim()
+    });
+  });
+
+  if (!hasDefaultRule) {
+    throw new Error("power_outage_rules.csv: at least one default rule is required");
+  }
+
+  normalized.sort((a, b) => a.rule_id.localeCompare(b.rule_id));
+
+  const byId = {};
+  const byAppliesTo = {};
+  normalized.forEach((rule) => {
+    byId[rule.rule_id] = rule;
+    byAppliesTo[rule.applies_to] = rule;
+  });
+
+  return {
+    items: normalized,
+    byId,
+    byAppliesTo,
+    matchingPriority: ["food", "category", "default"]
+  };
+}
+
 function validateSourceRows(rows) {
   const seenSourceIds = new Set();
   const normalized = [];
@@ -506,6 +623,10 @@ function buildData() {
   const foodsRaw = parseCsvFile(FILES.foods, REQUIRED.foods);
   const foodStatesRaw = parseOptionalCsvFile(FILES.foodStates, REQUIRED.foodStates);
   const rulesRaw = parseCsvFile(FILES.rules, REQUIRED.rules);
+  const powerOutageRulesRaw = parseCsvFile(
+    FILES.powerOutageRules,
+    REQUIRED.powerOutageRules
+  );
   const sourcesRaw = parseCsvFile(FILES.sources, REQUIRED.sources);
 
   const foods = validateFoodsRows(foodsRaw);
@@ -523,12 +644,18 @@ function buildData() {
     new Set(foods.categories),
     allowedStates
   );
+  const powerOutageRules = validatePowerOutageRulesRows(
+    powerOutageRulesRaw,
+    foods.byId,
+    new Set(foods.categories)
+  );
   const sources = validateSourceRows(sourcesRaw);
   const dataset = readDatasetVersion();
 
   writeJson(path.join(OUTPUT_DIR, "foods.json"), foods);
   writeJson(path.join(OUTPUT_DIR, "foodStates.json"), foodStates);
   writeJson(path.join(OUTPUT_DIR, "rules.json"), rules);
+  writeJson(path.join(OUTPUT_DIR, "powerOutageRules.json"), powerOutageRules);
   writeJson(path.join(OUTPUT_DIR, "sources.json"), sources);
   writeJson(path.join(OUTPUT_DIR, "dataset.json"), dataset);
 
@@ -536,6 +663,7 @@ function buildData() {
     foodsCount: foods.items.length,
     statesCount: foodStates.items.length,
     rulesCount: rules.items.length,
+    powerOutageRulesCount: powerOutageRules.items.length,
     sourcesCount: sources.items.length
   };
 }
@@ -544,7 +672,10 @@ if (require.main === module) {
   try {
     const result = buildData();
     process.stdout.write(
-      `Built foods=${result.foodsCount}, states=${result.statesCount}, rules=${result.rulesCount}, sources=${result.sourcesCount}.\n`
+      "Built " +
+        `foods=${result.foodsCount}, states=${result.statesCount}, ` +
+        `rules=${result.rulesCount}, outageRules=${result.powerOutageRulesCount}, ` +
+        `sources=${result.sourcesCount}.\n`
     );
   } catch (error) {
     process.stderr.write(`Data build failed: ${error.message}\n`);
@@ -555,6 +686,7 @@ if (require.main === module) {
 module.exports = {
   buildData,
   getAllowedStates,
+  parsePowerOutageAppliesTo,
   parseAppliesTo,
   parseBoolean,
   parseCsvFile,
@@ -562,5 +694,6 @@ module.exports = {
   resolveRuleForFood,
   splitList,
   validateFoodsRows,
+  validatePowerOutageRulesRows,
   validateRulesRows
 };
