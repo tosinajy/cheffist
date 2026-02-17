@@ -4,46 +4,56 @@
   only and does not guarantee safety.
 </p>
 
-<form method="get" action="/power-outage-calculator/">
-  <div>
-    <label for="food_id">Food</label>
-    <select id="food_id" name="food_id" required aria-required="true">
-      <option value="">Select a food</option>
-      {% for food in foods.items %}
-      <option
-        value="{{ food.food_id }}"
-        {% if powerOutageContext.initialInput.food_id == food.food_id %}selected{% endif %}
-      >
-        {{ food.name }}
-      </option>
-      {% endfor %}
-    </select>
-  </div>
+<form method="get" action="/power-outage-calculator/" class="space-y-6">
+  {% set fieldControl %}
+  <select id="food_id" name="food_id" required aria-required="true" class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm">
+    <option value="">Select a food</option>
+    {% for food in foods.items %}
+    <option
+      value="{{ food.food_id }}"
+      {% if powerOutageContext.initialInput.food_id == food.food_id %}selected{% endif %}
+    >
+      {{ food.name }}
+    </option>
+    {% endfor %}
+  </select>
+  {% endset %}
+  {% set fieldId = "food_id" %}
+  {% set fieldLabel = "Food" %}
+  {% include "components/ui-field.njk" %}
 
-  <div>
-    <label for="fridge_temp_f">Fridge temperature (F, optional)</label>
+  <div class="grid gap-4 sm:grid-cols-2">
+    {% set fieldControl %}
     <input
       id="fridge_temp_f"
       name="fridge_temp_f"
       type="number"
       step="0.1"
       value="{{ powerOutageContext.initialInput.fridge_temp_f }}"
+      class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm"
     />
-  </div>
+    {% endset %}
+    {% set fieldId = "fridge_temp_f" %}
+    {% set fieldLabel = "Fridge temperature (F, optional)" %}
+    {% include "components/ui-field.njk" %}
 
-  <div>
-    <label for="freezer_temp_f">Freezer temperature (F, optional)</label>
+    {% set fieldControl %}
     <input
       id="freezer_temp_f"
       name="freezer_temp_f"
       type="number"
       step="0.1"
       value="{{ powerOutageContext.initialInput.freezer_temp_f }}"
+      class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm"
     />
+    {% endset %}
+    {% set fieldId = "freezer_temp_f" %}
+    {% set fieldLabel = "Freezer temperature (F, optional)" %}
+    {% include "components/ui-field.njk" %}
   </div>
 
-  <div>
-    <label for="outage_hours">Outage hours</label>
+  <div class="grid gap-4 sm:grid-cols-2">
+    {% set fieldControl %}
     <input
       id="outage_hours"
       name="outage_hours"
@@ -52,11 +62,14 @@
       value="{{ powerOutageContext.initialInput.outage_hours }}"
       required
       aria-required="true"
+      class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm"
     />
-  </div>
+    {% endset %}
+    {% set fieldId = "outage_hours" %}
+    {% set fieldLabel = "Outage hours" %}
+    {% include "components/ui-field.njk" %}
 
-  <div>
-    <label for="outage_minutes">Outage minutes</label>
+    {% set fieldControl %}
     <input
       id="outage_minutes"
       name="outage_minutes"
@@ -65,21 +78,28 @@
       value="{{ powerOutageContext.initialInput.outage_minutes }}"
       required
       aria-required="true"
+      class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm"
     />
+    {% endset %}
+    {% set fieldId = "outage_minutes" %}
+    {% set fieldLabel = "Outage minutes" %}
+    {% include "components/ui-field.njk" %}
   </div>
 
-  <div>
-    <label for="freezer_fullness">Freezer fullness</label>
-    <select id="freezer_fullness" name="freezer_fullness">
-      <option value="full" {% if powerOutageContext.initialInput.freezer_fullness == "full" %}selected{% endif %}>Full</option>
-      <option value="half" {% if powerOutageContext.initialInput.freezer_fullness == "half" %}selected{% endif %}>Half full</option>
-      <option value="empty" {% if powerOutageContext.initialInput.freezer_fullness == "empty" %}selected{% endif %}>Mostly empty</option>
-    </select>
-  </div>
+  {% set fieldControl %}
+  <select id="freezer_fullness" name="freezer_fullness" class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm">
+    <option value="full" {% if powerOutageContext.initialInput.freezer_fullness == "full" %}selected{% endif %}>Full</option>
+    <option value="half" {% if powerOutageContext.initialInput.freezer_fullness == "half" %}selected{% endif %}>Half full</option>
+    <option value="empty" {% if powerOutageContext.initialInput.freezer_fullness == "empty" %}selected{% endif %}>Mostly empty</option>
+  </select>
+  {% endset %}
+  {% set fieldId = "freezer_fullness" %}
+  {% set fieldLabel = "Freezer fullness" %}
+  {% include "components/ui-field.njk" %}
 
-  <fieldset>
-    <legend>Modifiers</legend>
-    <label>
+  <fieldset class="space-y-2 rounded-2xl border border-white/10 bg-white/5 p-4">
+    <legend class="px-2 text-xs uppercase tracking-wide text-muted">Modifiers</legend>
+    <label class="inline-flex items-center gap-2 text-sm">
       <input
         name="fridge_opened"
         type="checkbox"
@@ -88,7 +108,7 @@
       />
       Fridge opened during outage
     </label>
-    <label>
+    <label class="inline-flex items-center gap-2 text-sm">
       <input
         name="freezer_opened"
         type="checkbox"
@@ -97,7 +117,7 @@
       />
       Freezer opened during outage
     </label>
-    <label>
+    <label class="inline-flex items-center gap-2 text-sm">
       <input
         name="high_risk_consumer"
         type="checkbox"
@@ -108,26 +128,32 @@
     </label>
   </fieldset>
 
-  <button type="submit">Evaluate outage risk</button>
+  {% set buttonVariant = "primary" %}
+  {% set buttonType = "submit" %}
+  {% set buttonLabel = "Evaluate outage risk" %}
+  {% include "components/ui-button.njk" %}
 </form>
 
-<section aria-live="polite">
+{% set cardVariant = "elevated" %}
+{% set cardContent %}
+<section aria-live="polite" class="space-y-3">
   <h2>Result</h2>
-  <p>Status: <strong>{{ powerOutageContext.initialResult.status }}</strong></p>
+  {% set badgeStatus = powerOutageContext.initialResult.status %}
+  {% include "components/ui-badge.njk" %}
   <p>
     Recommended action:
     <strong>{{ powerOutageContext.initialResult.recommendedAction }}</strong>
   </p>
 
   <h3>Explanation</h3>
-  <ul>
+  <ul class="list-disc space-y-1 pl-5">
     {% for reason in powerOutageContext.initialResult.reasons %}
     <li>{{ reason }}</li>
     {% endfor %}
   </ul>
 
   <h3>Assumptions</h3>
-  <ul>
+  <ul class="list-disc space-y-1 pl-5">
     {% for assumption in powerOutageContext.initialResult.assumptions %}
     <li>{{ assumption }}</li>
     {% endfor %}
@@ -137,6 +163,8 @@
     Read the <a href="/disclaimer/">disclaimer</a> before making food safety decisions.
   </p>
 </section>
+{% endset %}
+{% include "components/ui-card.njk" %}
 
 {% set affiliateBlock = {
   title: "Recommended tools (affiliate links)",
@@ -147,9 +175,11 @@
 } %}
 {% include "components/affiliate-block.njk" %}
 
+{% set cardVariant = "default" %}
+{% set cardContent %}
 <section>
   <h2>Related tools</h2>
-  <ul>
+  <ul class="list-disc space-y-1 pl-5">
     {% if powerOutageContext.initialResult.relatedTools and powerOutageContext.initialResult.relatedTools.length %}
     {% for tool in powerOutageContext.initialResult.relatedTools %}
     <li><a href="{{ tool.href }}">{{ tool.label }}</a></li>
@@ -161,6 +191,8 @@
     {% endif %}
   </ul>
 </section>
+{% endset %}
+{% include "components/ui-card.njk" %}
 
 {% if powerOutageContext.adContext.enabled %}
 {% set adSlot = {

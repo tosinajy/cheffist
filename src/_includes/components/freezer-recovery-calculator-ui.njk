@@ -1,52 +1,59 @@
-<form method="get" action="/can-i-refreeze-this/" data-freezer-recovery-form>
-  <div>
-    <label for="food_id">Food</label>
-    <select id="food_id" name="food_id" required aria-required="true">
-      <option value="">Select a food</option>
-      {% for food in foods.items %}
-      <option
-        value="{{ food.food_id }}"
-        {% if freezerRecoveryContext.initialInput.food_id == food.food_id %}selected{% endif %}
-      >
-        {{ food.name }}
-      </option>
-      {% endfor %}
-    </select>
-  </div>
+<form method="get" action="/can-i-refreeze-this/" data-freezer-recovery-form class="space-y-6">
+  {% set fieldControl %}
+  <select id="food_id" name="food_id" required aria-required="true" class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm">
+    <option value="">Select a food</option>
+    {% for food in foods.items %}
+    <option
+      value="{{ food.food_id }}"
+      {% if freezerRecoveryContext.initialInput.food_id == food.food_id %}selected{% endif %}
+    >
+      {{ food.name }}
+    </option>
+    {% endfor %}
+  </select>
+  {% endset %}
+  {% set fieldId = "food_id" %}
+  {% set fieldLabel = "Food" %}
+  {% include "components/ui-field.njk" %}
 
-  <div>
-    <label for="thaw_state">Thaw state</label>
-    <select id="thaw_state" name="thaw_state" required aria-required="true">
-      <option
-        value="partially_thawed"
-        {% if freezerRecoveryContext.initialInput.thaw_state == "partially_thawed" %}selected{% endif %}
-      >
-        Partially thawed (ice crystals remain)
-      </option>
-      <option
-        value="fully_thawed"
-        {% if freezerRecoveryContext.initialInput.thaw_state == "fully_thawed" %}selected{% endif %}
-      >
-        Fully thawed
-      </option>
-    </select>
-  </div>
+  {% set fieldControl %}
+  <select id="thaw_state" name="thaw_state" required aria-required="true" class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm">
+    <option
+      value="partially_thawed"
+      {% if freezerRecoveryContext.initialInput.thaw_state == "partially_thawed" %}selected{% endif %}
+    >
+      Partially thawed (ice crystals remain)
+    </option>
+    <option
+      value="fully_thawed"
+      {% if freezerRecoveryContext.initialInput.thaw_state == "fully_thawed" %}selected{% endif %}
+    >
+      Fully thawed
+    </option>
+  </select>
+  {% endset %}
+  {% set fieldId = "thaw_state" %}
+  {% set fieldLabel = "Thaw state" %}
+  {% include "components/ui-field.njk" %}
 
-  <div>
-    <label for="internal_temp_f">Estimated internal temperature (F)</label>
-    <input
-      id="internal_temp_f"
-      name="internal_temp_f"
-      type="number"
-      step="0.1"
-      value="{{ freezerRecoveryContext.initialInput.internal_temp_f }}"
-      aria-describedby="internal-temp-help"
-    />
-    <p id="internal-temp-help">Leave blank if unknown.</p>
-  </div>
+  {% set fieldControl %}
+  <input
+    id="internal_temp_f"
+    name="internal_temp_f"
+    type="number"
+    step="0.1"
+    value="{{ freezerRecoveryContext.initialInput.internal_temp_f }}"
+    aria-describedby="internal-temp-help"
+    class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm"
+  />
+  {% endset %}
+  {% set fieldId = "internal_temp_f" %}
+  {% set fieldLabel = "Estimated internal temperature (F)" %}
+  {% set fieldHint = "Leave blank if unknown." %}
+  {% include "components/ui-field.njk" %}
 
-  <div>
-    <label for="thaw_hours">Time thawed (hours)</label>
+  <div class="grid gap-4 sm:grid-cols-2">
+    {% set fieldControl %}
     <input
       id="thaw_hours"
       name="thaw_hours"
@@ -55,11 +62,15 @@
       value="{{ freezerRecoveryContext.initialInput.thaw_hours }}"
       required
       aria-required="true"
+      class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm"
     />
-  </div>
+    {% endset %}
+    {% set fieldId = "thaw_hours" %}
+    {% set fieldLabel = "Time thawed (hours)" %}
+    {% set fieldHint = "" %}
+    {% include "components/ui-field.njk" %}
 
-  <div>
-    <label for="thaw_minutes">Additional minutes thawed</label>
+    {% set fieldControl %}
     <input
       id="thaw_minutes"
       name="thaw_minutes"
@@ -68,12 +79,17 @@
       value="{{ freezerRecoveryContext.initialInput.thaw_minutes }}"
       required
       aria-required="true"
+      class="w-full rounded-xl border border-border bg-surfaceElevated px-3 py-2 text-sm"
     />
+    {% endset %}
+    {% set fieldId = "thaw_minutes" %}
+    {% set fieldLabel = "Additional minutes thawed" %}
+    {% include "components/ui-field.njk" %}
   </div>
 
-  <fieldset>
-    <legend>Modifiers</legend>
-    <label for="refrozen">
+  <fieldset class="space-y-2 rounded-2xl border border-white/10 bg-white/5 p-4">
+    <legend class="px-2 text-xs uppercase tracking-wide text-muted">Modifiers</legend>
+    <label for="refrozen" class="inline-flex items-center gap-2 text-sm">
       <input
         id="refrozen"
         name="refrozen"
@@ -83,7 +99,7 @@
       />
       Food has already been refrozen
     </label>
-    <label for="high_risk_consumer">
+    <label for="high_risk_consumer" class="inline-flex items-center gap-2 text-sm">
       <input
         id="high_risk_consumer"
         name="high_risk_consumer"
@@ -95,29 +111,36 @@
     </label>
   </fieldset>
 
-  <button type="submit">Check refreezing risk</button>
+  {% set buttonVariant = "primary" %}
+  {% set buttonType = "submit" %}
+  {% set buttonLabel = "Check refreezing risk" %}
+  {% include "components/ui-button.njk" %}
 </form>
 
-<section aria-live="polite" data-freezer-recovery-results>
+{% set cardVariant = "elevated" %}
+{% set cardContent %}
+<section aria-live="polite" data-freezer-recovery-results class="space-y-3">
   <h2>Result</h2>
   <p>
     Status:
     <strong data-freezer-recovery-status>{{ freezerRecoveryContext.initialResult.status }}</strong>
   </p>
+  {% set badgeStatus = freezerRecoveryContext.initialResult.status %}
+  {% include "components/ui-badge.njk" %}
   <p>
     Recommended action:
     <strong data-freezer-recovery-action>{{ freezerRecoveryContext.initialResult.recommendedAction }}</strong>
   </p>
 
   <h3>Explanation</h3>
-  <ul data-freezer-recovery-reasons>
+  <ul data-freezer-recovery-reasons class="list-disc space-y-1 pl-5">
     {% for reason in freezerRecoveryContext.initialResult.reasons %}
     <li>{{ reason }}</li>
     {% endfor %}
   </ul>
 
   <h3>Conservative guidance assumptions</h3>
-  <ul data-freezer-recovery-assumptions>
+  <ul data-freezer-recovery-assumptions class="list-disc space-y-1 pl-5">
     {% for assumption in freezerRecoveryContext.initialResult.assumptions %}
     <li>{{ assumption }}</li>
     {% endfor %}
@@ -126,6 +149,8 @@
     Read the <a href="/disclaimer/">disclaimer</a> before making food safety decisions.
   </p>
 </section>
+{% endset %}
+{% include "components/ui-card.njk" %}
 
 {% set affiliateBlock = {
   title: "Recommended tools (affiliate links)",
@@ -137,6 +162,8 @@
 {% include "components/affiliate-block.njk" %}
 
 {% set selectedFood = foods.byId[freezerRecoveryContext.initialInput.food_id] %}
+{% set cardVariant = "default" %}
+{% set cardContent %}
 <section data-freezer-next-scenario>
   <h2>Next scenario</h2>
   <p data-freezer-next-scenario-summary>
@@ -146,7 +173,7 @@
     Compare related safety scenarios to make conservative decisions.
     {% endif %}
   </p>
-  <ul data-freezer-next-scenario-links>
+  <ul data-freezer-next-scenario-links class="list-disc space-y-1 pl-5">
     {% if freezerRecoveryContext.initialResult.status == "USE_CAUTION" %}
     {% if selectedFood %}
     <li>
@@ -166,6 +193,8 @@
     {% endif %}
   </ul>
 </section>
+{% endset %}
+{% include "components/ui-card.njk" %}
 
 {% if freezerRecoveryContext.adContext.enabled %}
 {% set adSlot = {

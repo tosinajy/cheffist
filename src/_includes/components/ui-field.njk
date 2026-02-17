@@ -1,0 +1,9 @@
+<div class="space-y-2">
+  <label for="{{ fieldId }}" class="block text-sm font-medium text-text">
+    {{ fieldLabel }}
+  </label>
+  {{ fieldControl | safe }}
+  {% if fieldHint %}
+  <p class="text-xs text-muted">{{ fieldHint }}</p>
+  {% endif %}
+</div>
