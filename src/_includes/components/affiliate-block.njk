@@ -1,0 +1,19 @@
+{% if affiliateBlock and affiliateBlock.products and affiliateBlock.products.length %}
+<section aria-label="Recommended tools">
+  <h2>{{ affiliateBlock.title or "Recommended tools (affiliate links)" }}</h2>
+  <p>
+    Recommended tools (affiliate links). If you buy through these links, we may earn a commission
+    at no extra cost to you.
+  </p>
+  <ul>
+    {% for product in affiliateBlock.products %}
+    <li>
+      <a href="{{ product.affiliate_url }}" rel="nofollow sponsored">
+        {{ product.name }}
+      </a>
+      {% if product.notes %} - {{ product.notes }}{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}

@@ -1,0 +1,161 @@
+<h1>Power Outage Food Safety Calculator</h1>
+<p>
+  Estimate conservative outage risk for refrigerated and frozen foods. Guidance is educational
+  only and does not guarantee safety.
+</p>
+
+<form method="get" action="/power-outage-calculator/">
+  <div>
+    <label for="food_id">Food</label>
+    <select id="food_id" name="food_id" required aria-required="true">
+      <option value="">Select a food</option>
+      {% for food in foods.items %}
+      <option
+        value="{{ food.food_id }}"
+        {% if powerOutageContext.initialInput.food_id == food.food_id %}selected{% endif %}
+      >
+        {{ food.name }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <label for="fridge_temp_f">Fridge temperature (F, optional)</label>
+    <input
+      id="fridge_temp_f"
+      name="fridge_temp_f"
+      type="number"
+      step="0.1"
+      value="{{ powerOutageContext.initialInput.fridge_temp_f }}"
+    />
+  </div>
+
+  <div>
+    <label for="freezer_temp_f">Freezer temperature (F, optional)</label>
+    <input
+      id="freezer_temp_f"
+      name="freezer_temp_f"
+      type="number"
+      step="0.1"
+      value="{{ powerOutageContext.initialInput.freezer_temp_f }}"
+    />
+  </div>
+
+  <div>
+    <label for="outage_hours">Outage hours</label>
+    <input
+      id="outage_hours"
+      name="outage_hours"
+      type="number"
+      min="0"
+      value="{{ powerOutageContext.initialInput.outage_hours }}"
+      required
+      aria-required="true"
+    />
+  </div>
+
+  <div>
+    <label for="outage_minutes">Outage minutes</label>
+    <input
+      id="outage_minutes"
+      name="outage_minutes"
+      type="number"
+      min="0"
+      value="{{ powerOutageContext.initialInput.outage_minutes }}"
+      required
+      aria-required="true"
+    />
+  </div>
+
+  <div>
+    <label for="freezer_fullness">Freezer fullness</label>
+    <select id="freezer_fullness" name="freezer_fullness">
+      <option value="full" {% if powerOutageContext.initialInput.freezer_fullness == "full" %}selected{% endif %}>Full</option>
+      <option value="half" {% if powerOutageContext.initialInput.freezer_fullness == "half" %}selected{% endif %}>Half full</option>
+      <option value="empty" {% if powerOutageContext.initialInput.freezer_fullness == "empty" %}selected{% endif %}>Mostly empty</option>
+    </select>
+  </div>
+
+  <fieldset>
+    <legend>Modifiers</legend>
+    <label>
+      <input
+        name="fridge_opened"
+        type="checkbox"
+        value="1"
+        {% if powerOutageContext.initialInput.fridge_opened %}checked{% endif %}
+      />
+      Fridge opened during outage
+    </label>
+    <label>
+      <input
+        name="freezer_opened"
+        type="checkbox"
+        value="1"
+        {% if powerOutageContext.initialInput.freezer_opened %}checked{% endif %}
+      />
+      Freezer opened during outage
+    </label>
+    <label>
+      <input
+        name="high_risk_consumer"
+        type="checkbox"
+        value="1"
+        {% if powerOutageContext.initialInput.high_risk_consumer %}checked{% endif %}
+      />
+      High-risk consumer
+    </label>
+  </fieldset>
+
+  <button type="submit">Evaluate outage risk</button>
+</form>
+
+<section aria-live="polite">
+  <h2>Result</h2>
+  <p>Status: <strong>{{ powerOutageContext.initialResult.status }}</strong></p>
+  <p>
+    Recommended action:
+    <strong>{{ powerOutageContext.initialResult.recommendedAction }}</strong>
+  </p>
+
+  <h3>Explanation</h3>
+  <ul>
+    {% for reason in powerOutageContext.initialResult.reasons %}
+    <li>{{ reason }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Assumptions</h3>
+  <ul>
+    {% for assumption in powerOutageContext.initialResult.assumptions %}
+    <li>{{ assumption }}</li>
+    {% endfor %}
+  </ul>
+
+  <p>
+    Read the <a href="/disclaimer/">disclaimer</a> before making food safety decisions.
+  </p>
+</section>
+
+{% set affiliateBlock = {
+  title: "Recommended tools (affiliate links)",
+  products: powerOutageContext.affiliateProducts,
+  scenarioType: "outage"
+} %}
+{% include "components/affiliate-block.njk" %}
+
+<section>
+  <h2>Related tools</h2>
+  <ul>
+    {% if powerOutageContext.initialResult.relatedTools and powerOutageContext.initialResult.relatedTools.length %}
+    {% for tool in powerOutageContext.initialResult.relatedTools %}
+    <li><a href="{{ tool.href }}">{{ tool.label }}</a></li>
+    {% endfor %}
+    {% else %}
+    <li><a href="/food-left-out-calculator/">Food left out calculator</a></li>
+    <li><a href="/can-i-refreeze-this/">Can I refreeze this?</a></li>
+    <li><a href="/printable-food-storage-chart/">Printable food storage chart</a></li>
+    {% endif %}
+  </ul>
+</section>

@@ -8,6 +8,7 @@ const assert = require("node:assert/strict");
 const {
   getAllowedStates,
   parseCsvFile,
+  validateAffiliateProductsRows,
   validateFreezerRecoveryRulesRows,
   validatePowerOutageRulesRows,
   validateFoodsRows,
@@ -54,7 +55,7 @@ test("happy path: build-data script succeeds with seeded CSVs", () => {
   assert.equal(result.status, 0, result.stderr);
   assert.match(
     result.stdout,
-    /Built foods=\d+, states=\d+, rules=\d+, outageRules=\d+, freezerRecoveryRules=\d+, sources=\d+\./
+    /Built foods=\d+, states=\d+, rules=\d+, outageRules=\d+, freezerRecoveryRules=\d+, affiliateProducts=\d+, sources=\d+\./
   );
 });
 
@@ -273,5 +274,34 @@ test("freezer recovery rules reject invalid thaw_state", () => {
         categories
       ),
     /thaw_state must be one of partially_thawed, fully_thawed, any/
+  );
+});
+
+test("affiliate products reject unknown scenario tags", () => {
+  const foodsById = { milk_whole: { food_id: "milk_whole", category: "dairy" } };
+  const categories = new Set(["dairy"]);
+
+  assert.throws(
+    () =>
+      validateAffiliateProductsRows(
+        [
+          {
+            product_id: "p1",
+            name: "Prod 1",
+            slug: "prod-1",
+            category_tags: "thermometer",
+            applies_to_food_ids: "",
+            applies_to_categories: "",
+            applies_to_scenarios: "invalid_scenario",
+            priority: "1",
+            affiliate_url: "https://example.com/p1",
+            image_url: "",
+            notes: ""
+          }
+        ],
+        foodsById,
+        categories
+      ),
+    /applies_to_scenarios value 'invalid_scenario' is invalid/
   );
 });

@@ -165,6 +165,13 @@
   </p>
 </section>
 
+{% set affiliateBlock = {
+  title: "Recommended tools (affiliate links)",
+  products: calculatorContext.affiliateProducts,
+  scenarioType: "sitout"
+} %}
+{% include "components/affiliate-block.njk" %}
+
 {% set selectedFood = foods.byId[calculatorContext.initialInput.food_id] %}
 <section data-next-scenario>
   <h2>Next scenario</h2>

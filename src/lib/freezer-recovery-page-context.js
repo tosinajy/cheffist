@@ -1,4 +1,5 @@
 const { evaluateFreezerRecovery } = require("../../lib/freezerRecoveryEngine");
+const { getRelevantProducts } = require("../../lib/affiliateEngine");
 
 function toBool(value) {
   return value === true || value === "true" || value === "1" || value === 1 || value === "on";
@@ -82,10 +83,18 @@ function buildFreezerRecoveryContext(data, prefillInput) {
           rules: data.freezerRecoveryRules
         })
       : defaultResult();
+  const affiliateProducts = getRelevantProducts({
+    food,
+    category: food?.category || "",
+    scenarioType: "freezer",
+    status: initialResult.status,
+    products: data.affiliateProducts
+  });
 
   return {
     initialInput: normalized,
     initialResult,
+    affiliateProducts,
     hasPrefill,
     serialized: JSON.stringify({
       foods: data.foods,

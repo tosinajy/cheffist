@@ -12,6 +12,7 @@ const FILES = {
   rules: path.join(DATA_DIR, "sitout_rules.csv"),
   powerOutageRules: path.join(DATA_DIR, "power_outage_rules.csv"),
   freezerRecoveryRules: path.join(DATA_DIR, "freezer_recovery_rules.csv"),
+  affiliateProducts: path.join(DATA_DIR, "affiliate_products.csv"),
   sources: path.join(DATA_DIR, "sources.csv"),
   dataset: path.join(DATA_DIR, "DATASET_VERSION.json")
 };
@@ -58,6 +59,19 @@ const REQUIRED = {
     "thaw_state",
     "temp_threshold_f",
     "max_safe_minutes",
+    "notes"
+  ],
+  affiliateProducts: [
+    "product_id",
+    "name",
+    "slug",
+    "category_tags",
+    "applies_to_food_ids",
+    "applies_to_categories",
+    "applies_to_scenarios",
+    "priority",
+    "affiliate_url",
+    "image_url",
     "notes"
   ],
   sources: ["source_id", "title", "publisher", "url", "notes", "applies_to"]
@@ -692,6 +706,109 @@ function validateFreezerRecoveryRulesRows(rows, foodsById, categories) {
   };
 }
 
+function validateAffiliateProductsRows(rows, foodsById, categories) {
+  const allowedTags = new Set([
+    "thermometer",
+    "vacuum_sealer",
+    "container",
+    "freezer_bag",
+    "fridge_thermometer"
+  ]);
+  const allowedScenarios = new Set(["sitout", "outage", "freezer", "storage"]);
+  const seenProductIds = new Set();
+  const seenSlugs = new Set();
+  const normalized = [];
+
+  rows.forEach((row, index) => {
+    const rowNumber = index + 2;
+    assertNonEmpty(row, "product_id", rowNumber, "affiliate_products.csv");
+    assertNonEmpty(row, "name", rowNumber, "affiliate_products.csv");
+    assertNonEmpty(row, "slug", rowNumber, "affiliate_products.csv");
+    assertNonEmpty(row, "category_tags", rowNumber, "affiliate_products.csv");
+    assertNonEmpty(row, "applies_to_scenarios", rowNumber, "affiliate_products.csv");
+    assertNonEmpty(row, "priority", rowNumber, "affiliate_products.csv");
+    assertNonEmpty(row, "affiliate_url", rowNumber, "affiliate_products.csv");
+
+    const productId = String(row.product_id).trim();
+    const slug = String(row.slug).trim();
+    if (seenProductIds.has(productId)) {
+      throw new Error(`affiliate_products.csv row ${rowNumber}: duplicate product_id '${productId}'`);
+    }
+    if (seenSlugs.has(slug)) {
+      throw new Error(`affiliate_products.csv row ${rowNumber}: duplicate slug '${slug}'`);
+    }
+    seenProductIds.add(productId);
+    seenSlugs.add(slug);
+
+    const tags = splitList(row.category_tags);
+    tags.forEach((tag) => {
+      if (!allowedTags.has(tag)) {
+        throw new Error(
+          `affiliate_products.csv row ${rowNumber}: category_tags value '${tag}' is invalid`
+        );
+      }
+    });
+
+    const scenarios = splitList(row.applies_to_scenarios);
+    scenarios.forEach((scenario) => {
+      if (!allowedScenarios.has(scenario)) {
+        throw new Error(
+          `affiliate_products.csv row ${rowNumber}: applies_to_scenarios value '${scenario}' is invalid`
+        );
+      }
+    });
+
+    const foodIds = splitList(row.applies_to_food_ids);
+    foodIds.forEach((foodId) => {
+      if (!foodsById[foodId]) {
+        throw new Error(
+          `affiliate_products.csv row ${rowNumber}: unknown food_id '${foodId}' in applies_to_food_ids`
+        );
+      }
+    });
+
+    const categoryList = splitList(row.applies_to_categories);
+    categoryList.forEach((category) => {
+      if (!categories.has(category)) {
+        throw new Error(
+          `affiliate_products.csv row ${rowNumber}: unknown category '${category}' in applies_to_categories`
+        );
+      }
+    });
+
+    normalized.push({
+      product_id: productId,
+      name: String(row.name).trim(),
+      slug,
+      category_tags: tags,
+      applies_to_food_ids: foodIds,
+      applies_to_categories: categoryList,
+      applies_to_scenarios: scenarios,
+      priority: toRequiredInt(row, "priority", rowNumber, "affiliate_products.csv"),
+      affiliate_url: String(row.affiliate_url).trim(),
+      image_url: String(row.image_url || "").trim(),
+      notes: String(row.notes || "").trim()
+    });
+  });
+
+  normalized.sort((a, b) => a.priority - b.priority || a.product_id.localeCompare(b.product_id));
+
+  const byId = {};
+  const bySlug = {};
+  normalized.forEach((item) => {
+    byId[item.product_id] = item;
+    bySlug[item.slug] = item;
+  });
+
+  return {
+    items: normalized,
+    byId,
+    bySlug,
+    allowedCategoryTags: [...allowedTags].sort(),
+    allowedScenarios: [...allowedScenarios].sort()
+  };
+}
+
 function validateSourceRows(rows) {
   const seenSourceIds = new Set();
   const normalized = [];
@@ -769,6 +886,10 @@ function buildData() {
     FILES.freezerRecoveryRules,
     REQUIRED.freezerRecoveryRules
   );
+  const affiliateProductsRaw = parseCsvFile(
+    FILES.affiliateProducts,
+    REQUIRED.affiliateProducts
+  );
   const sourcesRaw = parseCsvFile(FILES.sources, REQUIRED.sources);
 
   const foods = validateFoodsRows(foodsRaw);
@@ -796,6 +917,11 @@ function buildData() {
     foods.byId,
     new Set(foods.categories)
   );
+  const affiliateProducts = validateAffiliateProductsRows(
+    affiliateProductsRaw,
+    foods.byId,
+    new Set(foods.categories)
+  );
   const sources = validateSourceRows(sourcesRaw);
   const dataset = readDatasetVersion();
 
@@ -804,6 +930,7 @@ function buildData() {
   writeJson(path.join(OUTPUT_DIR, "rules.json"), rules);
   writeJson(path.join(OUTPUT_DIR, "powerOutageRules.json"), powerOutageRules);
   writeJson(path.join(OUTPUT_DIR, "freezerRecoveryRules.json"), freezerRecoveryRules);
+  writeJson(path.join(OUTPUT_DIR, "affiliateProducts.json"), affiliateProducts);
   writeJson(path.join(OUTPUT_DIR, "sources.json"), sources);
   writeJson(path.join(OUTPUT_DIR, "dataset.json"), dataset);
 
@@ -813,6 +940,7 @@ function buildData() {
     rulesCount: rules.items.length,
     powerOutageRulesCount: powerOutageRules.items.length,
     freezerRecoveryRulesCount: freezerRecoveryRules.items.length,
+    affiliateProductsCount: affiliateProducts.items.length,
     sourcesCount: sources.items.length
   };
 }
@@ -825,6 +953,7 @@ if (require.main === module) {
         `foods=${result.foodsCount}, states=${result.statesCount}, ` +
         `rules=${result.rulesCount}, outageRules=${result.powerOutageRulesCount}, ` +
         `freezerRecoveryRules=${result.freezerRecoveryRulesCount}, ` +
+        `affiliateProducts=${result.affiliateProductsCount}, ` +
         `sources=${result.sourcesCount}.\n`
     );
   } catch (error) {
@@ -844,6 +973,7 @@ module.exports = {
   parseCsvText,
   resolveRuleForFood,
   splitList,
+  validateAffiliateProductsRows,
   validateFoodsRows,
   validateFreezerRecoveryRulesRows,
   validatePowerOutageRulesRows,

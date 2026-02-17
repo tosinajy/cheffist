@@ -1,0 +1,438 @@
+{
+  "items": [
+    {
+      "product_id": "fridge_freezer_thermometer",
+      "name": "Fridge and Freezer Thermometer",
+      "slug": "fridge-freezer-thermometer",
+      "category_tags": [
+        "fridge_thermometer",
+        "thermometer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "outage",
+        "storage"
+      ],
+      "priority": 1,
+      "affiliate_url": "https://example.com/affiliate/fridge-freezer-thermometer",
+      "image_url": "https://example.com/img/fridge-freezer-thermometer.jpg",
+      "notes": "Helps monitor appliance temperature drift"
+    },
+    {
+      "product_id": "instant_read_thermometer",
+      "name": "Instant Read Digital Thermometer",
+      "slug": "instant-read-thermometer",
+      "category_tags": [
+        "thermometer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "protein",
+        "seafood",
+        "dairy",
+        "cooked_foods"
+      ],
+      "applies_to_scenarios": [
+        "sitout",
+        "outage"
+      ],
+      "priority": 1,
+      "affiliate_url": "https://example.com/affiliate/instant-read-thermometer",
+      "image_url": "https://example.com/img/instant-read-thermometer.jpg",
+      "notes": "Use for quick temperature checks"
+    },
+    {
+      "product_id": "heavy_duty_freezer_bags",
+      "name": "Heavy Duty Freezer Bags",
+      "slug": "heavy-duty-freezer-bags",
+      "category_tags": [
+        "freezer_bag"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "freezer",
+        "storage"
+      ],
+      "priority": 2,
+      "affiliate_url": "https://example.com/affiliate/heavy-duty-freezer-bags",
+      "image_url": "https://example.com/img/heavy-duty-freezer-bags.jpg",
+      "notes": "Useful for portioning and freezing"
+    },
+    {
+      "product_id": "vacuum_sealer_kit",
+      "name": "Vacuum Sealer Starter Kit",
+      "slug": "vacuum-sealer-kit",
+      "category_tags": [
+        "vacuum_sealer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "protein",
+        "seafood",
+        "cooked_foods"
+      ],
+      "applies_to_scenarios": [
+        "freezer",
+        "storage"
+      ],
+      "priority": 2,
+      "affiliate_url": "https://example.com/affiliate/vacuum-sealer-kit",
+      "image_url": "https://example.com/img/vacuum-sealer-kit.jpg",
+      "notes": "Reduces freezer burn risk"
+    },
+    {
+      "product_id": "dairy_storage_pitcher",
+      "name": "Cold Storage Dairy Pitcher",
+      "slug": "dairy-storage-pitcher",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "dairy"
+      ],
+      "applies_to_scenarios": [
+        "storage",
+        "outage"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/dairy-storage-pitcher",
+      "image_url": "https://example.com/img/dairy-storage-pitcher.jpg",
+      "notes": "Designed for cold temperature retention"
+    },
+    {
+      "product_id": "glass_storage_containers",
+      "name": "Glass Storage Containers with Lids",
+      "slug": "glass-storage-containers",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "storage",
+        "sitout"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/glass-storage-containers",
+      "image_url": "https://example.com/img/glass-storage-containers.jpg",
+      "notes": "Supports rapid cooling and safer leftovers"
+    },
+    {
+      "product_id": "produce_storage_bins",
+      "name": "Produce Storage Bins",
+      "slug": "produce-storage-bins",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "produce"
+      ],
+      "applies_to_scenarios": [
+        "storage"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/produce-storage-bins",
+      "image_url": "https://example.com/img/produce-storage-bins.jpg",
+      "notes": "Helps keep produce dry and organized"
+    }
+  ],
+  "byId": {
+    "fridge_freezer_thermometer": {
+      "product_id": "fridge_freezer_thermometer",
+      "name": "Fridge and Freezer Thermometer",
+      "slug": "fridge-freezer-thermometer",
+      "category_tags": [
+        "fridge_thermometer",
+        "thermometer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "outage",
+        "storage"
+      ],
+      "priority": 1,
+      "affiliate_url": "https://example.com/affiliate/fridge-freezer-thermometer",
+      "image_url": "https://example.com/img/fridge-freezer-thermometer.jpg",
+      "notes": "Helps monitor appliance temperature drift"
+    },
+    "instant_read_thermometer": {
+      "product_id": "instant_read_thermometer",
+      "name": "Instant Read Digital Thermometer",
+      "slug": "instant-read-thermometer",
+      "category_tags": [
+        "thermometer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "protein",
+        "seafood",
+        "dairy",
+        "cooked_foods"
+      ],
+      "applies_to_scenarios": [
+        "sitout",
+        "outage"
+      ],
+      "priority": 1,
+      "affiliate_url": "https://example.com/affiliate/instant-read-thermometer",
+      "image_url": "https://example.com/img/instant-read-thermometer.jpg",
+      "notes": "Use for quick temperature checks"
+    },
+    "heavy_duty_freezer_bags": {
+      "product_id": "heavy_duty_freezer_bags",
+      "name": "Heavy Duty Freezer Bags",
+      "slug": "heavy-duty-freezer-bags",
+      "category_tags": [
+        "freezer_bag"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "freezer",
+        "storage"
+      ],
+      "priority": 2,
+      "affiliate_url": "https://example.com/affiliate/heavy-duty-freezer-bags",
+      "image_url": "https://example.com/img/heavy-duty-freezer-bags.jpg",
+      "notes": "Useful for portioning and freezing"
+    },
+    "vacuum_sealer_kit": {
+      "product_id": "vacuum_sealer_kit",
+      "name": "Vacuum Sealer Starter Kit",
+      "slug": "vacuum-sealer-kit",
+      "category_tags": [
+        "vacuum_sealer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "protein",
+        "seafood",
+        "cooked_foods"
+      ],
+      "applies_to_scenarios": [
+        "freezer",
+        "storage"
+      ],
+      "priority": 2,
+      "affiliate_url": "https://example.com/affiliate/vacuum-sealer-kit",
+      "image_url": "https://example.com/img/vacuum-sealer-kit.jpg",
+      "notes": "Reduces freezer burn risk"
+    },
+    "dairy_storage_pitcher": {
+      "product_id": "dairy_storage_pitcher",
+      "name": "Cold Storage Dairy Pitcher",
+      "slug": "dairy-storage-pitcher",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "dairy"
+      ],
+      "applies_to_scenarios": [
+        "storage",
+        "outage"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/dairy-storage-pitcher",
+      "image_url": "https://example.com/img/dairy-storage-pitcher.jpg",
+      "notes": "Designed for cold temperature retention"
+    },
+    "glass_storage_containers": {
+      "product_id": "glass_storage_containers",
+      "name": "Glass Storage Containers with Lids",
+      "slug": "glass-storage-containers",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "storage",
+        "sitout"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/glass-storage-containers",
+      "image_url": "https://example.com/img/glass-storage-containers.jpg",
+      "notes": "Supports rapid cooling and safer leftovers"
+    },
+    "produce_storage_bins": {
+      "product_id": "produce_storage_bins",
+      "name": "Produce Storage Bins",
+      "slug": "produce-storage-bins",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "produce"
+      ],
+      "applies_to_scenarios": [
+        "storage"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/produce-storage-bins",
+      "image_url": "https://example.com/img/produce-storage-bins.jpg",
+      "notes": "Helps keep produce dry and organized"
+    }
+  },
+  "bySlug": {
+    "fridge-freezer-thermometer": {
+      "product_id": "fridge_freezer_thermometer",
+      "name": "Fridge and Freezer Thermometer",
+      "slug": "fridge-freezer-thermometer",
+      "category_tags": [
+        "fridge_thermometer",
+        "thermometer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "outage",
+        "storage"
+      ],
+      "priority": 1,
+      "affiliate_url": "https://example.com/affiliate/fridge-freezer-thermometer",
+      "image_url": "https://example.com/img/fridge-freezer-thermometer.jpg",
+      "notes": "Helps monitor appliance temperature drift"
+    },
+    "instant-read-thermometer": {
+      "product_id": "instant_read_thermometer",
+      "name": "Instant Read Digital Thermometer",
+      "slug": "instant-read-thermometer",
+      "category_tags": [
+        "thermometer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "protein",
+        "seafood",
+        "dairy",
+        "cooked_foods"
+      ],
+      "applies_to_scenarios": [
+        "sitout",
+        "outage"
+      ],
+      "priority": 1,
+      "affiliate_url": "https://example.com/affiliate/instant-read-thermometer",
+      "image_url": "https://example.com/img/instant-read-thermometer.jpg",
+      "notes": "Use for quick temperature checks"
+    },
+    "heavy-duty-freezer-bags": {
+      "product_id": "heavy_duty_freezer_bags",
+      "name": "Heavy Duty Freezer Bags",
+      "slug": "heavy-duty-freezer-bags",
+      "category_tags": [
+        "freezer_bag"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "freezer",
+        "storage"
+      ],
+      "priority": 2,
+      "affiliate_url": "https://example.com/affiliate/heavy-duty-freezer-bags",
+      "image_url": "https://example.com/img/heavy-duty-freezer-bags.jpg",
+      "notes": "Useful for portioning and freezing"
+    },
+    "vacuum-sealer-kit": {
+      "product_id": "vacuum_sealer_kit",
+      "name": "Vacuum Sealer Starter Kit",
+      "slug": "vacuum-sealer-kit",
+      "category_tags": [
+        "vacuum_sealer"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "protein",
+        "seafood",
+        "cooked_foods"
+      ],
+      "applies_to_scenarios": [
+        "freezer",
+        "storage"
+      ],
+      "priority": 2,
+      "affiliate_url": "https://example.com/affiliate/vacuum-sealer-kit",
+      "image_url": "https://example.com/img/vacuum-sealer-kit.jpg",
+      "notes": "Reduces freezer burn risk"
+    },
+    "dairy-storage-pitcher": {
+      "product_id": "dairy_storage_pitcher",
+      "name": "Cold Storage Dairy Pitcher",
+      "slug": "dairy-storage-pitcher",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "dairy"
+      ],
+      "applies_to_scenarios": [
+        "storage",
+        "outage"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/dairy-storage-pitcher",
+      "image_url": "https://example.com/img/dairy-storage-pitcher.jpg",
+      "notes": "Designed for cold temperature retention"
+    },
+    "glass-storage-containers": {
+      "product_id": "glass_storage_containers",
+      "name": "Glass Storage Containers with Lids",
+      "slug": "glass-storage-containers",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [],
+      "applies_to_scenarios": [
+        "storage",
+        "sitout"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/glass-storage-containers",
+      "image_url": "https://example.com/img/glass-storage-containers.jpg",
+      "notes": "Supports rapid cooling and safer leftovers"
+    },
+    "produce-storage-bins": {
+      "product_id": "produce_storage_bins",
+      "name": "Produce Storage Bins",
+      "slug": "produce-storage-bins",
+      "category_tags": [
+        "container"
+      ],
+      "applies_to_food_ids": [],
+      "applies_to_categories": [
+        "produce"
+      ],
+      "applies_to_scenarios": [
+        "storage"
+      ],
+      "priority": 3,
+      "affiliate_url": "https://example.com/affiliate/produce-storage-bins",
+      "image_url": "https://example.com/img/produce-storage-bins.jpg",
+      "notes": "Helps keep produce dry and organized"
+    }
+  },
+  "allowedCategoryTags": [
+    "container",
+    "freezer_bag",
+    "fridge_thermometer",
+    "thermometer",
+    "vacuum_sealer"
+  ],
+  "allowedScenarios": [
+    "freezer",
+    "outage",
+    "sitout",
+    "storage"
+  ]
+}

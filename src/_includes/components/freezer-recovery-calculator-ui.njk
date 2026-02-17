@@ -122,7 +122,17 @@
     <li>{{ assumption }}</li>
     {% endfor %}
   </ul>
+  <p>
+    Read the <a href="/disclaimer/">disclaimer</a> before making food safety decisions.
+  </p>
 </section>
+
+{% set affiliateBlock = {
+  title: "Recommended tools (affiliate links)",
+  products: freezerRecoveryContext.affiliateProducts,
+  scenarioType: "freezer"
+} %}
+{% include "components/affiliate-block.njk" %}
 
 {% set selectedFood = foods.byId[freezerRecoveryContext.initialInput.food_id] %}
 <section data-freezer-next-scenario>
