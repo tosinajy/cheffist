@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "eleventy --serve",
     "data:build": "node scripts/build-data.js",
-    "build": "npm run data:build && eleventy",
+    "clean:output": "node scripts/clean-output.js",
+    "report:pseo": "node scripts/build-pseo-report.js",
+    "build": "npm run data:build && npm run clean:output && eleventy && npm run report:pseo",
     "test": "node --test"
   },
   "devDependencies": {

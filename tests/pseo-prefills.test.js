@@ -24,3 +24,10 @@ test("state-based prefilled pages use raw/cooked only when state segment exists"
   assert.equal(pages.some((page) => /\/sit-out\/opened\//.test(page.url)), false);
   assert.equal(pages.some((page) => /\/sit-out\/unopened\//.test(page.url)), false);
 });
+
+test("prefilled pages exclude missing-rule scenarios and include configured noindex pages", () => {
+  const pages = buildSitoutPrefills();
+
+  assert.equal(pages.some((page) => !page.matched_rule_id), false);
+  assert.equal(pages.some((page) => page.indexable === false), true);
+});

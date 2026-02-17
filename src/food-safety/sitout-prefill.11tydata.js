@@ -10,7 +10,8 @@ module.exports = {
   permalink: (data) => data.prefill.url,
   eleventyComputed: {
     title: (data) => data.prefill.title,
-    canonical: (data) => data.prefill.url,
+    canonical: (data) => data.prefill.canonical || data.prefill.url,
+    noindex: (data) => data.prefill.indexable === false,
     calculatorInput: (data) => data.prefill.input,
     calculatorContext: (data) => buildCalculatorContext(data, data.prefill.input)
   }

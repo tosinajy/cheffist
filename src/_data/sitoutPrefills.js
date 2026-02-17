@@ -25,13 +25,17 @@ function scenarioStates(food) {
 
 module.exports = function buildSitoutPrefills() {
   const foods = require("./foods.json");
+  const rules = require("./rules.json");
   const pseoConfig = require("./pseoConfig.json");
+  const { evaluateCalculator } = require("../assets/calculator-engine");
 
   const config = pseoConfig.sitout || {};
   const durations = config.durations_minutes || [30, 60, 120, 240];
   const temps = config.temperatures_f || [70, 85, 95];
   const maxPages = Number(config.max_pages || 240);
   const defaultTempF = Number(config.default_temp_f || 70);
+  const noindexConfig = config.noindex || {};
+  const safeTempNoindexSet = new Set(noindexConfig.safe_temp_variant_temps_f || [defaultTempF]);
 
   const pages = [];
   const sortedFoods = [...(foods.items || [])].sort((a, b) => a.slug.localeCompare(b.slug));
@@ -53,6 +57,11 @@ module.exports = function buildSitoutPrefills() {
           covered: false,
           high_risk_consumer: false
         };
+        const durationResult = evaluateCalculator(input, foods, rules);
+        if (!durationResult.matched_rule) return;
+
+        const durationCanonical = `/food-safety/${food.slug}/sit-out/${stateSegment}${duration}/`;
+        const durationIndexable = true;
 
         pages.push({
           variant: "duration",
@@ -61,7 +70,12 @@ module.exports = function buildSitoutPrefills() {
           state,
           duration_minutes: minutes,
           temp_f: defaultTempF,
-          url: `/food-safety/${food.slug}/sit-out/${stateSegment}${duration}/`,
+          url: durationCanonical,
+          canonical: durationCanonical,
+          indexable: durationIndexable,
+          noindex_reason: null,
+          status: durationResult.status,
+          matched_rule_id: durationResult.matched_rule.rule_id,
           title: `Can ${food.name}${stateLabel} sit out for ${duration}?`,
           h1: `Can ${food.name}${stateLabel} sit out for ${duration}?`,
           input,
@@ -77,6 +91,23 @@ module.exports = function buildSitoutPrefills() {
         });
 
         temps.forEach((tempF) => {
+          const tempInput = {
+            food_id: food.food_id,
+            state,
+            temp_value: tempF,
+            temp_unit: "F",
+            hours: Math.floor(minutes / 60),
+            minutes: minutes % 60,
+            covered: false,
+            high_risk_consumer: false
+          };
+          const tempResult = evaluateCalculator(tempInput, foods, rules);
+          if (!tempResult.matched_rule) return;
+
+          const noindexBecauseNearDuplicate =
+            tempResult.status === "SAFE" && safeTempNoindexSet.has(tempF);
+          const tempCanonical = `/food-safety/${food.slug}/sit-out/${stateSegment}${tempF}f/${duration}/`;
+
           pages.push({
             variant: "temp_duration",
             food_id: food.food_id,
@@ -84,19 +115,17 @@ module.exports = function buildSitoutPrefills() {
             state,
             duration_minutes: minutes,
             temp_f: tempF,
-            url: `/food-safety/${food.slug}/sit-out/${stateSegment}${tempF}f/${duration}/`,
+            url: tempCanonical,
+            canonical: tempCanonical,
+            indexable: !noindexBecauseNearDuplicate,
+            noindex_reason: noindexBecauseNearDuplicate
+              ? "safe_near_duplicate"
+              : null,
+            status: tempResult.status,
+            matched_rule_id: tempResult.matched_rule.rule_id,
             title: `How long can ${food.name}${stateLabel} sit out at ${tempF}F for ${duration}?`,
             h1: `How long can ${food.name}${stateLabel} sit out at ${tempF}F for ${duration}?`,
-            input: {
-              food_id: food.food_id,
-              state,
-              temp_value: tempF,
-              temp_unit: "F",
-              hours: Math.floor(minutes / 60),
-              minutes: minutes % 60,
-              covered: false,
-              high_risk_consumer: false
-            },
+            input: tempInput,
             explanation: {
               summary:
                 "This page preloads a specific temperature and elapsed time to show the conservative recommendation immediately.",

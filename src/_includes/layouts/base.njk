@@ -15,6 +15,9 @@
     {% if jsonLd %}
     <script type="application/ld+json">{{ jsonLd | safe }}</script>
     {% endif %}
+    {% if noindex %}
+    <meta name="robots" content="noindex,follow" />
+    {% endif %}
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>

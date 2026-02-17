@@ -3,6 +3,10 @@
     "durations_minutes": [30, 60, 120, 240],
     "temperatures_f": [70, 85, 95],
     "max_pages": 240,
-    "default_temp_f": 70
+    "default_temp_f": 70,
+    "canonical_mode": "self",
+    "noindex": {
+      "safe_temp_variant_temps_f": [70]
+    }
   }
 }
