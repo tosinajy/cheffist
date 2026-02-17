@@ -64,6 +64,43 @@
     <p><a href="/food-left-out-calculator/">Food left out calculator</a></p>
   </section>
 
+  <section aria-label="Left out safety">
+    <h2>Left out safety</h2>
+    <p>
+      Check conservative sit-out guidance for {{ food.name }} with the calculator and scenario pages.
+      This guidance is educational only and not medical advice.
+    </p>
+    <p>
+      <a href="{{ calculatorFoodLink }}">Open calculator for {{ food.name }}</a>
+    </p>
+    {% if topSitoutPages.length %}
+    <ul>
+      {% for scenario in topSitoutPages %}
+      <li>
+        <a href="{{ scenario.url }}">
+          {{ food.name }}: {{ scenario.label }}
+        </a>
+        {% if not scenario.isStaticPrefill %}
+        (calculator prefill)
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Scenario pages are not available yet for this food.</p>
+    {% endif %}
+  </section>
+
+  <section>
+    <h2>Most common scenarios</h2>
+    <ul>
+      <li>Room temperature and elapsed time together drive risk. Hotter rooms shorten conservative limits.</li>
+      <li>Covered food may still become unsafe over time; use smell, texture, and visible spoilage signs as extra checks.</li>
+      <li>Higher-risk foods and higher-risk households should use stricter cutoffs and discard sooner when uncertain.</li>
+      <li>If conditions are unclear, follow the disclaimer guidance: when in doubt, throw it out.</li>
+    </ul>
+  </section>
+
   <section>
     <h2>Related foods</h2>
     {% if relatedFoods.length %}
