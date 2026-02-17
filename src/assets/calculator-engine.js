@@ -124,7 +124,7 @@
         recommended_action: "Use caution. If uncertain about safety, discard.",
         assumptions: [
           "Rule priority is state-specific, then food-specific, then category-specific.",
-          "Conservative guidance does not guarantee safety.",
+          "Conservative estimates are educational and not medical advice.",
           "When in doubt, throw it out."
         ],
         matched_rule: null,
