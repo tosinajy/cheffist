@@ -34,4 +34,7 @@ if (fs.existsSync(siteDir)) {
   }
 }
 
+// Eleventy expects output root to exist when writing top-level files (e.g. robots.txt)
+fs.mkdirSync(siteDir, { recursive: true });
+
 process.stdout.write("Cleaned _site output directory\n");
