@@ -26,7 +26,7 @@
   }
 
   body {
-    @apply m-0 bg-surface text-text font-sans antialiased;
+    @apply m-0 bg-surface text-text font-sans antialiased leading-7;
   }
 
   main {
@@ -41,11 +41,25 @@
     @apply tracking-tight text-text;
   }
 
+  p {
+    @apply max-w-prose;
+  }
+
   section {
-    @apply mb-8 rounded-xl border border-border bg-surfaceElevated p-5;
+    @apply space-y-4;
   }
 
   button {
     @apply rounded-lg bg-accent px-4 py-2 font-medium text-accentContrast transition-opacity hover:opacity-90;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply h-11;
+  }
+
+  .text-muted {
+    @apply text-slate-300/80;
   }
 }
