@@ -168,7 +168,9 @@
 {% set affiliateBlock = {
   title: "Recommended tools (affiliate links)",
   products: calculatorContext.affiliateProducts,
-  scenarioType: "sitout"
+  scenarioType: "sitout",
+  status: calculatorContext.initialResult.status,
+  hasDisclaimerAbove: true
 } %}
 {% include "components/affiliate-block.njk" %}
 

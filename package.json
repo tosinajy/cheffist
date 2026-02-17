@@ -11,8 +11,9 @@
     "subscribe:server": "node scripts/subscribe-server.js",
     "data:build": "node scripts/build-data.js",
     "clean:output": "node scripts/clean-output.js",
+    "monetization:lint": "node scripts/monetization-lint.js",
     "report:pseo": "node scripts/build-pseo-report.js",
-    "build": "npm run data:build && npm run clean:output && eleventy && npm run report:pseo",
+    "build": "npm run data:build && npm run clean:output && npm run monetization:lint && eleventy && npm run report:pseo",
     "test": "node --test"
   },
   "devDependencies": {

@@ -130,7 +130,9 @@
 {% set affiliateBlock = {
   title: "Recommended tools (affiliate links)",
   products: freezerRecoveryContext.affiliateProducts,
-  scenarioType: "freezer"
+  scenarioType: "freezer",
+  status: freezerRecoveryContext.initialResult.status,
+  hasDisclaimerAbove: true
 } %}
 {% include "components/affiliate-block.njk" %}
 

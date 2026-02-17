@@ -1,4 +1,6 @@
-{% if affiliateBlock and affiliateBlock.products and affiliateBlock.products.length %}
+{% set hasStatus = affiliateBlock and affiliateBlock.status is not none and affiliateBlock.status != "" %}
+{% set hasDisclaimerAbove = affiliateBlock and affiliateBlock.hasDisclaimerAbove %}
+{% if affiliateBlock and affiliateBlock.products and affiliateBlock.products.length and hasStatus and hasDisclaimerAbove %}
 <section aria-label="Recommended tools">
   <h2>{{ affiliateBlock.title or "Recommended tools (affiliate links)" }}</h2>
   <p>

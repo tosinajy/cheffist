@@ -49,10 +49,20 @@
   <p>Version {{ dataset.version }} | Last updated {{ dataset.last_updated }}</p>
 </section>
 
+<section>
+  <h2>Disclaimer</h2>
+  <p>
+    Educational only, not medical advice. Use conservative judgment and discard food when uncertain.
+    <a href="/disclaimer/">Read full disclaimer</a>.
+  </p>
+</section>
+
 {% set affiliateBlock = {
   title: "Recommended tools (affiliate links)",
   products: printableAffiliateProducts,
-  scenarioType: "storage"
+  scenarioType: "storage",
+  status: "SAFE",
+  hasDisclaimerAbove: true
 } %}
 {% include "components/affiliate-block.njk" %}
 
@@ -66,9 +76,7 @@
 
 <footer>
   <p>
-    Disclaimer: Educational only, not medical advice. Conservative guidance may change as
-    source rules update. When in doubt, throw it out.
-    <a href="/disclaimer/">Read full disclaimer</a>.
+    Conservative guidance may change as source rules update. When in doubt, throw it out.
   </p>
 </footer>
 

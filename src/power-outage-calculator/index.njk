@@ -141,7 +141,9 @@
 {% set affiliateBlock = {
   title: "Recommended tools (affiliate links)",
   products: powerOutageContext.affiliateProducts,
-  scenarioType: "outage"
+  scenarioType: "outage",
+  status: powerOutageContext.initialResult.status,
+  hasDisclaimerAbove: true
 } %}
 {% include "components/affiliate-block.njk" %}
 
