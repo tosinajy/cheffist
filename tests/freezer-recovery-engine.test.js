@@ -74,6 +74,23 @@ test("thaw longer time never improves status", () => {
   });
 });
 
+test("freezer recovery engine is deterministic for identical inputs", () => {
+  const rules = fixtureRules();
+  const input = {
+    food: { food_id: "milk_whole", category: "dairy", high_risk_food: true },
+    thawState: "fully_thawed",
+    internalTempF: 39,
+    thawMinutes: 25,
+    refrozen: false,
+    highRiskConsumer: true,
+    rules
+  };
+
+  const first = evaluateFreezerRecovery(input);
+  const second = evaluateFreezerRecovery(input);
+  assert.deepEqual(first, second);
+});
+
 test("fully thawed unsafe always returns DISCARD", () => {
   const rules = fixtureRules();
   const food = { food_id: "milk_whole", category: "dairy", high_risk_food: true };

@@ -120,6 +120,40 @@ test("opening doors never improves status", () => {
   );
 });
 
+test("high-risk consumer toggle never improves status", () => {
+  const food = { food_id: "milk_whole", category: "dairy", high_risk_food: true };
+  const rules = fixtureRules();
+
+  const baseline = evaluatePowerOutageRisk({
+    food,
+    fridgeTempF: 41,
+    freezerTempF: 35,
+    outageMinutes: 40,
+    fridgeOpened: false,
+    freezerOpened: false,
+    freezerFullness: "full",
+    highRiskConsumer: false,
+    rules
+  });
+
+  const highRisk = evaluatePowerOutageRisk({
+    food,
+    fridgeTempF: 41,
+    freezerTempF: 35,
+    outageMinutes: 40,
+    fridgeOpened: false,
+    freezerOpened: false,
+    freezerFullness: "full",
+    highRiskConsumer: true,
+    rules
+  });
+
+  assert.ok(
+    statusRank(highRisk.status) <= statusRank(baseline.status),
+    `status improved from ${baseline.status} to ${highRisk.status} with high-risk toggle`
+  );
+});
+
 test("output includes conservative disclaimers and action text", () => {
   const result = evaluatePowerOutageRisk({
     food: { food_id: "apple_whole", category: "produce", high_risk_food: false },
