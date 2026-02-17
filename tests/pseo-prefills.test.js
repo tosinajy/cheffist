@@ -1,11 +1,20 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 
-const buildSitoutPrefills = require("../src/_data/sitoutPrefills");
+const sitoutPrefillsData = require("../src/_data/sitoutPrefills");
 const pseoConfig = require("../src/_data/pseoConfig.json");
 
+function getPages() {
+  if (Array.isArray(sitoutPrefillsData)) return sitoutPrefillsData;
+  if (typeof sitoutPrefillsData === "function") return sitoutPrefillsData();
+  if (typeof sitoutPrefillsData.buildSitoutPrefills === "function") {
+    return sitoutPrefillsData.buildSitoutPrefills();
+  }
+  return [];
+}
+
 test("sitout prefilled pages are capped and deterministic", () => {
-  const pages = buildSitoutPrefills();
+  const pages = getPages();
   assert.ok(pages.length > 0);
   assert.ok(pages.length <= pseoConfig.sitout.max_pages);
 
@@ -15,7 +24,7 @@ test("sitout prefilled pages are capped and deterministic", () => {
 });
 
 test("state-based prefilled pages use raw/cooked only when state segment exists", () => {
-  const pages = buildSitoutPrefills();
+  const pages = getPages();
   const stateSegmentPages = pages.filter((page) =>
     /\/sit-out\/(raw|cooked)\//.test(page.url)
   );
@@ -26,7 +35,7 @@ test("state-based prefilled pages use raw/cooked only when state segment exists"
 });
 
 test("prefilled pages exclude missing-rule scenarios and include configured noindex pages", () => {
-  const pages = buildSitoutPrefills();
+  const pages = getPages();
 
   assert.equal(pages.some((page) => !page.matched_rule_id), false);
   assert.equal(pages.some((page) => page.indexable === false), true);

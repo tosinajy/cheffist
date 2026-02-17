@@ -2,8 +2,14 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 function buildReport() {
-  const buildSitoutPrefills = require("../src/_data/sitoutPrefills");
-  const pages = buildSitoutPrefills();
+  const sitoutPrefillsData = require("../src/_data/sitoutPrefills");
+  const pages = Array.isArray(sitoutPrefillsData)
+    ? sitoutPrefillsData
+    : typeof sitoutPrefillsData === "function"
+      ? sitoutPrefillsData()
+      : typeof sitoutPrefillsData.buildSitoutPrefills === "function"
+        ? sitoutPrefillsData.buildSitoutPrefills()
+        : [];
 
   const output = {
     generated_at: new Date().toISOString(),

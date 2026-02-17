@@ -23,7 +23,7 @@ function scenarioStates(food) {
   return [...new Set(supported)].sort();
 }
 
-module.exports = function buildSitoutPrefills() {
+function buildSitoutPrefills() {
   const foods = require("./foods.json");
   const rules = require("./rules.json");
   const pseoConfig = require("./pseoConfig.json");
@@ -148,4 +148,9 @@ module.exports = function buildSitoutPrefills() {
   }
 
   return pages;
-};
+}
+
+const sitoutPrefills = buildSitoutPrefills();
+
+module.exports = sitoutPrefills;
+module.exports.buildSitoutPrefills = buildSitoutPrefills;
