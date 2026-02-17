@@ -9,6 +9,7 @@
   const resultsNode = document.querySelector("[data-results]");
   const serializedDataNode = document.getElementById("calculator-data");
   const statusNode = document.querySelector("[data-result-status]");
+  const resultHeroNode = document.querySelector("[data-result-hero]");
   const limitNode = document.querySelector("[data-result-limit]");
   const reasonsNode = document.querySelector("[data-result-reasons]");
   const assumptionsNode = document.querySelector("[data-result-assumptions]");
@@ -22,6 +23,22 @@
   const pageData = JSON.parse(serializedDataNode.textContent);
   const foods = pageData.foods || { items: [], byId: {} };
   const rules = pageData.rules || { items: [], byAppliesTo: {} };
+
+  const STATUS_TONE_CLASSES = [
+    "ring-1",
+    "ring-emerald-400/30",
+    "bg-emerald-400/5",
+    "ring-amber-400/30",
+    "bg-amber-400/5",
+    "ring-rose-400/30",
+    "bg-rose-400/5"
+  ];
+
+  function toneClassForStatus(status) {
+    if (status === "SAFE") return ["ring-1", "ring-emerald-400/30", "bg-emerald-400/5"];
+    if (status === "DISCARD") return ["ring-1", "ring-rose-400/30", "bg-rose-400/5"];
+    return ["ring-1", "ring-amber-400/30", "bg-amber-400/5"];
+  }
 
   function currentFormInput() {
     const formData = new FormData(form);
@@ -64,6 +81,10 @@
   function renderResult(result) {
     resultsNode.hidden = false;
     statusNode.textContent = result.status;
+    if (resultHeroNode) {
+      resultHeroNode.classList.remove(...STATUS_TONE_CLASSES);
+      resultHeroNode.classList.add(...toneClassForStatus(result.status));
+    }
     limitNode.textContent = result.conservative_safe_limit_label;
     actionNode.textContent = result.recommended_action;
     matchedRuleNode.textContent = result.matched_rule
