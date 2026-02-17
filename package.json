@@ -7,17 +7,24 @@
     "node": ">=20 <23"
   },
   "scripts": {
-    "dev": "eleventy --serve",
+    "css:build": "tailwindcss -i ./src/styles/tailwind.css -o ./src/assets/styles.css --minify",
+    "dev": "npm run css:build && eleventy --serve",
     "subscribe:server": "node scripts/subscribe-server.js",
     "data:build": "node scripts/build-data.js",
     "clean:output": "node scripts/clean-output.js",
     "monetization:lint": "node scripts/monetization-lint.js",
     "report:pseo": "node scripts/build-pseo-report.js",
-    "build": "npm run data:build && npm run clean:output && npm run monetization:lint && eleventy && npm run report:pseo",
+    "build": "npm run data:build && npm run clean:output && npm run monetization:lint && npm run css:build && eleventy && npm run report:pseo",
     "test": "node --test"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2"
+    "@11ty/eleventy": "^3.1.2",
+    "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
     "csv-parse": "^6.1.0"

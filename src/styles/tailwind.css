@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --surface: 10 14 20;
+    --surface-elevated: 17 24 34;
+    --text: 233 240 255;
+    --muted: 154 169 194;
+    --border: 50 64 87;
+    --accent: 84 183 255;
+    --accent-contrast: 6 10 18;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --surface: 245 247 252;
+    --surface-elevated: 255 255 255;
+    --text: 22 30 46;
+    --muted: 89 103 126;
+    --border: 203 214 231;
+    --accent: 0 122 204;
+    --accent-contrast: 255 255 255;
+  }
+
+  body {
+    @apply m-0 bg-surface text-text font-sans antialiased;
+  }
+
+  main {
+    @apply container py-10;
+  }
+
+  a {
+    @apply text-accent underline-offset-2 hover:underline;
+  }
+
+  h1, h2, h3 {
+    @apply tracking-tight text-text;
+  }
+
+  section {
+    @apply mb-8 rounded-xl border border-border bg-surfaceElevated p-5;
+  }
+
+  button {
+    @apply rounded-lg bg-accent px-4 py-2 font-medium text-accentContrast transition-opacity hover:opacity-90;
+  }
+}
