@@ -7,7 +7,8 @@ const {
 } = require("../lib/structured-data");
 
 module.exports = {
-  layout: "layouts/base.njk",
+  layout: "layouts/app-shell.njk",
+  layoutContentWidth: "max-w-4xl",
   title: "Food Left Out Calculator",
   canonical: "/food-left-out-calculator/",
   permalink: "/food-left-out-calculator/",

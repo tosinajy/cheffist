@@ -8,7 +8,7 @@ const { getRelevantProducts } = require("../../lib/affiliateEngine");
 const { buildAdContext } = require("../lib/ad-context");
 
 module.exports = {
-  layout: "layouts/base.njk",
+  layout: "layouts/app-shell.njk",
   title: "Printable Food Storage Chart",
   canonical: "/printable-food-storage-chart/",
   permalink: "/printable-food-storage-chart/",

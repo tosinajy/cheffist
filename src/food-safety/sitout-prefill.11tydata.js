@@ -1,7 +1,8 @@
 const { buildCalculatorContext } = require("../lib/calculator-page-context");
 
 module.exports = {
-  layout: "layouts/base.njk",
+  layout: "layouts/app-shell.njk",
+  layoutContentWidth: "max-w-4xl",
   pagination: {
     data: "sitoutPrefills",
     size: 1,

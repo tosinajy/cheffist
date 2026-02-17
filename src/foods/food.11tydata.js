@@ -81,7 +81,7 @@ function categoryHubLink(food) {
 }
 
 module.exports = {
-  layout: "layouts/base.njk",
+  layout: "layouts/app-shell.njk",
   pagination: {
     data: "foods.items",
     size: 1,

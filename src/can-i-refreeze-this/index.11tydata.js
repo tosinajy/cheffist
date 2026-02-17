@@ -7,7 +7,8 @@ const {
 } = require("../lib/structured-data");
 
 module.exports = {
-  layout: "layouts/base.njk",
+  layout: "layouts/app-shell.njk",
+  layoutContentWidth: "max-w-4xl",
   title: "Can I Refreeze This?",
   canonical: "/can-i-refreeze-this/",
   permalink: "/can-i-refreeze-this/",
