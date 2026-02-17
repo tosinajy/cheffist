@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: Food Safety Updates
+permalink: /food-safety-updates/
+canonical: /food-safety-updates/
+---
+<h1>Food Safety Updates</h1>
+<p>Join the list for conservative food safety update notices.</p>
+
+<ul>
+  <li>Get notified when safety rules update.</li>
+  <li>Receive printable chart updates.</li>
+  <li>See seasonal food alerts.</li>
+</ul>
+
+{% set emailCapture = {
+  id: "food-safety-updates-form",
+  title: "Get safety updates by email",
+  description: "We send occasional updates when guidance changes.",
+  source: "/food-safety-updates/"
+} %}
+{% include "components/email-capture.njk" %}

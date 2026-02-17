@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "eleventy --serve",
+    "subscribe:server": "node scripts/subscribe-server.js",
     "data:build": "node scripts/build-data.js",
     "clean:output": "node scripts/clean-output.js",
     "report:pseo": "node scripts/build-pseo-report.js",

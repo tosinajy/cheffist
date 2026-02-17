@@ -209,6 +209,14 @@
 {% include "components/ad-slot.njk" %}
 {% endif %}
 
+{% set emailCapture = {
+  id: "sitout-email-capture",
+  title: "Get food safety updates",
+  description: "Get notified when safety rules update, including seasonal alerts and chart changes.",
+  source: "/food-left-out-calculator/"
+} %}
+{% include "components/email-capture.njk" %}
+
 <script id="calculator-data" type="application/json">{{ calculatorContext.serialized | safe }}</script>
 <script src="/assets/calculator-engine.js"></script>
 <script src="/assets/js/sitout-calculator.js"></script>

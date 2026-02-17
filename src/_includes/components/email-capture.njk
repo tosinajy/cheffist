@@ -1,0 +1,47 @@
+{% set captureId = emailCapture.id or "email-capture" %}
+{% set captureTitle = emailCapture.title or "Get food safety updates" %}
+{% set captureDescription = emailCapture.description or "Get notified when safety rules and printable charts are updated." %}
+{% set captureSource = emailCapture.source or page.url %}
+
+<section id="{{ captureId }}" data-email-capture data-email-exit-intent-target>
+  <h2>{{ captureTitle }}</h2>
+  <p>{{ captureDescription }}</p>
+
+  <form method="post" action="/subscribe" data-email-capture-form>
+    <div>
+      <label for="{{ captureId }}-name">Name</label>
+      <input id="{{ captureId }}-name" name="name" type="text" required maxlength="120" />
+    </div>
+
+    <div>
+      <label for="{{ captureId }}-email">Email</label>
+      <input id="{{ captureId }}-email" name="email" type="email" required />
+    </div>
+
+    <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+      <label for="{{ captureId }}-website">Website</label>
+      <input
+        id="{{ captureId }}-website"
+        name="website"
+        type="text"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+
+    <input type="hidden" name="source" value="{{ captureSource }}" />
+
+    <div>
+      <label for="{{ captureId }}-consent">
+        <input id="{{ captureId }}-consent" name="consent" type="checkbox" value="1" required />
+        I consent to receive email updates about food safety guidance.
+      </label>
+    </div>
+
+    <p>
+      By subscribing, you agree to our <a href="/privacy-policy/">privacy policy</a>.
+    </p>
+
+    <button type="submit">Subscribe for updates</button>
+  </form>
+</section>

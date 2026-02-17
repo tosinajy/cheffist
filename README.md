@@ -20,8 +20,10 @@ Current schema files:
 - `data/foods.csv`
 - `data/foods_states.csv` (optional state variants)
 - `data/sitout_rules.csv`
+- `data/affiliate_products.csv`
 - `data/sources.csv`
 - `data/DATASET_VERSION.json`
+- `data/submissions.json` (temporary local email capture storage)
 
 ## Data pipeline
 
@@ -32,6 +34,7 @@ Current schema files:
    - `src/_data/foods.json`
    - `src/_data/foodStates.json`
    - `src/_data/rules.json`
+   - `src/_data/affiliateProducts.json`
    - `src/_data/sources.json`
    - `src/_data/dataset.json`
 
@@ -46,9 +49,25 @@ Current schema files:
 ## Commands
 
 - `npm run dev`: serve Eleventy locally.
+- `npm run subscribe:server`: run local `/subscribe` endpoint for email capture.
 - `npm run data:build`: generate JSON from CSV.
 - `npm run build`: run data pipeline then Eleventy production build.
 - `npm test`: run Node test runner.
+
+## Email capture foundation
+
+- Reusable form component: `src/_includes/components/email-capture.njk`
+- Newsletter page: `/food-safety-updates/`
+- Form endpoint target: `POST /subscribe`
+- Local persistence: `data/submissions.json`
+- Local endpoint runner: `scripts/subscribe-server.js`
+- Serverless-ready handler stub: `api/subscribe.js`
+
+Submission requirements enforced server-side:
+- `name` required
+- `email` required and valid format
+- `consent` required
+- honeypot field (`website`) must be empty
 
 ## Node version
 

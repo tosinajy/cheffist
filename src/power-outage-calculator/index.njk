@@ -167,3 +167,11 @@
 } %}
 {% include "components/ad-slot.njk" %}
 {% endif %}
+
+{% set emailCapture = {
+  id: "outage-email-capture",
+  title: "Get outage and safety rule updates",
+  description: "Receive food safety update alerts, printable chart revisions, and seasonal guidance.",
+  source: "/power-outage-calculator/"
+} %}
+{% include "components/email-capture.njk" %}

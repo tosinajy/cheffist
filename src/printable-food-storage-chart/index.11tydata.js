@@ -12,7 +12,6 @@ module.exports = {
   title: "Printable Food Storage Chart",
   canonical: "/printable-food-storage-chart/",
   permalink: "/printable-food-storage-chart/",
-  showEmailCapture: false,
   eleventyComputed: {
     printableAffiliateProducts: (data) =>
       getRelevantProducts({

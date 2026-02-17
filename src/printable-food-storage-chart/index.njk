@@ -36,27 +36,18 @@
 </section>
 {% endfor %}
 
+{% set emailCapture = {
+  id: "printable-chart-email-capture",
+  title: "Get updated chart when safety rules change",
+  description: "We will email printable chart updates, rule changes, and seasonal food alerts.",
+  source: "/printable-food-storage-chart/"
+} %}
+{% include "components/email-capture.njk" %}
+
 <section>
   <h2>Dataset</h2>
   <p>Version {{ dataset.version }} | Last updated {{ dataset.last_updated }}</p>
 </section>
-
-{% if showEmailCapture %}
-<section>
-  <h2>Get updates</h2>
-  <p>Get updated chart when safety rules change.</p>
-  <form method="post" action="#" aria-label="Email updates placeholder form">
-    <label for="email">Email address</label>
-    <input id="email" name="email" type="email" required />
-    <button type="submit">Notify me</button>
-  </form>
-</section>
-{% else %}
-<section>
-  <h2>Get updates</h2>
-  <p>Get updated chart when safety rules change. Email signup is coming soon.</p>
-</section>
-{% endif %}
 
 {% set affiliateBlock = {
   title: "Recommended tools (affiliate links)",
