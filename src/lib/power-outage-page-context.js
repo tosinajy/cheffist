@@ -1,5 +1,6 @@
 const { evaluatePowerOutageRisk } = require("../../lib/powerOutageEngine");
 const { getRelevantProducts } = require("../../lib/affiliateEngine");
+const { buildAdContext } = require("./ad-context");
 
 function toOptionalNumber(value) {
   if (value === undefined || value === null || String(value).trim() === "") return null;
@@ -96,12 +97,18 @@ function buildPowerOutageContext(data, prefillInput) {
     status: initialResult.status,
     products: data.affiliateProducts
   });
+  const adContext = buildAdContext({
+    adConfig: data.adConfig,
+    status: initialResult.status,
+    isHighRiskScenario: Boolean(normalized.high_risk_consumer || food?.high_risk_food)
+  });
 
   return {
     initialInput: normalized,
     initialResult,
     hasPrefill,
-    affiliateProducts
+    affiliateProducts,
+    adContext
   };
 }
 

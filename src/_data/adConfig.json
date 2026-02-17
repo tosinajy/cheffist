@@ -1,0 +1,13 @@
+{
+  "enableAds": true,
+  "placements": [
+    "food_after_hero",
+    "food_after_spoilage",
+    "bottom_page"
+  ],
+  "placementFlags": {
+    "food_after_hero": true,
+    "food_after_spoilage": true,
+    "bottom_page": true
+  }
+}

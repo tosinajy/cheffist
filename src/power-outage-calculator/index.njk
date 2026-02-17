@@ -159,3 +159,11 @@
     {% endif %}
   </ul>
 </section>
+
+{% if powerOutageContext.adContext.enabled %}
+{% set adSlot = {
+  enabled: true,
+  zone: "bottom_page"
+} %}
+{% include "components/ad-slot.njk" %}
+{% endif %}

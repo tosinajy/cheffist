@@ -201,6 +201,14 @@
   </ul>
 </section>
 
+{% if calculatorContext.adContext.enabled %}
+{% set adSlot = {
+  enabled: true,
+  zone: "bottom_page"
+} %}
+{% include "components/ad-slot.njk" %}
+{% endif %}
+
 <script id="calculator-data" type="application/json">{{ calculatorContext.serialized | safe }}</script>
 <script src="/assets/calculator-engine.js"></script>
 <script src="/assets/js/sitout-calculator.js"></script>

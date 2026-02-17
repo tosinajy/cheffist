@@ -5,6 +5,7 @@ const {
   organizationNode
 } = require("../lib/structured-data");
 const { getRelevantProducts } = require("../../lib/affiliateEngine");
+const { buildAdContext } = require("../lib/ad-context");
 
 module.exports = {
   layout: "layouts/base.njk",
@@ -19,6 +20,12 @@ module.exports = {
         status: "SAFE",
         category: "",
         products: data.affiliateProducts
+      }),
+    adContext: (data) =>
+      buildAdContext({
+        adConfig: data.adConfig,
+        status: "SAFE",
+        isPrintable: true
       }),
     jsonLd: (data) => {
       const baseUrl = baseUrlFrom(data);

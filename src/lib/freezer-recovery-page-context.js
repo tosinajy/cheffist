@@ -1,5 +1,6 @@
 const { evaluateFreezerRecovery } = require("../../lib/freezerRecoveryEngine");
 const { getRelevantProducts } = require("../../lib/affiliateEngine");
+const { buildAdContext } = require("./ad-context");
 
 function toBool(value) {
   return value === true || value === "true" || value === "1" || value === 1 || value === "on";
@@ -90,11 +91,17 @@ function buildFreezerRecoveryContext(data, prefillInput) {
     status: initialResult.status,
     products: data.affiliateProducts
   });
+  const adContext = buildAdContext({
+    adConfig: data.adConfig,
+    status: initialResult.status,
+    isHighRiskScenario: Boolean(normalized.high_risk_consumer || food?.high_risk_food)
+  });
 
   return {
     initialInput: normalized,
     initialResult,
     affiliateProducts,
+    adContext,
     hasPrefill,
     serialized: JSON.stringify({
       foods: data.foods,

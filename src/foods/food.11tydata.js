@@ -9,6 +9,7 @@ const {
   datasetNode,
   organizationNode
 } = require("../lib/structured-data");
+const { buildAdContext } = require("../lib/ad-context");
 
 function pickDefaultState(food) {
   const states = (food.states || []).map((entry) => entry.state);
@@ -127,6 +128,12 @@ module.exports = {
     },
     categoryHubLink: (data) => categoryHubLink(data.food),
     topSitoutPages: (data) => pickTopSitoutPages(data),
+    adContext: (data) =>
+      buildAdContext({
+        adConfig: data.adConfig,
+        status: "SAFE",
+        isHighRiskScenario: false
+      }),
     jsonLd: (data) => {
       const baseUrl = baseUrlFrom(data);
       const canonical = `${baseUrl}/how-long-does-${data.food.slug}-last/`;

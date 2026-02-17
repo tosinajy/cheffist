@@ -165,6 +165,14 @@
   </ul>
 </section>
 
+{% if freezerRecoveryContext.adContext.enabled %}
+{% set adSlot = {
+  enabled: true,
+  zone: "bottom_page"
+} %}
+{% include "components/ad-slot.njk" %}
+{% endif %}
+
 <script id="freezer-recovery-data" type="application/json">{{ freezerRecoveryContext.serialized | safe }}</script>
 <script src="/assets/freezer-recovery-engine.js"></script>
 <script src="/assets/js/freezer-recovery-calculator.js"></script>

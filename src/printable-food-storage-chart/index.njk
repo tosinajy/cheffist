@@ -65,6 +65,14 @@
 } %}
 {% include "components/affiliate-block.njk" %}
 
+{% if adContext.enabled %}
+{% set adSlot = {
+  enabled: true,
+  zone: "bottom_page"
+} %}
+{% include "components/ad-slot.njk" %}
+{% endif %}
+
 <footer>
   <p>
     Disclaimer: Educational only, not medical advice. Conservative guidance may change as

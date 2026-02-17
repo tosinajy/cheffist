@@ -1,4 +1,5 @@
 <article>
+  {% set adsEnabled = (adContext and adContext.enabled) or (adConfig and adConfig.enableAds) %}
   <h1>How long does {{ food.name }} last?</h1>
 
   <section aria-label="Storage Summary">
@@ -9,6 +10,13 @@
       <li>Freezer: {{ food.freezer_min_days }}-{{ food.freezer_max_days }} days</li>
     </ul>
   </section>
+  {% if adsEnabled %}
+  {% set adSlot = {
+    enabled: true,
+    zone: "food_after_hero"
+  } %}
+  {% include "components/ad-slot.njk" %}
+  {% endif %}
 
   <section>
     <h2>Spoilage signs</h2>
@@ -18,6 +26,13 @@
       {% endfor %}
     </ul>
   </section>
+  {% if adsEnabled %}
+  {% set adSlot = {
+    enabled: true,
+    zone: "food_after_spoilage"
+  } %}
+  {% include "components/ad-slot.njk" %}
+  {% endif %}
 
   <section>
     <h2>Storage tips</h2>
@@ -123,4 +138,11 @@
     <p>No related foods yet.</p>
     {% endif %}
   </section>
+  {% if adsEnabled %}
+  {% set adSlot = {
+    enabled: true,
+    zone: "bottom_page"
+  } %}
+  {% include "components/ad-slot.njk" %}
+  {% endif %}
 </article>

@@ -1,5 +1,6 @@
 const { evaluateCalculator, normalizeInput } = require("../assets/calculator-engine");
 const { getRelevantProducts } = require("../../lib/affiliateEngine");
+const { buildAdContext } = require("./ad-context");
 
 function buildCalculatorContext(data, prefillInput) {
   const prefill = prefillInput || {};
@@ -23,11 +24,19 @@ function buildCalculatorContext(data, prefillInput) {
     status: initialResult.status,
     products: data.affiliateProducts
   });
+  const adContext = buildAdContext({
+    adConfig: data.adConfig,
+    status: initialResult.status,
+    isHighRiskScenario: Boolean(
+      initialResult.input.high_risk_consumer || selectedFood?.high_risk_food
+    )
+  });
 
   return {
     initialInput: initialResult.input,
     initialResult,
     affiliateProducts,
+    adContext,
     hasPrefill,
     serialized: JSON.stringify({
       foods: data.foods,
