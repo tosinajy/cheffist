@@ -3,6 +3,12 @@ const TOP_SITOUT_COMBOS = [
   { temp_f: 85, duration_minutes: 60, label: "85F for 1h" },
   { temp_f: 95, duration_minutes: 30, label: "95F for 30m" }
 ];
+const {
+  asJsonLd,
+  baseUrlFrom,
+  datasetNode,
+  organizationNode
+} = require("../lib/structured-data");
 
 function pickDefaultState(food) {
   const states = (food.states || []).map((entry) => entry.state);
@@ -111,26 +117,52 @@ module.exports = {
     },
     topSitoutPages: (data) => pickTopSitoutPages(data),
     jsonLd: (data) => {
-      const baseUrl = String(data.site?.url || "").replace(/\/$/, "");
+      const baseUrl = baseUrlFrom(data);
       const canonical = `${baseUrl}/how-long-does-${data.food.slug}-last/`;
-      const payload = {
-        "@context": "https://schema.org",
-        "@graph": [
+      const pantryRange = `${data.food.pantry_min_days}-${data.food.pantry_max_days} days`;
+      const fridgeRange = `${data.food.fridge_min_days}-${data.food.fridge_max_days} days`;
+      const freezerRange = `${data.food.freezer_min_days}-${data.food.freezer_max_days} days`;
+
+      const faq = {
+        "@type": "FAQPage",
+        "@id": `${canonical}#faq`,
+        mainEntity: [
           {
-            "@type": "Organization",
-            name: data.site?.organizationName || "Cheffist",
-            url: baseUrl
+            "@type": "Question",
+            name: `How long does ${data.food.name} last?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text:
+                `${data.food.name} storage ranges are Pantry: ${pantryRange}, ` +
+                `Fridge: ${fridgeRange}, Freezer: ${freezerRange}. ` +
+                "Use spoilage signs and conservative judgment; this guidance is educational only."
+            }
           },
           {
-            "@type": "WebPage",
-            name: `How long does ${data.food.name} last?`,
-            url: canonical,
-            dateModified: data.dataset?.last_updated
+            "@type": "Question",
+            name: `How long can ${data.food.name} sit out?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text:
+                `Sit-out risk for ${data.food.name} depends on time, temperature, and food state. ` +
+                `Use the food left out calculator for a conservative estimate and discard when uncertain.`
+            }
           }
         ]
       };
 
-      return JSON.stringify(payload);
+      return asJsonLd([
+        organizationNode(data),
+        datasetNode(data),
+        {
+          "@type": "WebPage",
+          "@id": canonical,
+          name: `How long does ${data.food.name} last?`,
+          url: canonical,
+          dateModified: data.dataset?.last_updated
+        },
+        faq
+      ]);
     }
   }
 };
