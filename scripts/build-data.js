@@ -11,6 +11,7 @@ const FILES = {
   foodStates: path.join(DATA_DIR, "foods_states.csv"),
   rules: path.join(DATA_DIR, "sitout_rules.csv"),
   powerOutageRules: path.join(DATA_DIR, "power_outage_rules.csv"),
+  freezerRecoveryRules: path.join(DATA_DIR, "freezer_recovery_rules.csv"),
   sources: path.join(DATA_DIR, "sources.csv"),
   dataset: path.join(DATA_DIR, "DATASET_VERSION.json")
 };
@@ -47,6 +48,14 @@ const REQUIRED = {
   powerOutageRules: [
     "rule_id",
     "applies_to",
+    "temp_threshold_f",
+    "max_safe_minutes",
+    "notes"
+  ],
+  freezerRecoveryRules: [
+    "rule_id",
+    "applies_to",
+    "thaw_state",
     "temp_threshold_f",
     "max_safe_minutes",
     "notes"
@@ -554,6 +563,135 @@ function validatePowerOutageRulesRows(rows, foodsById, categories) {
   };
 }
 
+function parseFreezerRecoveryThawState(thawStateValue, rowNumber) {
+  const thawState = String(thawStateValue || "").trim().toLowerCase();
+  const allowed = ["partially_thawed", "fully_thawed", "any"];
+  if (!allowed.includes(thawState)) {
+    throw new Error(
+      `freezer_recovery_rules.csv row ${rowNumber}: thaw_state must be one of ${allowed.join(", ")}`
+    );
+  }
+  return thawState;
+}
+
+function parseFreezerRecoveryAppliesTo(appliesToValue, rowNumber, foodsById, categories) {
+  const appliesTo = String(appliesToValue || "").trim();
+  const invalid = () =>
+    new Error(
+      "freezer_recovery_rules.csv row " +
+        rowNumber +
+        ": applies_to must be food:{food_id}, category:{category}, or default"
+    );
+
+  if (appliesTo === "default") {
+    return { type: "default", key: "default" };
+  }
+
+  if (appliesTo.startsWith("food:")) {
+    const foodId = appliesTo.slice(5);
+    if (!foodId) throw invalid();
+    if (!foodsById[foodId]) {
+      throw new Error(
+        `freezer_recovery_rules.csv row ${rowNumber}: unknown food_id '${foodId}' in applies_to`
+      );
+    }
+    return { type: "food", key: foodId, food_id: foodId };
+  }
+
+  if (appliesTo.startsWith("category:")) {
+    const category = appliesTo.slice(9);
+    if (!category) throw invalid();
+    if (!categories.has(category)) {
+      throw new Error(
+        `freezer_recovery_rules.csv row ${rowNumber}: unknown category '${category}' in applies_to`
+      );
+    }
+    return { type: "category", key: category, category };
+  }
+
+  throw invalid();
+}
+
+function validateFreezerRecoveryRulesRows(rows, foodsById, categories) {
+  const seenRuleIds = new Set();
+  const seenScopeAndState = new Set();
+  const normalized = [];
+  let hasDefaultAny = false;
+
+  rows.forEach((row, index) => {
+    const rowNumber = index + 2;
+    assertNonEmpty(row, "rule_id", rowNumber, "freezer_recovery_rules.csv");
+    assertNonEmpty(row, "applies_to", rowNumber, "freezer_recovery_rules.csv");
+    assertNonEmpty(row, "thaw_state", rowNumber, "freezer_recovery_rules.csv");
+
+    const ruleId = String(row.rule_id).trim();
+    if (seenRuleIds.has(ruleId)) {
+      throw new Error(`freezer_recovery_rules.csv row ${rowNumber}: duplicate rule_id '${ruleId}'`);
+    }
+    seenRuleIds.add(ruleId);
+
+    const appliesTo = String(row.applies_to).trim();
+    const scope = parseFreezerRecoveryAppliesTo(appliesTo, rowNumber, foodsById, categories);
+    const thawState = parseFreezerRecoveryThawState(row.thaw_state, rowNumber);
+
+    const scopeAndState = `${appliesTo}::${thawState}`;
+    if (seenScopeAndState.has(scopeAndState)) {
+      throw new Error(
+        `freezer_recovery_rules.csv row ${rowNumber}: duplicate applies_to + thaw_state '${scopeAndState}'`
+      );
+    }
+    seenScopeAndState.add(scopeAndState);
+
+    if (appliesTo === "default" && thawState === "any") {
+      hasDefaultAny = true;
+    }
+
+    normalized.push({
+      rule_id: ruleId,
+      applies_to: appliesTo,
+      thaw_state: thawState,
+      scope,
+      priority: scope.type === "food" ? 3 : scope.type === "category" ? 2 : 1,
+      temp_threshold_f: toRequiredInt(
+        row,
+        "temp_threshold_f",
+        rowNumber,
+        "freezer_recovery_rules.csv"
+      ),
+      max_safe_minutes: toRequiredInt(
+        row,
+        "max_safe_minutes",
+        rowNumber,
+        "freezer_recovery_rules.csv"
+      ),
+      notes: String(row.notes || "").trim()
+    });
+  });
+
+  if (!hasDefaultAny) {
+    throw new Error(
+      "freezer_recovery_rules.csv: at least one default row with thaw_state 'any' is required"
+    );
+  }
+
+  normalized.sort((a, b) => a.rule_id.localeCompare(b.rule_id));
+
+  const byId = {};
+  const byScopeAndState = {};
+  normalized.forEach((rule) => {
+    byId[rule.rule_id] = rule;
+    byScopeAndState[`${rule.applies_to}::${rule.thaw_state}`] = rule;
+  });
+
+  return {
+    items: normalized,
+    byId,
+    byScopeAndState,
+    matchingPriority: ["food", "category", "default"],
+    thawStates: ["partially_thawed", "fully_thawed", "any"]
+  };
+}
+
 function validateSourceRows(rows) {
   const seenSourceIds = new Set();
   const normalized = [];
@@ -627,6 +765,10 @@ function buildData() {
     FILES.powerOutageRules,
     REQUIRED.powerOutageRules
   );
+  const freezerRecoveryRulesRaw = parseCsvFile(
+    FILES.freezerRecoveryRules,
+    REQUIRED.freezerRecoveryRules
+  );
   const sourcesRaw = parseCsvFile(FILES.sources, REQUIRED.sources);
 
   const foods = validateFoodsRows(foodsRaw);
@@ -649,6 +791,11 @@ function buildData() {
     foods.byId,
     new Set(foods.categories)
   );
+  const freezerRecoveryRules = validateFreezerRecoveryRulesRows(
+    freezerRecoveryRulesRaw,
+    foods.byId,
+    new Set(foods.categories)
+  );
   const sources = validateSourceRows(sourcesRaw);
   const dataset = readDatasetVersion();
 
@@ -656,6 +803,7 @@ function buildData() {
   writeJson(path.join(OUTPUT_DIR, "foodStates.json"), foodStates);
   writeJson(path.join(OUTPUT_DIR, "rules.json"), rules);
   writeJson(path.join(OUTPUT_DIR, "powerOutageRules.json"), powerOutageRules);
+  writeJson(path.join(OUTPUT_DIR, "freezerRecoveryRules.json"), freezerRecoveryRules);
   writeJson(path.join(OUTPUT_DIR, "sources.json"), sources);
   writeJson(path.join(OUTPUT_DIR, "dataset.json"), dataset);
 
@@ -664,6 +812,7 @@ function buildData() {
     statesCount: foodStates.items.length,
     rulesCount: rules.items.length,
     powerOutageRulesCount: powerOutageRules.items.length,
+    freezerRecoveryRulesCount: freezerRecoveryRules.items.length,
     sourcesCount: sources.items.length
   };
 }
@@ -675,6 +824,7 @@ if (require.main === module) {
       "Built " +
         `foods=${result.foodsCount}, states=${result.statesCount}, ` +
         `rules=${result.rulesCount}, outageRules=${result.powerOutageRulesCount}, ` +
+        `freezerRecoveryRules=${result.freezerRecoveryRulesCount}, ` +
         `sources=${result.sourcesCount}.\n`
     );
   } catch (error) {
@@ -686,6 +836,7 @@ if (require.main === module) {
 module.exports = {
   buildData,
   getAllowedStates,
+  parseFreezerRecoveryAppliesTo,
   parsePowerOutageAppliesTo,
   parseAppliesTo,
   parseBoolean,
@@ -694,6 +845,7 @@ module.exports = {
   resolveRuleForFood,
   splitList,
   validateFoodsRows,
+  validateFreezerRecoveryRulesRows,
   validatePowerOutageRulesRows,
   validateRulesRows
 };

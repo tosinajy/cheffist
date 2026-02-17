@@ -8,6 +8,7 @@ const assert = require("node:assert/strict");
 const {
   getAllowedStates,
   parseCsvFile,
+  validateFreezerRecoveryRulesRows,
   validatePowerOutageRulesRows,
   validateFoodsRows,
   validateRulesRows
@@ -53,7 +54,7 @@ test("happy path: build-data script succeeds with seeded CSVs", () => {
   assert.equal(result.status, 0, result.stderr);
   assert.match(
     result.stdout,
-    /Built foods=\d+, states=\d+, rules=\d+, outageRules=\d+, sources=\d+\./
+    /Built foods=\d+, states=\d+, rules=\d+, outageRules=\d+, freezerRecoveryRules=\d+, sources=\d+\./
   );
 });
 
@@ -216,5 +217,61 @@ test("power outage rules reject invalid applies_to formats", () => {
         categories
       ),
     /applies_to must be food:\{food_id\}, category:\{category\}, or default/
+  );
+});
+
+test("freezer recovery rules require default any row", () => {
+  const foodsById = { milk_whole: { food_id: "milk_whole", category: "dairy" } };
+  const categories = new Set(["dairy"]);
+
+  assert.throws(
+    () =>
+      validateFreezerRecoveryRulesRows(
+        [
+          {
+            rule_id: "milk_only",
+            applies_to: "food:milk_whole",
+            thaw_state: "fully_thawed",
+            temp_threshold_f: "40",
+            max_safe_minutes: "30",
+            notes: ""
+          }
+        ],
+        foodsById,
+        categories
+      ),
+    /default row with thaw_state 'any' is required/
+  );
+});
+
+test("freezer recovery rules reject invalid thaw_state", () => {
+  const foodsById = { milk_whole: { food_id: "milk_whole", category: "dairy" } };
+  const categories = new Set(["dairy"]);
+
+  assert.throws(
+    () =>
+      validateFreezerRecoveryRulesRows(
+        [
+          {
+            rule_id: "default_any",
+            applies_to: "default",
+            thaw_state: "any",
+            temp_threshold_f: "40",
+            max_safe_minutes: "120",
+            notes: ""
+          },
+          {
+            rule_id: "bad_state",
+            applies_to: "category:dairy",
+            thaw_state: "semi_thawed",
+            temp_threshold_f: "40",
+            max_safe_minutes: "60",
+            notes: ""
+          }
+        ],
+        foodsById,
+        categories
+      ),
+    /thaw_state must be one of partially_thawed, fully_thawed, any/
   );
 });
