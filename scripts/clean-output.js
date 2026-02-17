@@ -11,7 +11,15 @@ function removeRecursive(target) {
     for (const entry of fs.readdirSync(target)) {
       removeRecursive(path.join(target, entry));
     }
-    fs.rmdirSync(target);
+    try {
+      fs.rmdirSync(target);
+    } catch (error) {
+      if (error && error.code === "ENOTEMPTY") {
+        fs.rmSync(target, { recursive: true, force: true });
+      } else {
+        throw error;
+      }
+    }
     return;
   }
 

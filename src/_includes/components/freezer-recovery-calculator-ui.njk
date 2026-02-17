@@ -1,0 +1,129 @@
+<form method="get" action="/can-i-refreeze-this/" data-freezer-recovery-form>
+  <div>
+    <label for="food_id">Food</label>
+    <select id="food_id" name="food_id" required aria-required="true">
+      <option value="">Select a food</option>
+      {% for food in foods.items %}
+      <option
+        value="{{ food.food_id }}"
+        {% if freezerRecoveryContext.initialInput.food_id == food.food_id %}selected{% endif %}
+      >
+        {{ food.name }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <label for="thaw_state">Thaw state</label>
+    <select id="thaw_state" name="thaw_state" required aria-required="true">
+      <option
+        value="partially_thawed"
+        {% if freezerRecoveryContext.initialInput.thaw_state == "partially_thawed" %}selected{% endif %}
+      >
+        Partially thawed (ice crystals remain)
+      </option>
+      <option
+        value="fully_thawed"
+        {% if freezerRecoveryContext.initialInput.thaw_state == "fully_thawed" %}selected{% endif %}
+      >
+        Fully thawed
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label for="internal_temp_f">Estimated internal temperature (F)</label>
+    <input
+      id="internal_temp_f"
+      name="internal_temp_f"
+      type="number"
+      step="0.1"
+      value="{{ freezerRecoveryContext.initialInput.internal_temp_f }}"
+      aria-describedby="internal-temp-help"
+    />
+    <p id="internal-temp-help">Leave blank if unknown.</p>
+  </div>
+
+  <div>
+    <label for="thaw_hours">Time thawed (hours)</label>
+    <input
+      id="thaw_hours"
+      name="thaw_hours"
+      type="number"
+      min="0"
+      value="{{ freezerRecoveryContext.initialInput.thaw_hours }}"
+      required
+      aria-required="true"
+    />
+  </div>
+
+  <div>
+    <label for="thaw_minutes">Additional minutes thawed</label>
+    <input
+      id="thaw_minutes"
+      name="thaw_minutes"
+      type="number"
+      min="0"
+      value="{{ freezerRecoveryContext.initialInput.thaw_minutes }}"
+      required
+      aria-required="true"
+    />
+  </div>
+
+  <fieldset>
+    <legend>Modifiers</legend>
+    <label for="refrozen">
+      <input
+        id="refrozen"
+        name="refrozen"
+        type="checkbox"
+        value="1"
+        {% if freezerRecoveryContext.initialInput.refrozen %}checked{% endif %}
+      />
+      Food has already been refrozen
+    </label>
+    <label for="high_risk_consumer">
+      <input
+        id="high_risk_consumer"
+        name="high_risk_consumer"
+        type="checkbox"
+        value="1"
+        {% if freezerRecoveryContext.initialInput.high_risk_consumer %}checked{% endif %}
+      />
+      High-risk consumer (pregnant, elderly, immunocompromised)
+    </label>
+  </fieldset>
+
+  <button type="submit">Check refreezing risk</button>
+</form>
+
+<section aria-live="polite" data-freezer-recovery-results>
+  <h2>Result</h2>
+  <p>
+    Status:
+    <strong data-freezer-recovery-status>{{ freezerRecoveryContext.initialResult.status }}</strong>
+  </p>
+  <p>
+    Recommended action:
+    <strong data-freezer-recovery-action>{{ freezerRecoveryContext.initialResult.recommendedAction }}</strong>
+  </p>
+
+  <h3>Explanation</h3>
+  <ul data-freezer-recovery-reasons>
+    {% for reason in freezerRecoveryContext.initialResult.reasons %}
+    <li>{{ reason }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Conservative guidance assumptions</h3>
+  <ul data-freezer-recovery-assumptions>
+    {% for assumption in freezerRecoveryContext.initialResult.assumptions %}
+    <li>{{ assumption }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<script id="freezer-recovery-data" type="application/json">{{ freezerRecoveryContext.serialized | safe }}</script>
+<script src="/assets/freezer-recovery-engine.js"></script>
+<script src="/assets/js/freezer-recovery-calculator.js"></script>

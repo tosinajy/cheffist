@@ -136,3 +136,21 @@ test("output includes conservative disclaimers and action text", () => {
   assert.equal(typeof result.recommendedAction, "string");
   assert.notEqual(result.recommendedAction.length, 0);
 });
+
+test("power outage output links freezer recovery tool when freezer warming risk exists", () => {
+  const result = evaluatePowerOutageRisk({
+    food: { food_id: "milk_whole", category: "dairy", high_risk_food: true },
+    outageMinutes: 120,
+    fridgeOpened: false,
+    freezerOpened: true,
+    freezerFullness: "empty",
+    highRiskConsumer: false,
+    rules: fixtureRules()
+  });
+
+  assert.ok(Array.isArray(result.relatedTools));
+  assert.ok(
+    result.relatedTools.some((tool) => tool.href === "/can-i-refreeze-this/"),
+    "expected freezer recovery tool link"
+  );
+});

@@ -100,6 +100,15 @@ module.exports = {
       }
       return `/food-left-out-calculator/?${params.toString()}`;
     },
+    freezerRecoveryLink: (data) => {
+      const params = new URLSearchParams({
+        food_id: data.food.food_id,
+        thaw_state: "partially_thawed",
+        thaw_hours: "0",
+        thaw_minutes: "30"
+      });
+      return `/can-i-refreeze-this/?${params.toString()}`;
+    },
     topSitoutPages: (data) => pickTopSitoutPages(data),
     jsonLd: (data) => {
       const baseUrl = String(data.site?.url || "").replace(/\/$/, "");
