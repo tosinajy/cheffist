@@ -124,6 +124,37 @@
   </ul>
 </section>
 
+{% set selectedFood = foods.byId[freezerRecoveryContext.initialInput.food_id] %}
+<section data-freezer-next-scenario>
+  <h2>Next scenario</h2>
+  <p data-freezer-next-scenario-summary>
+    {% if freezerRecoveryContext.initialResult.status == "USE_CAUTION" %}
+    This result is cautious. Compare with sit-out guidance and conservative storage references.
+    {% else %}
+    Compare related safety scenarios to make conservative decisions.
+    {% endif %}
+  </p>
+  <ul data-freezer-next-scenario-links>
+    {% if freezerRecoveryContext.initialResult.status == "USE_CAUTION" %}
+    {% if selectedFood %}
+    <li>
+      <a href="/food-left-out-calculator/?food_id={{ selectedFood.food_id }}">
+        Food left out calculator for {{ selectedFood.name }}
+      </a>
+    </li>
+    {% else %}
+    <li><a href="/food-left-out-calculator/">Food left out calculator</a></li>
+    {% endif %}
+    <li><a href="/printable-food-storage-chart/">Printable food storage chart</a></li>
+    <li><a href="/methodology/">Methodology</a></li>
+    {% else %}
+    <li><a href="/food-left-out-calculator/">Food left out calculator</a></li>
+    <li><a href="/printable-food-storage-chart/">Printable food storage chart</a></li>
+    <li><a href="/disclaimer/">Disclaimer</a></li>
+    {% endif %}
+  </ul>
+</section>
+
 <script id="freezer-recovery-data" type="application/json">{{ freezerRecoveryContext.serialized | safe }}</script>
 <script src="/assets/freezer-recovery-engine.js"></script>
 <script src="/assets/js/freezer-recovery-calculator.js"></script>

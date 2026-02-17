@@ -9,6 +9,8 @@
   var actionNode = document.querySelector("[data-freezer-recovery-action]");
   var reasonsNode = document.querySelector("[data-freezer-recovery-reasons]");
   var assumptionsNode = document.querySelector("[data-freezer-recovery-assumptions]");
+  var nextSummaryNode = document.querySelector("[data-freezer-next-scenario-summary]");
+  var nextLinksNode = document.querySelector("[data-freezer-next-scenario-links]");
 
   if (!form || !dataNode) return;
 
@@ -79,6 +81,52 @@
       var li = document.createElement("li");
       li.textContent = assumption;
       assumptionsNode.appendChild(li);
+    });
+
+    renderNextScenario(result);
+  }
+
+  function selectedFood() {
+    var foodId = form.elements.namedItem("food_id").value;
+    return foods.byId[foodId] || null;
+  }
+
+  function renderNextScenario(result) {
+    if (!nextSummaryNode || !nextLinksNode) return;
+    var food = selectedFood();
+    var summary = "Compare related safety scenarios to make conservative decisions.";
+    var links = [];
+
+    if (result.status === "USE_CAUTION") {
+      summary =
+        "This result is cautious. Compare with sit-out guidance and conservative storage references.";
+      links = [
+        food
+          ? {
+              href: "/food-left-out-calculator/?food_id=" + encodeURIComponent(food.food_id),
+              label: "Food left out calculator for " + food.name
+            }
+          : { href: "/food-left-out-calculator/", label: "Food left out calculator" },
+        { href: "/printable-food-storage-chart/", label: "Printable food storage chart" },
+        { href: "/methodology/", label: "Methodology" }
+      ];
+    } else {
+      links = [
+        { href: "/food-left-out-calculator/", label: "Food left out calculator" },
+        { href: "/printable-food-storage-chart/", label: "Printable food storage chart" },
+        { href: "/disclaimer/", label: "Disclaimer" }
+      ];
+    }
+
+    nextSummaryNode.textContent = summary;
+    nextLinksNode.innerHTML = "";
+    links.forEach(function each(link) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = link.href;
+      a.textContent = link.label;
+      li.appendChild(a);
+      nextLinksNode.appendChild(li);
     });
   }
 

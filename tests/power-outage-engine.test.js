@@ -153,4 +153,26 @@ test("power outage output links freezer recovery tool when freezer warming risk 
     result.relatedTools.some((tool) => tool.href === "/can-i-refreeze-this/"),
     "expected freezer recovery tool link"
   );
+  assert.ok(result.relatedTools.length >= 3);
+});
+
+test("power outage SAFE output links freezer recovery as next scenario", () => {
+  const result = evaluatePowerOutageRisk({
+    food: { food_id: "apple_whole", category: "produce", high_risk_food: false },
+    fridgeTempF: 37,
+    freezerTempF: 10,
+    outageMinutes: 20,
+    fridgeOpened: false,
+    freezerOpened: false,
+    freezerFullness: "full",
+    highRiskConsumer: false,
+    rules: fixtureRules()
+  });
+
+  assert.equal(result.status, "SAFE");
+  assert.ok(
+    result.relatedTools.some((tool) => tool.href === "/can-i-refreeze-this/"),
+    "SAFE status should link freezer recovery"
+  );
+  assert.ok(result.relatedTools.length >= 3);
 });

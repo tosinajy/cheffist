@@ -165,6 +165,35 @@
   </p>
 </section>
 
+{% set selectedFood = foods.byId[calculatorContext.initialInput.food_id] %}
+<section data-next-scenario>
+  <h2>Next scenario</h2>
+  <p data-next-scenario-summary>
+    {% if calculatorContext.initialResult.status == "DISCARD" %}
+    Conservative result is discard. Use these next steps for safer storage decisions.
+    {% else %}
+    Explore related safety scenarios and conservative storage guidance.
+    {% endif %}
+  </p>
+  <ul data-next-scenario-links>
+    {% if calculatorContext.initialResult.status == "DISCARD" %}
+    <li><a href="/printable-food-storage-chart/">Printable food storage chart</a></li>
+    <li><a href="/thermometer-recommendations/">Thermometer recommendations</a></li>
+    {% if selectedFood %}
+    <li><a href="/how-long-does-{{ selectedFood.slug }}-last/">Food storage page for {{ selectedFood.name }}</a></li>
+    {% else %}
+    <li><a href="/methodology/">Methodology</a></li>
+    {% endif %}
+    {% else %}
+    {% if selectedFood %}
+    <li><a href="/how-long-does-{{ selectedFood.slug }}-last/">Food storage page for {{ selectedFood.name }}</a></li>
+    {% endif %}
+    <li><a href="/printable-food-storage-chart/">Printable food storage chart</a></li>
+    <li><a href="/can-i-refreeze-this/">Can I refreeze this?</a></li>
+    {% endif %}
+  </ul>
+</section>
+
 <script id="calculator-data" type="application/json">{{ calculatorContext.serialized | safe }}</script>
 <script src="/assets/calculator-engine.js"></script>
 <script src="/assets/js/sitout-calculator.js"></script>

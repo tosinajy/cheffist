@@ -65,6 +65,9 @@
     {% if food.freezer_max_days > 0 %}
     <p><a href="{{ freezerRecoveryLink }}">Can I refreeze this?</a></p>
     {% endif %}
+    {% if categoryHubLink %}
+    <p><a href="{{ categoryHubLink }}">Category food safety hub</a></p>
+    {% endif %}
   </section>
 
   <section aria-label="Left out safety">

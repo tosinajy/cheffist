@@ -14,6 +14,8 @@
   const assumptionsNode = document.querySelector("[data-result-assumptions]");
   const actionNode = document.querySelector("[data-result-action]");
   const matchedRuleNode = document.querySelector("[data-result-rule]");
+  const nextScenarioSummaryNode = document.querySelector("[data-next-scenario-summary]");
+  const nextScenarioLinksNode = document.querySelector("[data-next-scenario-links]");
 
   if (!form || !serializedDataNode) return;
 
@@ -80,6 +82,59 @@
       const li = document.createElement("li");
       li.textContent = assumption;
       assumptionsNode.appendChild(li);
+    });
+
+    renderNextScenario(result);
+  }
+
+  function selectedFood() {
+    const selectedFoodId = form.elements.namedItem("food_id").value;
+    return foods.byId[selectedFoodId] || null;
+  }
+
+  function renderNextScenario(result) {
+    if (!nextScenarioSummaryNode || !nextScenarioLinksNode) return;
+    const food = selectedFood();
+
+    let summary = "Explore related safety scenarios and conservative storage guidance.";
+    let links = [];
+
+    if (result.status === "DISCARD") {
+      summary = "Conservative result is discard. Use these next steps for safer storage decisions.";
+      links = [
+        { href: "/printable-food-storage-chart/", label: "Printable food storage chart" },
+        { href: "/thermometer-recommendations/", label: "Thermometer recommendations" },
+        food
+          ? {
+              href: `/how-long-does-${food.slug}-last/`,
+              label: `Food storage page for ${food.name}`
+            }
+          : { href: "/methodology/", label: "Methodology" }
+      ];
+    } else {
+      links = [
+        ...(food
+          ? [
+              {
+                href: `/how-long-does-${food.slug}-last/`,
+                label: `Food storage page for ${food.name}`
+              }
+            ]
+          : []),
+        { href: "/printable-food-storage-chart/", label: "Printable food storage chart" },
+        { href: "/can-i-refreeze-this/", label: "Can I refreeze this?" }
+      ];
+    }
+
+    nextScenarioSummaryNode.textContent = summary;
+    nextScenarioLinksNode.innerHTML = "";
+    links.forEach((link) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = link.href;
+      a.textContent = link.label;
+      li.appendChild(a);
+      nextScenarioLinksNode.appendChild(li);
     });
   }
 

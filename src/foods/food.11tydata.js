@@ -69,6 +69,16 @@ function pickTopSitoutPages(data) {
   return selected.slice(0, 3);
 }
 
+function categoryHubLink(food) {
+  const category = String(food.category || "");
+  if (category === "dairy") return "/dairy-food-safety/";
+  if (category === "produce") return "/produce-food-safety/";
+  if (category === "protein" || category === "seafood" || category === "cooked_foods") {
+    return "/meat-food-safety/";
+  }
+  return null;
+}
+
 module.exports = {
   layout: "layouts/base.njk",
   pagination: {
@@ -115,6 +125,7 @@ module.exports = {
       });
       return `/can-i-refreeze-this/?${params.toString()}`;
     },
+    categoryHubLink: (data) => categoryHubLink(data.food),
     topSitoutPages: (data) => pickTopSitoutPages(data),
     jsonLd: (data) => {
       const baseUrl = baseUrlFrom(data);
