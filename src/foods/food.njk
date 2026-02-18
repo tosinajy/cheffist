@@ -1,117 +1,242 @@
-<article class="grid gap-6">
-  <header class="rounded-3xl border border-white/80 bg-white/90 p-7 shadow-panel">
-    <p class="text-sm font-medium uppercase tracking-[0.14em] text-slate-500">Storage Guide</p>
-    <h1 class="mt-2 font-display text-4xl leading-tight sm:text-5xl">How long does {{ food.name }} last?</h1>
-    <div class="mt-4 flex flex-wrap items-center gap-3">
-      <span class="rounded-full bg-frost px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">{{ food.category }}</span>
-      {% if food.high_risk_food %}
-      <span class="rounded-full bg-[#ffe9d1] px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#b45309]">Higher risk food</span>
-      {% endif %}
+<article class="space-y-8">
+  
+  <!-- Product Header -->
+  <header class="flex flex-col items-start justify-between gap-6 border-b border-surface-200 pb-8 lg:flex-row lg:items-end">
+    <div>
+      <div class="flex items-center gap-3 text-sm font-medium text-surface-500">
+        <a href="/" class="hover:text-surface-900 transition-colors">Foods</a>
+        <span class="text-surface-300">/</span>
+        <span class="capitalize text-surface-900">{{ food.category }}</span>
+      </div>
+      <h1 class="mt-3 font-display text-5xl font-bold tracking-tight text-surface-900 sm:text-6xl">How long does {{ food.name }} last?</h1>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {% for tag in food.default_affiliate_tags %}
+          <span class="inline-flex items-center rounded-full border border-surface-200 bg-surface-50 px-3 py-1 text-xs font-medium text-surface-600">{{ tag }}</span>
+        {% endfor %}
+      </div>
     </div>
+    
+    {% if food.high_risk_food %}
+    <div class="flex items-center gap-3 rounded-2xl border border-warning/20 bg-warning/5 px-5 py-3 text-warning-700">
+      <div class="flex h-2 w-2 rounded-full bg-warning animate-pulse"></div>
+      <p class="text-sm font-bold uppercase tracking-wide text-warning">High Risk Pathogen Potential</p>
+    </div>
+    {% endif %}
   </header>
 
-  <section class="rounded-3xl border border-[#dbe7ff] bg-gradient-to-br from-[#f8fbff] to-[#e9f0ff] p-6 shadow-panel" aria-labelledby="storage-summary">
-    <h2 id="storage-summary" class="font-display text-2xl">Storage Summary</h2>
-    <div class="mt-4 grid gap-3 sm:grid-cols-3">
-      <div class="rounded-xl border border-white bg-white/80 p-4">
-        <p class="text-xs uppercase tracking-[0.12em] text-slate-500">Pantry</p>
-        <p class="mt-1 text-xl font-semibold">{{ food.pantry_min_days }}-{{ food.pantry_max_days }} days</p>
+  <!-- Metric Cards -->
+  <section class="grid gap-4 sm:grid-cols-3">
+    <!-- Pantry -->
+    <div class="group relative overflow-hidden rounded-3xl border border-surface-200 bg-white p-6 shadow-sm">
+      <div class="flex items-center justify-between">
+        <p class="text-xs font-bold uppercase tracking-widest text-surface-400">Pantry</p>
+        <div class="h-2 w-2 rounded-full {% if food.pantry_max_days > 0 %}bg-success{% else %}bg-surface-200{% endif %}"></div>
       </div>
-      <div class="rounded-xl border border-white bg-white/80 p-4">
-        <p class="text-xs uppercase tracking-[0.12em] text-slate-500">Fridge</p>
-        <p class="mt-1 text-xl font-semibold">{{ food.fridge_min_days }}-{{ food.fridge_max_days }} days</p>
+      <div class="mt-4">
+        {% if food.pantry_max_days > 0 %}
+          <span class="font-display text-4xl font-semibold text-surface-900">{{ food.pantry_max_days }}</span>
+          <span class="text-sm font-medium text-surface-500">days max</span>
+          <p class="mt-1 text-xs text-surface-400">Min: {{ food.pantry_min_days }} days</p>
+        {% else %}
+          <span class="font-display text-4xl font-semibold text-surface-300">N/A</span>
+          <p class="mt-2 text-xs text-surface-400">Not recommended for safe storage</p>
+        {% endif %}
       </div>
-      <div class="rounded-xl border border-white bg-white/80 p-4">
-        <p class="text-xs uppercase tracking-[0.12em] text-slate-500">Freezer</p>
-        <p class="mt-1 text-xl font-semibold">{{ food.freezer_min_days }}-{{ food.freezer_max_days }} days</p>
+    </div>
+
+    <!-- Fridge -->
+    <div class="group relative overflow-hidden rounded-3xl border border-surface-200 bg-white p-6 shadow-sm ring-4 ring-transparent transition-all hover:ring-brand/5">
+      <div class="flex items-center justify-between">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand">Fridge</p>
+        <div class="h-2 w-2 rounded-full {% if food.fridge_max_days > 0 %}bg-success{% else %}bg-surface-200{% endif %}"></div>
+      </div>
+      <div class="mt-4">
+        {% if food.fridge_max_days > 0 %}
+          <span class="font-display text-4xl font-semibold text-surface-900">{{ food.fridge_max_days }}</span>
+          <span class="text-sm font-medium text-surface-500">days max</span>
+          <p class="mt-1 text-xs text-surface-400">Min: {{ food.fridge_min_days }} days</p>
+        {% else %}
+          <span class="font-display text-4xl font-semibold text-surface-300">N/A</span>
+          <p class="mt-2 text-xs text-surface-400">Not recommended</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Freezer -->
+    <div class="group relative overflow-hidden rounded-3xl border border-surface-200 bg-white p-6 shadow-sm">
+      <div class="flex items-center justify-between">
+        <p class="text-xs font-bold uppercase tracking-widest text-surface-400">Freezer</p>
+        <div class="h-2 w-2 rounded-full {% if food.freezer_max_days > 0 %}bg-success{% else %}bg-surface-200{% endif %}"></div>
+      </div>
+      <div class="mt-4">
+        {% if food.freezer_max_days > 0 %}
+          <span class="font-display text-4xl font-semibold text-surface-900">{{ food.freezer_max_days }}</span>
+          <span class="text-sm font-medium text-surface-500">days max</span>
+          <p class="mt-1 text-xs text-surface-400">Min: {{ food.freezer_min_days }} days</p>
+        {% else %}
+          <span class="font-display text-4xl font-semibold text-surface-300">N/A</span>
+           <p class="mt-2 text-xs text-surface-400">Not recommended</p>
+        {% endif %}
       </div>
     </div>
   </section>
 
+  <!-- Details Grid -->
   <section class="grid gap-6 lg:grid-cols-2">
-    <div class="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-panel" aria-labelledby="spoilage-signs">
-      <h2 id="spoilage-signs" class="font-display text-2xl">Spoilage signs</h2>
-      <ul class="mt-4 space-y-2">
+    <!-- Spoilage (Red Accent) -->
+    <div class="rounded-3xl border border-surface-200 bg-white p-8 shadow-sm">
+      <h2 class="flex items-center gap-2 font-display text-2xl font-semibold text-surface-900">
+        <span class="flex h-6 w-6 items-center justify-center rounded-full bg-danger/10 text-xs text-danger">!</span>
+        Spoilage Signs
+      </h2>
+      <ul class="mt-6 space-y-3">
         {% for sign in food.spoilage_signs %}
-        <li class="rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-700">{{ sign | replace("_", " ") }}</li>
+        <li class="flex items-start gap-3 rounded-xl border border-danger/10 bg-danger/5 px-4 py-3 text-sm font-medium text-surface-700 transition-colors hover:border-danger/20">
+          <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-danger"></span>
+          {{ sign | replace("_", " ") | capitalize }}
+        </li>
         {% endfor %}
       </ul>
     </div>
 
-    <div class="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-panel" aria-labelledby="storage-tips">
-      <h2 id="storage-tips" class="font-display text-2xl">Storage tips</h2>
-      <ul class="mt-4 space-y-2">
+    <!-- Tips (Blue Accent) -->
+    <div class="rounded-3xl border border-surface-200 bg-white p-8 shadow-sm">
+      <h2 class="flex items-center gap-2 font-display text-2xl font-semibold text-surface-900">
+        <span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-light/20 text-xs text-brand">i</span>
+        Storage Tips
+      </h2>
+      <ul class="mt-6 space-y-3">
         {% for tip in food.storage_tips %}
-        <li class="rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-700">{{ tip | replace("_", " ") }}</li>
+        <li class="flex items-start gap-3 rounded-xl border border-surface-100 bg-surface-50 px-4 py-3 text-sm font-medium text-surface-700 transition-colors hover:bg-surface-100">
+          <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>
+          {{ tip | replace("_", " ") | capitalize }}
+        </li>
         {% endfor %}
       </ul>
     </div>
   </section>
 
   {% if food.notes %}
-  <section class="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-panel" aria-labelledby="notes">
-    <h2 id="notes" class="font-display text-2xl">Notes</h2>
-    <p class="mt-3 text-slate-700">{{ food.notes }}</p>
-  </section>
+  <div class="rounded-2xl border border-surface-200 bg-surface-50 p-6 text-sm text-surface-600 leading-relaxed">
+    <strong class="text-surface-900">Curator Note:</strong> {{ food.notes }}
+  </div>
   {% endif %}
 
-  <section class="rounded-2xl border border-amber-200 bg-[#fff8ee] p-6 shadow-panel" aria-labelledby="safety-disclaimer">
-    <h2 id="safety-disclaimer" class="font-display text-2xl text-amber-900">Safety disclaimer</h2>
-    <p class="mt-3 text-amber-900/90">
-      Educational only, not medical advice. When in doubt, throw it out.
-      Read the <a class="font-semibold underline decoration-amber-500 underline-offset-2" href="/disclaimer/">full disclaimer</a>.
-    </p>
-  </section>
+  <!-- Safety & Sources Section -->
+  <section class="grid gap-6 lg:grid-cols-3">
+    <!-- Disclaimer -->
+    <div class="lg:col-span-1 rounded-3xl border border-warning/20 bg-warning/5 p-6 shadow-sm flex flex-col">
+      <div class="flex-grow">
+        <h3 class="flex items-center gap-2 text-lg font-semibold text-warning-700">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+          </svg>
+          Safety Disclaimer
+        </h3>
+        <div class="mt-3 space-y-2 text-sm text-surface-700">
+          <p>This data is for educational purposes only.</p>
+          <p>Shelf life varies by local conditions, handling, and appliance temperatures. If food looks, smells, or tastes off, throw it out immediately.</p>
+        </div>
+      </div>
+      
+      <div class="mt-6 pt-6 border-t border-warning/10">
+        <a href="/disclaimer/" class="block text-center text-xs font-medium text-warning-700 hover:text-warning-900 underline underline-offset-2">Read full policy</a>
+      </div>
+    </div>
 
-  <section class="grid gap-6 lg:grid-cols-2">
-    <div class="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-panel" aria-labelledby="sources-used">
-      <h2 id="sources-used" class="font-display text-2xl">Sources used</h2>
+    <!-- Sources & Metadata -->
+    <div class="lg:col-span-2 rounded-3xl border border-surface-200 bg-white p-6 shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-surface-900">Data Sources & Metadata</h3>
+        <span class="text-xs font-mono text-surface-400">v{{ dataset.version }}</span>
+      </div>
+
       {% if matchingSources.length > 0 %}
-      <ul class="mt-4 space-y-3">
-        {% for source in matchingSources %}
-        <li class="rounded-lg border border-slate-200 p-3">
-          <a class="font-semibold text-pine hover:underline" href="{{ source.url }}">{{ source.title }}</a>
-          <p class="mt-1 text-sm text-slate-500">{{ source.publisher }}</p>
-        </li>
-        {% endfor %}
-      </ul>
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {% for source in matchingSources %}
+          <li class="rounded-xl border border-surface-100 p-3 hover:bg-surface-50 transition-colors">
+            <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer" class="group block">
+              <span class="block text-sm font-semibold text-brand group-hover:underline">{{ source.title }}</span>
+              <span class="text-xs text-surface-500">{{ source.publisher }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
       {% else %}
-      <p class="mt-3 text-slate-600">No source mappings for this exact food or category yet.</p>
+        <p class="text-sm text-surface-500 italic">No specific external source mappings for this item classification.</p>
       {% endif %}
-    </div>
-
-    <div class="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-panel" aria-labelledby="metadata">
-      <h2 id="metadata" class="font-display text-2xl">Dataset metadata</h2>
-      <dl class="mt-4 space-y-2 text-sm text-slate-700">
-        <div class="flex items-center justify-between gap-3 rounded-lg bg-slate-50 px-3 py-2">
-          <dt class="font-medium">Version</dt>
-          <dd>{{ dataset.version }}</dd>
-        </div>
-        <div class="flex items-center justify-between gap-3 rounded-lg bg-slate-50 px-3 py-2">
-          <dt class="font-medium">Last updated</dt>
-          <dd>{{ dataset.last_updated }}</dd>
-        </div>
-      </dl>
+      
+      <div class="mt-4 pt-4 border-t border-surface-100 flex items-center gap-4 text-xs text-surface-400">
+        <span>Last Updated: {{ dataset.last_updated }}</span>
+        <span>ID: {{ food.food_id }}</span>
+      </div>
     </div>
   </section>
 
-  <section class="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-panel" aria-labelledby="related-foods">
-    <div class="flex flex-wrap items-end justify-between gap-3">
-      <h2 id="related-foods" class="font-display text-2xl">Related foods</h2>
-      <a href="/food-left-out-calculator/" class="text-sm font-semibold text-pine hover:underline">Food left out calculator</a>
+  <!-- Safety Tools Grid -->
+  <section class="grid gap-4 sm:grid-cols-3">
+    <!-- Food Left Out Calculator -->
+    <a href="/food-left-out-calculator/" class="group flex flex-col justify-between rounded-3xl border border-surface-200 bg-white p-6 shadow-sm transition-all hover:border-brand/30 hover:shadow-md">
+      <div>
+        <div class="mb-4 inline-flex items-center justify-center rounded-xl bg-brand/10 p-3 text-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="font-display text-lg font-semibold text-surface-900">Left Out Calculator</h3>
+        <p class="mt-2 text-sm text-surface-500">Calculate risk for food left at room temperature.</p>
+      </div>
+      <div class="mt-6 flex items-center text-sm font-semibold text-brand">
+        Check Now <span class="ml-2 transition-transform group-hover:translate-x-1">&rarr;</span>
+      </div>
+    </a>
+
+    <!-- Power Outage Calculator (Placeholder) -->
+    <div class="group flex flex-col justify-between rounded-3xl border border-surface-200 bg-surface-50/50 p-6 shadow-sm">
+      <div>
+        <div class="mb-4 inline-flex items-center justify-center rounded-xl bg-surface-200 p-3 text-surface-400">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          </svg>
+        </div>
+        <div class="flex items-center gap-2">
+          <h3 class="font-display text-lg font-semibold text-surface-900">Power Outage</h3>
+          <span class="rounded-full bg-surface-200 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-surface-500">Coming Soon</span>
+        </div>
+        <p class="mt-2 text-sm text-surface-500">Safety timelines for fridge/freezer during power loss.</p>
+      </div>
     </div>
 
+    <!-- Freezer Thaw Tool (Placeholder) -->
+    <div class="group flex flex-col justify-between rounded-3xl border border-surface-200 bg-surface-50/50 p-6 shadow-sm">
+      <div>
+        <div class="mb-4 inline-flex items-center justify-center rounded-xl bg-surface-200 p-3 text-surface-400">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+          </svg>
+        </div>
+        <div class="flex items-center gap-2">
+          <h3 class="font-display text-lg font-semibold text-surface-900">Thaw & Refreeze</h3>
+          <span class="rounded-full bg-surface-200 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-surface-500">Coming Soon</span>
+        </div>
+        <p class="mt-2 text-sm text-surface-500">Guidance on safety of refreezing thawed items.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="pt-8 border-t border-surface-200">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-display text-xl font-semibold text-surface-900">Related {{ food.category }}</h3>
+    </div>
     {% if relatedFoods.length > 0 %}
-    <div class="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {% for related in relatedFoods %}
-      <a href="/how-long-does-{{ related.slug }}-last/" class="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-slate-400 hover:shadow-panel">
-        <p class="font-semibold text-ink">{{ related.name }}</p>
-        <p class="mt-1 text-sm capitalize text-slate-500">{{ related.category }}</p>
+      <a href="/how-long-does-{{ related.slug }}-last/" class="block rounded-xl border border-surface-200 bg-white px-4 py-3 text-sm font-medium text-surface-700 transition hover:border-surface-400 hover:shadow-sm">
+        {{ related.name }}
       </a>
       {% endfor %}
     </div>
-    {% else %}
-    <p class="mt-3 text-slate-600">No related foods in this category yet.</p>
     {% endif %}
   </section>
 </article>

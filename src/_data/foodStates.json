@@ -1,0 +1,37 @@
+[
+  {
+    "food_id": "food_canned_beans",
+    "state": "unopened",
+    "label": "Unopened Can",
+    "override_high_risk_food": false,
+    "notes": "Shelf stable unopened can profile"
+  },
+  {
+    "food_id": "food_cooked_rice",
+    "state": "cooked",
+    "label": "Cooked Rice",
+    "override_high_risk_food": true,
+    "notes": "Most conservative handling profile"
+  },
+  {
+    "food_id": "food_deli_turkey",
+    "state": "opened",
+    "label": "Opened Deli Meat",
+    "override_high_risk_food": true,
+    "notes": "Opened deli meat profile"
+  },
+  {
+    "food_id": "food_raw_chicken",
+    "state": "raw",
+    "label": "Raw Chicken",
+    "override_high_risk_food": true,
+    "notes": "Raw poultry risk profile"
+  },
+  {
+    "food_id": "food_yogurt_plain",
+    "state": "opened",
+    "label": "Opened Yogurt",
+    "override_high_risk_food": true,
+    "notes": "Opened container profile"
+  }
+]

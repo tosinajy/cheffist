@@ -1,60 +1,84 @@
 ---
-title: Cheffist | Food Freshness Intelligence
+title: Cheffist | Precision Shelf-Life Data
 layout: layouts/base.njk
 permalink: /
 canonical: https://cheffist.com/
 ---
-<section class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-  <div class="rounded-3xl border border-white/80 bg-white/90 p-8 shadow-panel backdrop-blur">
-    <p class="mb-3 inline-flex rounded-full bg-frost px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
-      Household Food Safety
-    </p>
-    <h1 class="font-display text-4xl leading-tight text-ink sm:text-5xl">
-      Premium shelf-life guidance for real kitchens.
-    </h1>
-    <p class="mt-5 max-w-2xl text-base text-slate-600 sm:text-lg">
-      Explore conservative storage windows, spoilage clues, and practical handling tips for common foods.
-    </p>
-    <div class="mt-7 flex flex-wrap gap-3">
-      <a href="/food-left-out-calculator/" class="rounded-xl bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Try left-out calculator</a>
-      <a href="/disclaimer/" class="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-500">Read disclaimer</a>
-    </div>
-  </div>
 
-  <aside class="grid gap-4">
-    <div class="rounded-2xl border border-white/80 bg-white/90 p-5 shadow-panel">
-      <p class="text-sm text-slate-500">Foods tracked</p>
-      <p class="mt-1 font-display text-4xl">{{ foods.foods | length }}</p>
-    </div>
-    <div class="rounded-2xl border border-white/80 bg-white/90 p-5 shadow-panel">
-      <p class="text-sm text-slate-500">Dataset version</p>
-      <p class="mt-1 text-xl font-semibold">{{ dataset.version }}</p>
-      <p class="mt-3 text-sm text-slate-500">Updated {{ dataset.last_updated }}</p>
-    </div>
-    <div class="rounded-2xl border border-amber-200 bg-[#fff8ee] p-5 shadow-panel">
-      <p class="font-semibold text-amber-900">Safety first</p>
-      <p class="mt-2 text-sm text-amber-900/80">Educational only. If quality is uncertain, throw it out.</p>
-    </div>
-  </aside>
+<section class="py-12 text-center sm:py-20">
+  <div class="inline-flex items-center rounded-full border border-surface-200 bg-white/50 px-3 py-1 mb-8 backdrop-blur-sm shadow-sm">
+    <span class="flex h-2 w-2 rounded-full bg-success mr-2 animate-pulse"></span>
+    <span class="text-xs font-semibold uppercase tracking-wider text-surface-500">v{{ dataset.version }} Dataset Live</span>
+  </div>
+  
+  <h1 class="mx-auto max-w-3xl font-display text-5xl font-semibold leading-[1.1] text-surface-900 tracking-tight sm:text-7xl">
+    Your kitchen’s <br class="hidden sm:block" />
+    <span class="text-transparent bg-clip-text bg-gradient-to-br from-surface-900 to-surface-500">operating system.</span>
+  </h1>
+  
+  <p class="mx-auto mt-6 max-w-2xl text-lg text-surface-500 leading-relaxed">
+    Professional-grade shelf life data for the home cook. 
+    Scientifically grounded storage windows, spoilage indicators, and risk assessments.
+  </p>
+
+  <div class="mt-10 flex flex-wrap justify-center gap-4">
+    <a href="#browse" class="rounded-full bg-surface-900 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-surface-900/10 transition-transform hover:-translate-y-1 hover:shadow-2xl">
+      Explore Database
+    </a>
+    <a href="/food-left-out-calculator/" class="rounded-full border border-surface-200 bg-white px-8 py-3.5 text-sm font-semibold text-surface-700 shadow-sm transition-all hover:border-surface-300 hover:bg-surface-50">
+      Safety Calculator
+    </a>
+  </div>
 </section>
 
-<section class="mt-8 rounded-3xl border border-white/80 bg-white/90 p-6 shadow-panel sm:p-8">
-  <div class="mb-5 flex items-end justify-between gap-4">
-    <h2 class="font-display text-3xl">Browse Food Guides</h2>
-    <p class="text-sm text-slate-500">How long each food lasts by storage method</p>
+<section id="browse" class="mt-12">
+  <div class="flex items-center justify-between mb-8 px-2">
+    <h2 class="text-xl font-semibold tracking-tight text-surface-900">Food Index</h2>
+    <span class="text-sm font-medium text-surface-400">{{ foods.foods | length }} items tracked</span>
   </div>
 
-  <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {% for item in foods.foods %}
-    <a href="/how-long-does-{{ item.slug }}-last/" class="group rounded-2xl border border-slate-200/80 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-panel">
-      <div class="flex items-center justify-between gap-3">
-        <h3 class="text-lg font-semibold text-ink transition group-hover:text-pine">{{ item.name }}</h3>
+    <a href="/how-long-does-{{ item.slug }}-last/" class="group relative overflow-hidden rounded-3xl border border-surface-100 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-glass-hover">
+      
+      <div class="absolute inset-0 bg-gradient-to-br from-brand-light/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+      <div class="relative flex items-start justify-between">
+        <div>
+          <div class="mb-2 inline-flex items-center rounded-md border border-surface-100 bg-surface-50 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-surface-500">
+            {{ item.category }}
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-surface-900 group-hover:text-brand transition-colors">{{ item.name }}</h3>
+        </div>
         {% if item.high_risk_food %}
-        <span class="rounded-full bg-[#ffe9d1] px-2.5 py-1 text-xs font-semibold text-[#b45309]">High risk</span>
+        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-warning/10 text-warning" title="High Risk">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+            <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+          </svg>
+        </div>
         {% endif %}
       </div>
-      <p class="mt-2 text-sm capitalize text-slate-500">{{ item.category }}</p>
-      <p class="mt-4 text-sm text-slate-600">Fridge: {{ item.fridge_min_days }}-{{ item.fridge_max_days }} days</p>
+
+      <div class="relative mt-8 grid grid-cols-3 gap-2 border-t border-surface-100 pt-4">
+        <div>
+          <p class="text-[10px] font-medium uppercase tracking-wider text-surface-400">Pantry</p>
+          <p class="mt-1 text-sm font-semibold text-surface-700">
+            {% if item.pantry_max_days > 0 %}{{ item.pantry_max_days }}d{% else %}-{% endif %}
+          </p>
+        </div>
+        <div>
+          <p class="text-[10px] font-medium uppercase tracking-wider text-surface-400">Fridge</p>
+          <p class="mt-1 text-sm font-semibold text-surface-700">
+            {% if item.fridge_max_days > 0 %}{{ item.fridge_max_days }}d{% else %}-{% endif %}
+          </p>
+        </div>
+        <div>
+          <p class="text-[10px] font-medium uppercase tracking-wider text-surface-400">Freezer</p>
+          <p class="mt-1 text-sm font-semibold text-surface-700">
+            {% if item.freezer_max_days > 0 %}{{ item.freezer_max_days }}d{% else %}-{% endif %}
+          </p>
+        </div>
+      </div>
     </a>
     {% endfor %}
   </div>

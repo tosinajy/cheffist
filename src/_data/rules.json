@@ -1,38 +1,92 @@
 [
   {
-    "rule_id": "rule_cold_room",
-    "applies_to": "all_foods",
-    "temp_min_f": 0,
-    "temp_max_f": 31,
-    "max_safe_minutes": 240,
-    "covered_modifier_minutes": 30,
-    "high_risk_modifier_minutes": -30
-  },
-  {
-    "rule_id": "rule_general_room",
-    "applies_to": "all_foods",
+    "rule_id": "rule_category_bakery_room",
+    "applies_to": "category:bakery",
     "temp_min_f": 32,
     "temp_max_f": 89,
     "max_safe_minutes": 120,
-    "covered_modifier_minutes": 30,
-    "high_risk_modifier_minutes": -30
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -10
   },
   {
-    "rule_id": "rule_high_risk_room",
-    "applies_to": "high_risk_foods",
+    "rule_id": "rule_category_dairy_room",
+    "applies_to": "category:dairy",
     "temp_min_f": 32,
     "temp_max_f": 89,
-    "max_safe_minutes": 60,
-    "covered_modifier_minutes": 15,
+    "max_safe_minutes": 90,
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -20
+  },
+  {
+    "rule_id": "rule_category_grains_hot",
+    "applies_to": "category:grains",
+    "temp_min_f": 90,
+    "temp_max_f": 110,
+    "max_safe_minutes": 45,
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -10
+  },
+  {
+    "rule_id": "rule_category_grains_room",
+    "applies_to": "category:grains",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
+    "max_safe_minutes": 90,
+    "covered_modifier_minutes": 0,
     "high_risk_modifier_minutes": -15
   },
   {
-    "rule_id": "rule_hot_room",
-    "applies_to": "all_foods",
+    "rule_id": "rule_category_meat_hot",
+    "applies_to": "category:meat",
     "temp_min_f": 90,
     "temp_max_f": 110,
+    "max_safe_minutes": 30,
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -10
+  },
+  {
+    "rule_id": "rule_category_meat_room",
+    "applies_to": "category:meat",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
     "max_safe_minutes": 60,
-    "covered_modifier_minutes": 15,
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -20
+  },
+  {
+    "rule_id": "rule_category_pantry_room",
+    "applies_to": "category:pantry",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
+    "max_safe_minutes": 240,
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -10
+  },
+  {
+    "rule_id": "rule_category_produce_room",
+    "applies_to": "category:produce",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
+    "max_safe_minutes": 120,
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -15
+  },
+  {
+    "rule_id": "rule_food_rice_room",
+    "applies_to": "food:food_cooked_rice",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
+    "max_safe_minutes": 60,
+    "covered_modifier_minutes": 0,
+    "high_risk_modifier_minutes": -15
+  },
+  {
+    "rule_id": "rule_state_rice_cooked_room",
+    "applies_to": "state:food_cooked_rice:cooked",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
+    "max_safe_minutes": 45,
+    "covered_modifier_minutes": 0,
     "high_risk_modifier_minutes": -15
   }
 ]

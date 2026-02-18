@@ -30,7 +30,8 @@
         "bread",
         "bread-box",
         "freezer-bags"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "food_canned_beans",
@@ -62,6 +63,14 @@
         "pantry",
         "can-organizer",
         "labels"
+      ],
+      "states": [
+        {
+          "state": "unopened",
+          "label": "Unopened Can",
+          "override_high_risk_food": false,
+          "notes": "Shelf stable unopened can profile"
+        }
       ]
     },
     {
@@ -94,7 +103,8 @@
         "cheese",
         "cheese-paper",
         "vacuum-sealer"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "food_cooked_pasta",
@@ -126,7 +136,8 @@
         "pasta",
         "meal-prep",
         "airtight-container"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "food_cooked_rice",
@@ -158,6 +169,14 @@
         "rice",
         "leftovers",
         "airtight-container"
+      ],
+      "states": [
+        {
+          "state": "cooked",
+          "label": "Cooked Rice",
+          "override_high_risk_food": true,
+          "notes": "Most conservative handling profile"
+        }
       ]
     },
     {
@@ -190,6 +209,14 @@
         "deli-meat",
         "portion-packs",
         "freezer-bags"
+      ],
+      "states": [
+        {
+          "state": "opened",
+          "label": "Opened Deli Meat",
+          "override_high_risk_food": true,
+          "notes": "Opened deli meat profile"
+        }
       ]
     },
     {
@@ -222,7 +249,8 @@
         "eggs",
         "carton-organizer",
         "fridge-bin"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "food_ground_beef",
@@ -254,7 +282,8 @@
         "beef",
         "freezer-wrap",
         "labels"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "food_leafy_spinach",
@@ -286,7 +315,8 @@
         "produce",
         "crisper-bin",
         "paper-towels"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "food_milk_whole",
@@ -318,7 +348,8 @@
         "dairy",
         "pitcher",
         "fridge-thermometer"
-      ]
+      ],
+      "states": []
     },
     {
       "food_id": "food_raw_chicken",
@@ -350,6 +381,14 @@
         "poultry",
         "freezer-bags",
         "food-thermometer"
+      ],
+      "states": [
+        {
+          "state": "raw",
+          "label": "Raw Chicken",
+          "override_high_risk_food": true,
+          "notes": "Raw poultry risk profile"
+        }
       ]
     },
     {
@@ -382,6 +421,14 @@
         "dairy",
         "single-serve",
         "spoons"
+      ],
+      "states": [
+        {
+          "state": "opened",
+          "label": "Opened Yogurt",
+          "override_high_risk_food": true,
+          "notes": "Opened container profile"
+        }
       ]
     }
   ],
@@ -416,7 +463,8 @@
         "bread",
         "bread-box",
         "freezer-bags"
-      ]
+      ],
+      "states": []
     },
     "food_canned_beans": {
       "food_id": "food_canned_beans",
@@ -448,6 +496,14 @@
         "pantry",
         "can-organizer",
         "labels"
+      ],
+      "states": [
+        {
+          "state": "unopened",
+          "label": "Unopened Can",
+          "override_high_risk_food": false,
+          "notes": "Shelf stable unopened can profile"
+        }
       ]
     },
     "food_cheddar_block": {
@@ -480,7 +536,8 @@
         "cheese",
         "cheese-paper",
         "vacuum-sealer"
-      ]
+      ],
+      "states": []
     },
     "food_cooked_pasta": {
       "food_id": "food_cooked_pasta",
@@ -512,7 +569,8 @@
         "pasta",
         "meal-prep",
         "airtight-container"
-      ]
+      ],
+      "states": []
     },
     "food_cooked_rice": {
       "food_id": "food_cooked_rice",
@@ -544,6 +602,14 @@
         "rice",
         "leftovers",
         "airtight-container"
+      ],
+      "states": [
+        {
+          "state": "cooked",
+          "label": "Cooked Rice",
+          "override_high_risk_food": true,
+          "notes": "Most conservative handling profile"
+        }
       ]
     },
     "food_deli_turkey": {
@@ -576,6 +642,14 @@
         "deli-meat",
         "portion-packs",
         "freezer-bags"
+      ],
+      "states": [
+        {
+          "state": "opened",
+          "label": "Opened Deli Meat",
+          "override_high_risk_food": true,
+          "notes": "Opened deli meat profile"
+        }
       ]
     },
     "food_eggs_shell": {
@@ -608,7 +682,8 @@
         "eggs",
         "carton-organizer",
         "fridge-bin"
-      ]
+      ],
+      "states": []
     },
     "food_ground_beef": {
       "food_id": "food_ground_beef",
@@ -640,7 +715,8 @@
         "beef",
         "freezer-wrap",
         "labels"
-      ]
+      ],
+      "states": []
     },
     "food_leafy_spinach": {
       "food_id": "food_leafy_spinach",
@@ -672,7 +748,8 @@
         "produce",
         "crisper-bin",
         "paper-towels"
-      ]
+      ],
+      "states": []
     },
     "food_milk_whole": {
       "food_id": "food_milk_whole",
@@ -704,7 +781,8 @@
         "dairy",
         "pitcher",
         "fridge-thermometer"
-      ]
+      ],
+      "states": []
     },
     "food_raw_chicken": {
       "food_id": "food_raw_chicken",
@@ -736,6 +814,14 @@
         "poultry",
         "freezer-bags",
         "food-thermometer"
+      ],
+      "states": [
+        {
+          "state": "raw",
+          "label": "Raw Chicken",
+          "override_high_risk_food": true,
+          "notes": "Raw poultry risk profile"
+        }
       ]
     },
     "food_yogurt_plain": {
@@ -768,6 +854,14 @@
         "dairy",
         "single-serve",
         "spoons"
+      ],
+      "states": [
+        {
+          "state": "opened",
+          "label": "Opened Yogurt",
+          "override_high_risk_food": true,
+          "notes": "Opened container profile"
+        }
       ]
     }
   },
@@ -802,7 +896,8 @@
         "bread",
         "bread-box",
         "freezer-bags"
-      ]
+      ],
+      "states": []
     },
     "canned-beans-unopened": {
       "food_id": "food_canned_beans",
@@ -834,6 +929,14 @@
         "pantry",
         "can-organizer",
         "labels"
+      ],
+      "states": [
+        {
+          "state": "unopened",
+          "label": "Unopened Can",
+          "override_high_risk_food": false,
+          "notes": "Shelf stable unopened can profile"
+        }
       ]
     },
     "cheddar-block": {
@@ -866,7 +969,8 @@
         "cheese",
         "cheese-paper",
         "vacuum-sealer"
-      ]
+      ],
+      "states": []
     },
     "pasta-cooked": {
       "food_id": "food_cooked_pasta",
@@ -898,7 +1002,8 @@
         "pasta",
         "meal-prep",
         "airtight-container"
-      ]
+      ],
+      "states": []
     },
     "rice-cooked": {
       "food_id": "food_cooked_rice",
@@ -930,6 +1035,14 @@
         "rice",
         "leftovers",
         "airtight-container"
+      ],
+      "states": [
+        {
+          "state": "cooked",
+          "label": "Cooked Rice",
+          "override_high_risk_food": true,
+          "notes": "Most conservative handling profile"
+        }
       ]
     },
     "deli-turkey-slices": {
@@ -962,6 +1075,14 @@
         "deli-meat",
         "portion-packs",
         "freezer-bags"
+      ],
+      "states": [
+        {
+          "state": "opened",
+          "label": "Opened Deli Meat",
+          "override_high_risk_food": true,
+          "notes": "Opened deli meat profile"
+        }
       ]
     },
     "eggs-shell": {
@@ -994,7 +1115,8 @@
         "eggs",
         "carton-organizer",
         "fridge-bin"
-      ]
+      ],
+      "states": []
     },
     "ground-beef-raw": {
       "food_id": "food_ground_beef",
@@ -1026,7 +1148,8 @@
         "beef",
         "freezer-wrap",
         "labels"
-      ]
+      ],
+      "states": []
     },
     "spinach-fresh": {
       "food_id": "food_leafy_spinach",
@@ -1058,7 +1181,8 @@
         "produce",
         "crisper-bin",
         "paper-towels"
-      ]
+      ],
+      "states": []
     },
     "milk-whole": {
       "food_id": "food_milk_whole",
@@ -1090,7 +1214,8 @@
         "dairy",
         "pitcher",
         "fridge-thermometer"
-      ]
+      ],
+      "states": []
     },
     "chicken-raw": {
       "food_id": "food_raw_chicken",
@@ -1122,6 +1247,14 @@
         "poultry",
         "freezer-bags",
         "food-thermometer"
+      ],
+      "states": [
+        {
+          "state": "raw",
+          "label": "Raw Chicken",
+          "override_high_risk_food": true,
+          "notes": "Raw poultry risk profile"
+        }
       ]
     },
     "yogurt-plain": {
@@ -1154,6 +1287,14 @@
         "dairy",
         "single-serve",
         "spoons"
+      ],
+      "states": [
+        {
+          "state": "opened",
+          "label": "Opened Yogurt",
+          "override_high_risk_food": true,
+          "notes": "Opened container profile"
+        }
       ]
     }
   }
