@@ -1,0 +1,1160 @@
+{
+  "foods": [
+    {
+      "food_id": "food_bread_white",
+      "name": "Bread White Loaf",
+      "slug": "bread-white-loaf",
+      "category": "bakery",
+      "synonyms": [
+        "sandwich bread",
+        "white bread"
+      ],
+      "pantry_min_days": 3,
+      "pantry_max_days": 5,
+      "fridge_min_days": 5,
+      "fridge_max_days": 7,
+      "freezer_min_days": 30,
+      "freezer_max_days": 90,
+      "spoilage_signs": [
+        "visible_mold",
+        "stale_hard_texture",
+        "off_smell"
+      ],
+      "storage_tips": [
+        "store_sealed_at_room_temp",
+        "freeze_sliced_for_long_storage"
+      ],
+      "notes": "Avoid humid counters",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "bread",
+        "bread-box",
+        "freezer-bags"
+      ]
+    },
+    {
+      "food_id": "food_canned_beans",
+      "name": "Canned Beans Unopened",
+      "slug": "canned-beans-unopened",
+      "category": "pantry",
+      "synonyms": [
+        "canned legumes",
+        "bean can"
+      ],
+      "pantry_min_days": 365,
+      "pantry_max_days": 730,
+      "fridge_min_days": 0,
+      "fridge_max_days": 0,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "bulging_can",
+        "leaking_seam",
+        "spurting_when_opened"
+      ],
+      "storage_tips": [
+        "store_cool_dry_place",
+        "avoid_dented_cans"
+      ],
+      "notes": "Unopened shelf stable pantry item",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "pantry",
+        "can-organizer",
+        "labels"
+      ]
+    },
+    {
+      "food_id": "food_cheddar_block",
+      "name": "Cheddar Cheese Block",
+      "slug": "cheddar-block",
+      "category": "dairy",
+      "synonyms": [
+        "cheddar",
+        "hard cheese"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 21,
+      "fridge_max_days": 28,
+      "freezer_min_days": 180,
+      "freezer_max_days": 240,
+      "spoilage_signs": [
+        "surface_mold_beyond_trim",
+        "ammonia_smell",
+        "cracking_dryness"
+      ],
+      "storage_tips": [
+        "wrap_in_wax_or_parchment_then_bag",
+        "keep_low_humidity"
+      ],
+      "notes": "Hard cheeses keep longer than soft cheeses",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "cheese",
+        "cheese-paper",
+        "vacuum-sealer"
+      ]
+    },
+    {
+      "food_id": "food_cooked_pasta",
+      "name": "Pasta Cooked",
+      "slug": "pasta-cooked",
+      "category": "grains",
+      "synonyms": [
+        "cooked noodles",
+        "boiled pasta"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_coating",
+        "fuzzy_mold"
+      ],
+      "storage_tips": [
+        "drain_and_cool_before_storing",
+        "use_airtight_container"
+      ],
+      "notes": "Sauce can shorten life",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "pasta",
+        "meal-prep",
+        "airtight-container"
+      ]
+    },
+    {
+      "food_id": "food_cooked_rice",
+      "name": "Rice Cooked",
+      "slug": "rice-cooked",
+      "category": "grains",
+      "synonyms": [
+        "cooked rice",
+        "steamed rice"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 4,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_texture",
+        "visible_mold"
+      ],
+      "storage_tips": [
+        "store_within_two_hours",
+        "use_shallow_airtight_container"
+      ],
+      "notes": "Conservative range for home leftovers",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "rice",
+        "leftovers",
+        "airtight-container"
+      ]
+    },
+    {
+      "food_id": "food_deli_turkey",
+      "name": "Deli Turkey Slices",
+      "slug": "deli-turkey-slices",
+      "category": "meat",
+      "synonyms": [
+        "lunch meat turkey",
+        "sliced turkey"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_surface",
+        "rainbow_sheen"
+      ],
+      "storage_tips": [
+        "reseal_tightly_after_opening",
+        "store_below_40f"
+      ],
+      "notes": "Opened deli meat is high risk",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "deli-meat",
+        "portion-packs",
+        "freezer-bags"
+      ]
+    },
+    {
+      "food_id": "food_eggs_shell",
+      "name": "Eggs In Shell",
+      "slug": "eggs-shell",
+      "category": "dairy",
+      "synonyms": [
+        "shell eggs",
+        "chicken eggs"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 21,
+      "fridge_max_days": 35,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "sulfur_smell_when_cracked",
+        "powdery_shell_mold",
+        "watery_whites"
+      ],
+      "storage_tips": [
+        "store_in_original_carton",
+        "keep_consistently_cold"
+      ],
+      "notes": "Do not freeze eggs in shell",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "eggs",
+        "carton-organizer",
+        "fridge-bin"
+      ]
+    },
+    {
+      "food_id": "food_ground_beef",
+      "name": "Ground Beef Raw",
+      "slug": "ground-beef-raw",
+      "category": "meat",
+      "synonyms": [
+        "minced beef",
+        "hamburger meat"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 1,
+      "fridge_max_days": 2,
+      "freezer_min_days": 90,
+      "freezer_max_days": 120,
+      "spoilage_signs": [
+        "rancid_smell",
+        "tacky_texture",
+        "brown_gray_discoloration"
+      ],
+      "storage_tips": [
+        "store_coldest_part_of_fridge",
+        "freeze_portioned_packs"
+      ],
+      "notes": "Higher surface area means shorter life",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "beef",
+        "freezer-wrap",
+        "labels"
+      ]
+    },
+    {
+      "food_id": "food_leafy_spinach",
+      "name": "Spinach Fresh",
+      "slug": "spinach-fresh",
+      "category": "produce",
+      "synonyms": [
+        "baby spinach",
+        "leafy greens"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "slimy_leaves",
+        "yellowing",
+        "musty_smell"
+      ],
+      "storage_tips": [
+        "store_dry_with_paper_towel",
+        "wash_just_before_use"
+      ],
+      "notes": "Freezing requires blanching process",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "produce",
+        "crisper-bin",
+        "paper-towels"
+      ]
+    },
+    {
+      "food_id": "food_milk_whole",
+      "name": "Milk Whole",
+      "slug": "milk-whole",
+      "category": "dairy",
+      "synonyms": [
+        "whole milk",
+        "fresh milk"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 5,
+      "fridge_max_days": 7,
+      "freezer_min_days": 30,
+      "freezer_max_days": 90,
+      "spoilage_signs": [
+        "sour_smell",
+        "curdling",
+        "swollen_carton"
+      ],
+      "storage_tips": [
+        "keep_at_back_of_fridge",
+        "avoid_door_storage"
+      ],
+      "notes": "Quality drops after freezing",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "dairy",
+        "pitcher",
+        "fridge-thermometer"
+      ]
+    },
+    {
+      "food_id": "food_raw_chicken",
+      "name": "Chicken Raw",
+      "slug": "chicken-raw",
+      "category": "meat",
+      "synonyms": [
+        "poultry raw",
+        "uncooked chicken"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 1,
+      "fridge_max_days": 2,
+      "freezer_min_days": 270,
+      "freezer_max_days": 365,
+      "spoilage_signs": [
+        "sour_odor",
+        "sticky_surface",
+        "gray_color"
+      ],
+      "storage_tips": [
+        "keep_in_original_packaging_until_use",
+        "store_on_bottom_shelf"
+      ],
+      "notes": "Use or freeze quickly for safety",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "poultry",
+        "freezer-bags",
+        "food-thermometer"
+      ]
+    },
+    {
+      "food_id": "food_yogurt_plain",
+      "name": "Yogurt Plain",
+      "slug": "yogurt-plain",
+      "category": "dairy",
+      "synonyms": [
+        "plain yogurt",
+        "cultured milk"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 7,
+      "fridge_max_days": 14,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "mold_on_surface",
+        "yeasty_smell",
+        "excess_separation"
+      ],
+      "storage_tips": [
+        "keep_lid_tightly_closed",
+        "use_clean_spoon_each_time"
+      ],
+      "notes": "Opened containers spoil faster",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "dairy",
+        "single-serve",
+        "spoons"
+      ]
+    }
+  ],
+  "byId": {
+    "food_bread_white": {
+      "food_id": "food_bread_white",
+      "name": "Bread White Loaf",
+      "slug": "bread-white-loaf",
+      "category": "bakery",
+      "synonyms": [
+        "sandwich bread",
+        "white bread"
+      ],
+      "pantry_min_days": 3,
+      "pantry_max_days": 5,
+      "fridge_min_days": 5,
+      "fridge_max_days": 7,
+      "freezer_min_days": 30,
+      "freezer_max_days": 90,
+      "spoilage_signs": [
+        "visible_mold",
+        "stale_hard_texture",
+        "off_smell"
+      ],
+      "storage_tips": [
+        "store_sealed_at_room_temp",
+        "freeze_sliced_for_long_storage"
+      ],
+      "notes": "Avoid humid counters",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "bread",
+        "bread-box",
+        "freezer-bags"
+      ]
+    },
+    "food_canned_beans": {
+      "food_id": "food_canned_beans",
+      "name": "Canned Beans Unopened",
+      "slug": "canned-beans-unopened",
+      "category": "pantry",
+      "synonyms": [
+        "canned legumes",
+        "bean can"
+      ],
+      "pantry_min_days": 365,
+      "pantry_max_days": 730,
+      "fridge_min_days": 0,
+      "fridge_max_days": 0,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "bulging_can",
+        "leaking_seam",
+        "spurting_when_opened"
+      ],
+      "storage_tips": [
+        "store_cool_dry_place",
+        "avoid_dented_cans"
+      ],
+      "notes": "Unopened shelf stable pantry item",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "pantry",
+        "can-organizer",
+        "labels"
+      ]
+    },
+    "food_cheddar_block": {
+      "food_id": "food_cheddar_block",
+      "name": "Cheddar Cheese Block",
+      "slug": "cheddar-block",
+      "category": "dairy",
+      "synonyms": [
+        "cheddar",
+        "hard cheese"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 21,
+      "fridge_max_days": 28,
+      "freezer_min_days": 180,
+      "freezer_max_days": 240,
+      "spoilage_signs": [
+        "surface_mold_beyond_trim",
+        "ammonia_smell",
+        "cracking_dryness"
+      ],
+      "storage_tips": [
+        "wrap_in_wax_or_parchment_then_bag",
+        "keep_low_humidity"
+      ],
+      "notes": "Hard cheeses keep longer than soft cheeses",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "cheese",
+        "cheese-paper",
+        "vacuum-sealer"
+      ]
+    },
+    "food_cooked_pasta": {
+      "food_id": "food_cooked_pasta",
+      "name": "Pasta Cooked",
+      "slug": "pasta-cooked",
+      "category": "grains",
+      "synonyms": [
+        "cooked noodles",
+        "boiled pasta"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_coating",
+        "fuzzy_mold"
+      ],
+      "storage_tips": [
+        "drain_and_cool_before_storing",
+        "use_airtight_container"
+      ],
+      "notes": "Sauce can shorten life",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "pasta",
+        "meal-prep",
+        "airtight-container"
+      ]
+    },
+    "food_cooked_rice": {
+      "food_id": "food_cooked_rice",
+      "name": "Rice Cooked",
+      "slug": "rice-cooked",
+      "category": "grains",
+      "synonyms": [
+        "cooked rice",
+        "steamed rice"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 4,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_texture",
+        "visible_mold"
+      ],
+      "storage_tips": [
+        "store_within_two_hours",
+        "use_shallow_airtight_container"
+      ],
+      "notes": "Conservative range for home leftovers",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "rice",
+        "leftovers",
+        "airtight-container"
+      ]
+    },
+    "food_deli_turkey": {
+      "food_id": "food_deli_turkey",
+      "name": "Deli Turkey Slices",
+      "slug": "deli-turkey-slices",
+      "category": "meat",
+      "synonyms": [
+        "lunch meat turkey",
+        "sliced turkey"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_surface",
+        "rainbow_sheen"
+      ],
+      "storage_tips": [
+        "reseal_tightly_after_opening",
+        "store_below_40f"
+      ],
+      "notes": "Opened deli meat is high risk",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "deli-meat",
+        "portion-packs",
+        "freezer-bags"
+      ]
+    },
+    "food_eggs_shell": {
+      "food_id": "food_eggs_shell",
+      "name": "Eggs In Shell",
+      "slug": "eggs-shell",
+      "category": "dairy",
+      "synonyms": [
+        "shell eggs",
+        "chicken eggs"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 21,
+      "fridge_max_days": 35,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "sulfur_smell_when_cracked",
+        "powdery_shell_mold",
+        "watery_whites"
+      ],
+      "storage_tips": [
+        "store_in_original_carton",
+        "keep_consistently_cold"
+      ],
+      "notes": "Do not freeze eggs in shell",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "eggs",
+        "carton-organizer",
+        "fridge-bin"
+      ]
+    },
+    "food_ground_beef": {
+      "food_id": "food_ground_beef",
+      "name": "Ground Beef Raw",
+      "slug": "ground-beef-raw",
+      "category": "meat",
+      "synonyms": [
+        "minced beef",
+        "hamburger meat"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 1,
+      "fridge_max_days": 2,
+      "freezer_min_days": 90,
+      "freezer_max_days": 120,
+      "spoilage_signs": [
+        "rancid_smell",
+        "tacky_texture",
+        "brown_gray_discoloration"
+      ],
+      "storage_tips": [
+        "store_coldest_part_of_fridge",
+        "freeze_portioned_packs"
+      ],
+      "notes": "Higher surface area means shorter life",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "beef",
+        "freezer-wrap",
+        "labels"
+      ]
+    },
+    "food_leafy_spinach": {
+      "food_id": "food_leafy_spinach",
+      "name": "Spinach Fresh",
+      "slug": "spinach-fresh",
+      "category": "produce",
+      "synonyms": [
+        "baby spinach",
+        "leafy greens"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "slimy_leaves",
+        "yellowing",
+        "musty_smell"
+      ],
+      "storage_tips": [
+        "store_dry_with_paper_towel",
+        "wash_just_before_use"
+      ],
+      "notes": "Freezing requires blanching process",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "produce",
+        "crisper-bin",
+        "paper-towels"
+      ]
+    },
+    "food_milk_whole": {
+      "food_id": "food_milk_whole",
+      "name": "Milk Whole",
+      "slug": "milk-whole",
+      "category": "dairy",
+      "synonyms": [
+        "whole milk",
+        "fresh milk"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 5,
+      "fridge_max_days": 7,
+      "freezer_min_days": 30,
+      "freezer_max_days": 90,
+      "spoilage_signs": [
+        "sour_smell",
+        "curdling",
+        "swollen_carton"
+      ],
+      "storage_tips": [
+        "keep_at_back_of_fridge",
+        "avoid_door_storage"
+      ],
+      "notes": "Quality drops after freezing",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "dairy",
+        "pitcher",
+        "fridge-thermometer"
+      ]
+    },
+    "food_raw_chicken": {
+      "food_id": "food_raw_chicken",
+      "name": "Chicken Raw",
+      "slug": "chicken-raw",
+      "category": "meat",
+      "synonyms": [
+        "poultry raw",
+        "uncooked chicken"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 1,
+      "fridge_max_days": 2,
+      "freezer_min_days": 270,
+      "freezer_max_days": 365,
+      "spoilage_signs": [
+        "sour_odor",
+        "sticky_surface",
+        "gray_color"
+      ],
+      "storage_tips": [
+        "keep_in_original_packaging_until_use",
+        "store_on_bottom_shelf"
+      ],
+      "notes": "Use or freeze quickly for safety",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "poultry",
+        "freezer-bags",
+        "food-thermometer"
+      ]
+    },
+    "food_yogurt_plain": {
+      "food_id": "food_yogurt_plain",
+      "name": "Yogurt Plain",
+      "slug": "yogurt-plain",
+      "category": "dairy",
+      "synonyms": [
+        "plain yogurt",
+        "cultured milk"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 7,
+      "fridge_max_days": 14,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "mold_on_surface",
+        "yeasty_smell",
+        "excess_separation"
+      ],
+      "storage_tips": [
+        "keep_lid_tightly_closed",
+        "use_clean_spoon_each_time"
+      ],
+      "notes": "Opened containers spoil faster",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "dairy",
+        "single-serve",
+        "spoons"
+      ]
+    }
+  },
+  "bySlug": {
+    "bread-white-loaf": {
+      "food_id": "food_bread_white",
+      "name": "Bread White Loaf",
+      "slug": "bread-white-loaf",
+      "category": "bakery",
+      "synonyms": [
+        "sandwich bread",
+        "white bread"
+      ],
+      "pantry_min_days": 3,
+      "pantry_max_days": 5,
+      "fridge_min_days": 5,
+      "fridge_max_days": 7,
+      "freezer_min_days": 30,
+      "freezer_max_days": 90,
+      "spoilage_signs": [
+        "visible_mold",
+        "stale_hard_texture",
+        "off_smell"
+      ],
+      "storage_tips": [
+        "store_sealed_at_room_temp",
+        "freeze_sliced_for_long_storage"
+      ],
+      "notes": "Avoid humid counters",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "bread",
+        "bread-box",
+        "freezer-bags"
+      ]
+    },
+    "canned-beans-unopened": {
+      "food_id": "food_canned_beans",
+      "name": "Canned Beans Unopened",
+      "slug": "canned-beans-unopened",
+      "category": "pantry",
+      "synonyms": [
+        "canned legumes",
+        "bean can"
+      ],
+      "pantry_min_days": 365,
+      "pantry_max_days": 730,
+      "fridge_min_days": 0,
+      "fridge_max_days": 0,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "bulging_can",
+        "leaking_seam",
+        "spurting_when_opened"
+      ],
+      "storage_tips": [
+        "store_cool_dry_place",
+        "avoid_dented_cans"
+      ],
+      "notes": "Unopened shelf stable pantry item",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "pantry",
+        "can-organizer",
+        "labels"
+      ]
+    },
+    "cheddar-block": {
+      "food_id": "food_cheddar_block",
+      "name": "Cheddar Cheese Block",
+      "slug": "cheddar-block",
+      "category": "dairy",
+      "synonyms": [
+        "cheddar",
+        "hard cheese"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 21,
+      "fridge_max_days": 28,
+      "freezer_min_days": 180,
+      "freezer_max_days": 240,
+      "spoilage_signs": [
+        "surface_mold_beyond_trim",
+        "ammonia_smell",
+        "cracking_dryness"
+      ],
+      "storage_tips": [
+        "wrap_in_wax_or_parchment_then_bag",
+        "keep_low_humidity"
+      ],
+      "notes": "Hard cheeses keep longer than soft cheeses",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "cheese",
+        "cheese-paper",
+        "vacuum-sealer"
+      ]
+    },
+    "pasta-cooked": {
+      "food_id": "food_cooked_pasta",
+      "name": "Pasta Cooked",
+      "slug": "pasta-cooked",
+      "category": "grains",
+      "synonyms": [
+        "cooked noodles",
+        "boiled pasta"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_coating",
+        "fuzzy_mold"
+      ],
+      "storage_tips": [
+        "drain_and_cool_before_storing",
+        "use_airtight_container"
+      ],
+      "notes": "Sauce can shorten life",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "pasta",
+        "meal-prep",
+        "airtight-container"
+      ]
+    },
+    "rice-cooked": {
+      "food_id": "food_cooked_rice",
+      "name": "Rice Cooked",
+      "slug": "rice-cooked",
+      "category": "grains",
+      "synonyms": [
+        "cooked rice",
+        "steamed rice"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 4,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_texture",
+        "visible_mold"
+      ],
+      "storage_tips": [
+        "store_within_two_hours",
+        "use_shallow_airtight_container"
+      ],
+      "notes": "Conservative range for home leftovers",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "rice",
+        "leftovers",
+        "airtight-container"
+      ]
+    },
+    "deli-turkey-slices": {
+      "food_id": "food_deli_turkey",
+      "name": "Deli Turkey Slices",
+      "slug": "deli-turkey-slices",
+      "category": "meat",
+      "synonyms": [
+        "lunch meat turkey",
+        "sliced turkey"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "sour_smell",
+        "slimy_surface",
+        "rainbow_sheen"
+      ],
+      "storage_tips": [
+        "reseal_tightly_after_opening",
+        "store_below_40f"
+      ],
+      "notes": "Opened deli meat is high risk",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "deli-meat",
+        "portion-packs",
+        "freezer-bags"
+      ]
+    },
+    "eggs-shell": {
+      "food_id": "food_eggs_shell",
+      "name": "Eggs In Shell",
+      "slug": "eggs-shell",
+      "category": "dairy",
+      "synonyms": [
+        "shell eggs",
+        "chicken eggs"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 21,
+      "fridge_max_days": 35,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "sulfur_smell_when_cracked",
+        "powdery_shell_mold",
+        "watery_whites"
+      ],
+      "storage_tips": [
+        "store_in_original_carton",
+        "keep_consistently_cold"
+      ],
+      "notes": "Do not freeze eggs in shell",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "eggs",
+        "carton-organizer",
+        "fridge-bin"
+      ]
+    },
+    "ground-beef-raw": {
+      "food_id": "food_ground_beef",
+      "name": "Ground Beef Raw",
+      "slug": "ground-beef-raw",
+      "category": "meat",
+      "synonyms": [
+        "minced beef",
+        "hamburger meat"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 1,
+      "fridge_max_days": 2,
+      "freezer_min_days": 90,
+      "freezer_max_days": 120,
+      "spoilage_signs": [
+        "rancid_smell",
+        "tacky_texture",
+        "brown_gray_discoloration"
+      ],
+      "storage_tips": [
+        "store_coldest_part_of_fridge",
+        "freeze_portioned_packs"
+      ],
+      "notes": "Higher surface area means shorter life",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "beef",
+        "freezer-wrap",
+        "labels"
+      ]
+    },
+    "spinach-fresh": {
+      "food_id": "food_leafy_spinach",
+      "name": "Spinach Fresh",
+      "slug": "spinach-fresh",
+      "category": "produce",
+      "synonyms": [
+        "baby spinach",
+        "leafy greens"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 3,
+      "fridge_max_days": 5,
+      "freezer_min_days": 0,
+      "freezer_max_days": 0,
+      "spoilage_signs": [
+        "slimy_leaves",
+        "yellowing",
+        "musty_smell"
+      ],
+      "storage_tips": [
+        "store_dry_with_paper_towel",
+        "wash_just_before_use"
+      ],
+      "notes": "Freezing requires blanching process",
+      "high_risk_food": false,
+      "default_affiliate_tags": [
+        "produce",
+        "crisper-bin",
+        "paper-towels"
+      ]
+    },
+    "milk-whole": {
+      "food_id": "food_milk_whole",
+      "name": "Milk Whole",
+      "slug": "milk-whole",
+      "category": "dairy",
+      "synonyms": [
+        "whole milk",
+        "fresh milk"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 5,
+      "fridge_max_days": 7,
+      "freezer_min_days": 30,
+      "freezer_max_days": 90,
+      "spoilage_signs": [
+        "sour_smell",
+        "curdling",
+        "swollen_carton"
+      ],
+      "storage_tips": [
+        "keep_at_back_of_fridge",
+        "avoid_door_storage"
+      ],
+      "notes": "Quality drops after freezing",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "dairy",
+        "pitcher",
+        "fridge-thermometer"
+      ]
+    },
+    "chicken-raw": {
+      "food_id": "food_raw_chicken",
+      "name": "Chicken Raw",
+      "slug": "chicken-raw",
+      "category": "meat",
+      "synonyms": [
+        "poultry raw",
+        "uncooked chicken"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 1,
+      "fridge_max_days": 2,
+      "freezer_min_days": 270,
+      "freezer_max_days": 365,
+      "spoilage_signs": [
+        "sour_odor",
+        "sticky_surface",
+        "gray_color"
+      ],
+      "storage_tips": [
+        "keep_in_original_packaging_until_use",
+        "store_on_bottom_shelf"
+      ],
+      "notes": "Use or freeze quickly for safety",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "poultry",
+        "freezer-bags",
+        "food-thermometer"
+      ]
+    },
+    "yogurt-plain": {
+      "food_id": "food_yogurt_plain",
+      "name": "Yogurt Plain",
+      "slug": "yogurt-plain",
+      "category": "dairy",
+      "synonyms": [
+        "plain yogurt",
+        "cultured milk"
+      ],
+      "pantry_min_days": 0,
+      "pantry_max_days": 0,
+      "fridge_min_days": 7,
+      "fridge_max_days": 14,
+      "freezer_min_days": 30,
+      "freezer_max_days": 60,
+      "spoilage_signs": [
+        "mold_on_surface",
+        "yeasty_smell",
+        "excess_separation"
+      ],
+      "storage_tips": [
+        "keep_lid_tightly_closed",
+        "use_clean_spoon_each_time"
+      ],
+      "notes": "Opened containers spoil faster",
+      "high_risk_food": true,
+      "default_affiliate_tags": [
+        "dairy",
+        "single-serve",
+        "spoons"
+      ]
+    }
+  }
+}

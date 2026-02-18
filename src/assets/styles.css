@@ -1,0 +1,15 @@
+/* Tailwind handles the core styling. Keep only small custom animation helpers here. */
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-soft {
+  animation: float-soft 9s ease-in-out infinite;
+}

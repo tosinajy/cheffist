@@ -1,0 +1,37 @@
+[
+  {
+    "source_id": "src_fda_food_code",
+    "title": "Food Code and Time Temperature Safety",
+    "publisher": "FDA",
+    "url": "https://www.fda.gov/food/retail-food-protection/fda-food-code",
+    "notes": "Used for room temperature handling rules",
+    "applies_to": [
+      "meat",
+      "dairy"
+    ]
+  },
+  {
+    "source_id": "src_foodkeeper",
+    "title": "FoodKeeper App Guidance",
+    "publisher": "USDA and Cornell",
+    "url": "https://www.foodsafety.gov/foodkeeper-app",
+    "notes": "Used for category specific storage ranges",
+    "applies_to": [
+      "produce",
+      "pantry",
+      "bakery"
+    ]
+  },
+  {
+    "source_id": "src_usda_leftovers",
+    "title": "Leftovers and Food Safety",
+    "publisher": "USDA",
+    "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety",
+    "notes": "Used for conservative fridge timelines",
+    "applies_to": [
+      "food_cooked_rice",
+      "food_cooked_pasta",
+      "grains"
+    ]
+  }
+]

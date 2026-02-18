@@ -1,0 +1,38 @@
+[
+  {
+    "rule_id": "rule_cold_room",
+    "applies_to": "all_foods",
+    "temp_min_f": 0,
+    "temp_max_f": 31,
+    "max_safe_minutes": 240,
+    "covered_modifier_minutes": 30,
+    "high_risk_modifier_minutes": -30
+  },
+  {
+    "rule_id": "rule_general_room",
+    "applies_to": "all_foods",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
+    "max_safe_minutes": 120,
+    "covered_modifier_minutes": 30,
+    "high_risk_modifier_minutes": -30
+  },
+  {
+    "rule_id": "rule_high_risk_room",
+    "applies_to": "high_risk_foods",
+    "temp_min_f": 32,
+    "temp_max_f": 89,
+    "max_safe_minutes": 60,
+    "covered_modifier_minutes": 15,
+    "high_risk_modifier_minutes": -15
+  },
+  {
+    "rule_id": "rule_hot_room",
+    "applies_to": "all_foods",
+    "temp_min_f": 90,
+    "temp_max_f": 110,
+    "max_safe_minutes": 60,
+    "covered_modifier_minutes": 15,
+    "high_risk_modifier_minutes": -15
+  }
+]

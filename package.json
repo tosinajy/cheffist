@@ -1,0 +1,23 @@
+{
+    "name":  "cheffist",
+    "version":  "1.0.0",
+    "private":  true,
+    "description":  "Eleventy-first site scaffold with CSV-to-JSON data pipeline",
+    "type":  "commonjs",
+    "engines":  {
+                    "node":  "\u003e=20.0.0"
+                },
+    "scripts":  {
+                    "dev":  "eleventy --serve",
+                    "data:build":  "node scripts/build-data.js",
+                    "build":  "npm run data:build \u0026\u0026 eleventy",
+                    "test":  "vitest run --globals"
+                },
+    "dependencies":  {
+                         "@11ty/eleventy":  "^3.1.2",
+                         "csv-parse":  "^6.1.0"
+                     },
+    "devDependencies":  {
+                            "vitest":  "^4.0.18"
+                        }
+}
