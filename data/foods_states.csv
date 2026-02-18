@@ -1,8 +1,0 @@
-food_id,state,label,override_high_risk_food,notes
-chicken_raw,raw,Raw chicken,true,Raw poultry risk profile
-ground_beef_raw,raw,Raw ground beef,true,Ground meat high-risk state
-salmon_raw,raw,Raw salmon,true,Raw seafood risk profile
-rice_cooked,cooked,Cooked rice,true,Cooked leftovers are time-sensitive
-chicken_cooked,cooked,Cooked chicken,true,Prepared leftovers should be handled conservatively
-milk_whole,opened,Opened milk,true,Opened dairy is more perishable
-milk_whole,unopened,Unopened milk,,Use package date plus spoilage checks

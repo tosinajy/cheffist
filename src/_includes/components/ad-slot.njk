@@ -1,8 +1,0 @@
-{% if adSlot and adSlot.enabled %}
-<aside class="ad-slot ad-slot--{{ adSlot.zone }}" aria-label="Advertisement">
-  <p><strong>Advertisement</strong></p>
-  <div class="ad-slot__placeholder" data-ad-zone="{{ adSlot.zone }}">
-    Ad slot: {{ adSlot.zone | replace("_", " ") }}
-  </div>
-</aside>
-{% endif %}

@@ -1,6 +1,0 @@
-rule_id,applies_to,temp_min_f,temp_max_f,max_safe_minutes,covered_modifier_minutes,high_risk_modifier_minutes
-category_protein_room_temp,category:protein,40,90,120,30,-15
-food_chicken_raw_room_temp,food:chicken_raw,40,90,90,20,-20
-state_chicken_raw_raw_room_temp,state:chicken_raw:raw,40,90,60,15,-30
-category_cooked_foods_room_temp,category:cooked_foods,40,90,90,20,-20
-state_rice_cooked_cooked_room_temp,state:rice_cooked:cooked,40,90,60,15,-25

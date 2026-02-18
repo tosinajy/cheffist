@@ -1,8 +1,0 @@
-rule_id,applies_to,temp_threshold_f,max_safe_minutes,notes
-default_power_outage,default,40,120,Conservative fallback for unknown foods
-category_dairy_outage,category:dairy,40,60,Dairy warms quickly and should be handled conservatively
-category_protein_outage,category:protein,40,60,Raw proteins are high risk when warming
-category_seafood_outage,category:seafood,40,45,Seafood is highly perishable during outages
-category_cooked_foods_outage,category:cooked_foods,40,60,Prepared leftovers need strict limits
-category_produce_outage,category:produce,45,180,Whole produce has slightly more tolerance
-food_milk_whole_outage,food:milk_whole,40,45,Milk should be discarded sooner once warming

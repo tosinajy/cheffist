@@ -1,9 +1,0 @@
-rule_id,applies_to,thaw_state,temp_threshold_f,max_safe_minutes,notes
-default_freezer_recovery_any,default,any,40,120,Conservative fallback when no specific rule exists
-default_freezer_recovery_fully,default,fully_thawed,40,60,Fully thawed foods should be handled with stricter limits
-default_freezer_recovery_partial,default,partially_thawed,40,180,Partially thawed foods may have a longer window when still cold
-category_dairy_recovery_fully,category:dairy,fully_thawed,40,45,Dairy is high risk once fully thawed and warm
-category_protein_recovery_fully,category:protein,fully_thawed,40,45,Raw proteins need strict refreeze thresholds
-category_seafood_recovery_fully,category:seafood,fully_thawed,40,30,Seafood is highly perishable when fully thawed
-category_cooked_recovery_fully,category:cooked_foods,fully_thawed,40,45,Cooked leftovers should be treated conservatively
-food_milk_whole_recovery_fully,food:milk_whole,fully_thawed,40,30,Milk above threshold should be discarded quickly
